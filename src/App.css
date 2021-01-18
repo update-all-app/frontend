@@ -2,37 +2,78 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html, body{
+  height: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.logo{
+  height: 60%;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  margin: auto;
+  padding-top: 40px;
+  transform-origin: bottom;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#root{
+  height: 100%;
+}
+
+.bg-img{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -1;
+  opacity: 0.1;
+}
+
+.landing-auth-buttons{
+  margin: auto;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  opacity: 1;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.landing{
+  margin-top: 0px;
+  height: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.landing-top{
+  height: 60%;
+  width: 100%;
+  opacity: 0.75;
+  background-color: #ECF3F3;
 }
+
+.landing-bottom{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-text{
+  margin: 50px;
+  color: #555555;
+}
+
+.auth-button{
+  margin: 40px;
+}
+
+.landing-navbar{
+  display: flex;
+  justify-content: space-between;
+}
+
+.bounce-2 {
+  animation-name: bounce-2;
+  animation-timing-function: ease;
+}
+@keyframes bounce-2 {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-30px); }
+  100% { transform: translateY(0); }
+}
+
