@@ -13,50 +13,81 @@ export default function Login(props){
     const history = useHistory()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [emailErrors, setEmailErrors] = useState([])
+    const [passwordErrors, setPasswordErrors] = useState([])
     const {dispatch} = useContext(UserContext)
 
-    const login = async () => {
-        const res = await LoginManager.login(email, password)
-        if(res.success){
-            console.log(res.user)
-            dispatch({type: POPULATE_USER, payload: { email: res.user.email }})
-            //dispatch{type: POPULATE_USER, payload: {email: res.user.email, name: res.user.name}}
-            history.push('/home')
-        }else{
-            LoginManager.clearLocalStorage()
-            console.log(res)
+    const checkEmail = (email) => {
+        return {
+            valid: email !== "",
+            errors: ["Must include an email"]
         }
     }
+
+    const checkPassword = (password) => {
+        return {
+            valid: password.length > 5,
+            errors: ["Password must be at least 5 characters"]
+        
+        }
+    }
+
+    const login = async () => {
+        const validEmail = checkEmail(email)
+        const validPassword = checkPassword(password)
+        if(validEmail.valid && validPassword.valid){
+            const res = await LoginManager.login(email, password)
+            if(res.success){
+                console.log(res.user)
+                dispatch({type: POPULATE_USER, payload: { email: res.user.email }})
+                //dispatch{type: POPULATE_USER, payload: {email: res.user.email, name: res.user.name}}
+                history.push('/home')
+            }else{
+                LoginManager.clearLocalStorage()
+                console.log(res)
+            }
+        }else{
+            if(!validEmail.valid){
+                setEmailErrors(validEmail.errors)
+            }else{
+                setEmailErrors([])
+            }
+            if(!validPassword.valid){
+                setPasswordErrors(validPassword.errors)
+            }else{
+                setPasswordErrors([])
+            }
+        }
+    }
+
 
     return(
         <div className="landing">
             <div className="landing-top">
                 <LandingNavbar/>
-                <div className="landing-title-div">
-                    <h1 className="landing-title color-green-600">Login</h1>
-                </div>
             </div>
             <div className="landing-bottom">
-                <div className="border-l-2 border-primary shadow-lg p-10 content-center">
+            </div> 
+            <div className="border-l-2 border-primary shadow-lg p-10 content-center absolute top-1/4 left-1/4 bg-white w-2/4">
                     <Input 
                         placeholder="Email"
                         onChange={(email) => { setEmail(email) }}
                         value={ email }
+                        errors={emailErrors}
                     />
                     <Input
                         placeholder="Password"
                         type="password"
                         onChange={(pass) => { setPassword(pass) }}
                         value={ password }
+                        errors={passwordErrors}
                     />
-
                     <Submit 
                         value="Log In"
                         onClick={login}
                     />
 
                 </div>
-            </div> 
         </div>
         
     )
