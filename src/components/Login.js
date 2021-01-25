@@ -6,6 +6,7 @@ import Submit from '../subcomponents/Submit'
 import LoginManager from '../helpers/LoginManager'
 import { POPULATE_USER } from '../actionTypes'
 import UserContext from '../context/UserContext'
+import { Link } from 'react-router-dom'
 
 
 export default function Login(props){
@@ -86,7 +87,12 @@ export default function Login(props){
                         value="Log In"
                         onClick={login}
                     />
-
+                    <div className="mt-6">
+                        <Link to="/">Trouble logging in?</Link>
+                    </div> 
+                    <div className="mt-6 ">
+                        <Link to="/">Don't have an account? Sign Up.</Link>
+                    </div>   
                 </div>
         </div>
         
