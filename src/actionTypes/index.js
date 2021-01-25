@@ -1,0 +1,9 @@
+const POPULATE_USER = "LOGIN_USER"
+const LOGOUT_USER = "LOGOUT_USER"
+const LOADING = "LOADING"
+
+export {
+    POPULATE_USER,
+    LOGOUT_USER, 
+    LOADING
+}

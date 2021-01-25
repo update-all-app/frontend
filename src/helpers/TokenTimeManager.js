@@ -1,6 +1,6 @@
 
 
-class TokenTimeManager{
+export default class TokenTimeManager{
 
     static getEpochExpiryTime(expiresIn){
         const now = new Date()

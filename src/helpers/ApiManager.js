@@ -1,4 +1,6 @@
-import { BACKEND_URL } from '../constants'
+import { BACKEND_URL, FRONTEND_URL } from '../constants'
+import LoginManager from './LoginManager'
+import AuthenticationError from '../errors/AuthenticationError'
 
 export default class ApiManager{
 
@@ -14,6 +16,44 @@ export default class ApiManager{
         return headers
     }
 
+    static async getToken(){
+        const token = LoginManager.getToken()
+        if(!!token){
+            if(!!token.token){
+                return token.token
+            }else if(!!token.refresh_token){
+                return await LoginManager.getNewToken(token.refresh_token)
+            }
+        }else{
+            return null
+        }
+    }
+
+    static async protectedRoute(){
+        try{
+            const token = await this.getToken()
+            if(!!token){ throw new AuthenticationError()}
+            return token
+        }catch(err){
+            if(err instanceof AuthenticationError){
+                LoginManager.clearLocalStorage()
+                window.location.replace(`${FRONTEND_URL}/`)
+            }else{
+                throw err
+            }
+        }
+    }
+
+    static async getUser(){
+        const token = await this.getToken()
+        if(token){
+            //  return await this.get('/me', token)
+            return await this.get('/businesses', token)
+        }else{
+            return null
+        }
+    }
+
     static async login(email, password){
         return await this.post('/login', {
             user: {
@@ -23,24 +63,33 @@ export default class ApiManager{
         })
     }
 
-    static async get_businesses(token){
+    static loading(){
+        // set loading
+    }
+
+    static done(){
+        // set not loading
+    }
+
+    static async getBusinesses(){
+        const token = this.protectedRoute()
         return await this.get('/bussinesses', token)
     }
 
     static async get(path, token=null){
-        return await this.request("GET", path)
+        return await this.request("GET", path, null, token)
     }
 
     static async post(path, body, token=null){
-        return await this.request("POST", path, body)
+        return await this.request("POST", path, body, token)
     }
 
     static async patch(path, body, token=null){
-        return await this.request("PATCH", path, body)
+        return await this.request("PATCH", path, body, token)
     }
 
     static async delete(path, body=null, token=null){
-        return await this.request("DELETE", path, body)
+        return await this.request("DELETE", path, body, token)
     }
 
     static async request(method, path, body=null, token=null){
