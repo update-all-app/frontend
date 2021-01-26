@@ -29,8 +29,8 @@ export default function Login(props){
 
     const checkPassword = (password) => {
         return {
-            valid: password.length > 5,
-            errors: ["Password must be at least 5 characters"]
+            valid: password.length > 0,
+            errors: ["Must include a password"]
         
         }
     }
