@@ -3,6 +3,8 @@ import LandingNavbar from './LandingNavbar'
 import { useHistory } from 'react-router-dom'
 import Input from '../subcomponents/Input'
 import Submit from '../subcomponents/Submit'
+import Footer from './Footer'
+
 import LoginManager from '../helpers/LoginManager'
 import { POPULATE_USER } from '../actionTypes'
 import UserContext from '../context/UserContext'
@@ -68,6 +70,7 @@ export default function Login(props){
                 <LandingNavbar/>
             </div>
             <div className="landing-bottom">
+                
             </div> 
             <div className="border-l-2 border-primary shadow-lg p-10 content-center absolute top-1/4 left-1/4 bg-white w-2/4">
                     <Input 
@@ -94,6 +97,7 @@ export default function Login(props){
                         <Link to="/">Don't have an account? Sign Up.</Link>
                     </div>   
                 </div>
+                <Footer />
         </div>
         
     )

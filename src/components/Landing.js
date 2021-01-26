@@ -1,5 +1,6 @@
 import React from 'react'
 import LandingNavbar from './LandingNavbar'
+import Footer from './Footer'
 import { useHistory } from 'react-router-dom'
 
 export default function Landing(props){
@@ -32,6 +33,7 @@ export default function Landing(props){
                 <p className="landing-text text-primary">UpdateItAll is a platform for small businesses like yours to update all of their information in one place.</p>
             </div>
             {/* <img className="bg-img" src={process.env.PUBLIC_URL + '/bg-test.jpg'} alt=""/> */}
+            <Footer />
         </div>
     )
 }

@@ -14,6 +14,10 @@ export default function LandingNavbar(props){
         history.push("/login")
     }
 
+    const goToAbout = () => {
+        history.push("/about")
+    }
+
     return(
         <div className="landing-navbar">
             <div>
@@ -27,7 +31,7 @@ export default function LandingNavbar(props){
             <div>
             <button 
             className="bg-transparent text-black hover:bg-transparent font-bold py-2 px-4 rounded-l focus:outline-none"
-            onClick={() => {}}
+            onClick={goToAbout}
             >
                 <span className="bold-text">About</span>
             </button>

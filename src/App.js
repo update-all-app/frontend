@@ -10,6 +10,7 @@ from 'react'
 import Landing from './components/Landing'
 import Login from './components/Login'
 import Home from './components/Home'
+import About from './components/About'
 
 import UserContext from './context/UserContext'
 import UserReducer from './reducers/UserReducer'
@@ -74,6 +75,9 @@ function App() {
               <WithoutAuth>
                 <Login />
               </WithoutAuth>
+            </Route>
+            <Route exact path="/about">
+              <About />
             </Route>
             <Route exact path ="/home">
               <WithAuth>
