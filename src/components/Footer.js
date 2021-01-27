@@ -5,7 +5,7 @@ export default function Footer(props){
 
 
     return(
-        <footer className="flex justify-center border-t-2">
+        <footer className="flex justify-center border-t-2 absolute bottom-0 w-full h-10">
             <div>
             <button 
             className="bg-transparent text-xs text-black hover:bg-transparent hover:text-secondary py-2 px-4 rounded-l focus:outline-none"

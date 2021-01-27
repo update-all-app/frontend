@@ -11,6 +11,7 @@ import Landing from './components/Landing'
 import Login from './components/Login'
 import Home from './components/Home'
 import About from './components/About'
+import Signup from './components/Signup'
 
 import UserContext from './context/UserContext'
 import UserReducer from './reducers/UserReducer'
@@ -69,11 +70,16 @@ function App() {
             <Route exact path="/">
               <WithoutAuth>
                 <Landing />
-                </WithoutAuth>
+              </WithoutAuth>
             </Route>
             <Route exact path="/login">
               <WithoutAuth>
                 <Login />
+              </WithoutAuth>
+            </Route>
+            <Route exact path="/signup">
+              <WithoutAuth>
+                <Signup />
               </WithoutAuth>
             </Route>
             <Route exact path="/about">

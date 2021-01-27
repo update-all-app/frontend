@@ -72,17 +72,17 @@ export default function Login(props){
             <div className="landing-bottom">
                 
             </div> 
-            <div className="border-l-2 border-primary shadow-lg p-10 content-center absolute top-1/4 left-1/4 bg-white w-2/4">
+            <div className="border-l-2 border-primary shadow-lg p-10 content-center absolute top-1/4 left-3/10 bg-white w-2/5">
                     <Input 
                         placeholder="Email"
-                        onChange={(email) => { setEmail(email) }}
+                        onChange={email => setEmail(email) }
                         value={ email }
                         errors={emailErrors}
                     />
                     <Input
                         placeholder="Password"
                         type="password"
-                        onChange={(pass) => { setPassword(pass) }}
+                        onChange={pass => setPassword(pass) }
                         value={ password }
                         errors={passwordErrors}
                     />
@@ -94,7 +94,7 @@ export default function Login(props){
                         <Link to="/">Trouble logging in?</Link>
                     </div> 
                     <div className="mt-6 ">
-                        <Link to="/">Don't have an account? Sign Up.</Link>
+                        <Link to="/signup">Don't have an account? Sign Up.</Link>
                     </div>   
                 </div>
                 <Footer />

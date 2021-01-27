@@ -11,13 +11,20 @@ export default function Landing(props){
         history.push("/login")
     }
 
+    const signupClick = () => {
+        history.push("/signup")
+    }
+
     return(
         <div className="landing" >
             <div className="landing-top">
                 <LandingNavbar/>
                 <img className="logo bounce-2" src={process.env.PUBLIC_URL + '/logo.png'} alt={"logo"}/>
                 <div className="landing-auth-buttons">
-                <button className="bg-primary hover:bg-black text-white font-bold py-2 px-4 border border-primary hover:border-transparent rounded auth-button focus:outline-none">
+                <button 
+                    className="bg-primary hover:bg-black text-white font-bold py-2 px-4 border border-primary hover:border-transparent rounded auth-button focus:outline-none"
+                    onClick={signupClick}
+                >
                     Sign Up
                 </button>
                     <button 

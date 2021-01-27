@@ -14,6 +14,10 @@ export default function LandingNavbar(props){
         history.push("/login")
     }
 
+    const goToSignup = () => {
+        history.push("/signup")
+    }
+
     const goToAbout = () => {
         history.push("/about")
     }
@@ -43,7 +47,7 @@ export default function LandingNavbar(props){
             </button>
             <button 
             className="bg-transparent text-black hover:bg-transparent font-bold py-2 px-4 rounded-l focus:outline-none"
-            onClick={() => {}}
+            onClick={goToSignup}
             >
                 <span className="bold-text">Signup</span>
             </button>
