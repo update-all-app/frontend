@@ -5,7 +5,6 @@ import { hash } from '../helpers/functions'
 export default function Submit(props){
 
     const {value, onClick, errors=[]} = props
-
     const renderErrors = () => {
         return (
         <div>

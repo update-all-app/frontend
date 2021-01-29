@@ -19,7 +19,9 @@ export default function Login(props){
     const [emailErrors, setEmailErrors] = useState([])
     const [passwordErrors, setPasswordErrors] = useState([])
     const [formErrors, setFormErrors] = useState([])
-    const {dispatch} = useContext(UserContext)
+    const { loading, setLoading } = useState(false)
+    const { dispatch } = useContext(UserContext)
+    
 
     const checkEmail = () => {
         const valid = email.length > 0
@@ -39,6 +41,7 @@ export default function Login(props){
         }
     }
 
+
     const login = async () => {
         const validEmail = checkEmail()
         const validPassword = checkPassword()
@@ -46,7 +49,9 @@ export default function Login(props){
         setPasswordErrors(validPassword.errors)
         if(validEmail.valid && validPassword.valid){
             dispatch({type: LOADING})
+            // window.setTimeout( async () =>{
             const res = await LoginManager.login(email, password)
+            console.log(res)
             if(res.success){
                 dispatch({type: POPULATE_USER, payload: { name: res.user.name, email: res.user.email }})
                 history.push('/home')
@@ -55,6 +60,7 @@ export default function Login(props){
                 dispatch({type: LOGOUT_USER })
                 setFormErrors(["Improper Credentials Entered"])
             }
+            // }, 2000)
         }
     }
 
