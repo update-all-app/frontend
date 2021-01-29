@@ -7,11 +7,11 @@ import React,
 } 
 from 'react'
 
-import Landing from './components/Landing'
-import Login from './components/Login'
+import Landing from './components/without_auth_flow/Landing'
+import Login from './components/without_auth_flow/Login'
 import Home from './components/Home'
-import About from './components/About'
-import Signup from './components/Signup'
+import About from './components/without_auth_flow/About'
+import Signup from './components/without_auth_flow/Signup'
 
 import UserContext from './context/UserContext'
 import UserReducer from './reducers/UserReducer'

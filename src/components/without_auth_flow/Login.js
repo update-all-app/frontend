@@ -1,13 +1,13 @@
 import React, { useState, useContext } from 'react'
 import LandingNavbar from './LandingNavbar'
 import { useHistory } from 'react-router-dom'
-import Input from '../subcomponents/Input'
-import Submit from '../subcomponents/Submit'
-import Footer from './Footer'
+import Input from '../../subcomponents/Input'
+import Submit from '../../subcomponents/Submit'
+import Footer from '../Footer'
 
-import LoginManager from '../helpers/LoginManager'
-import { POPULATE_USER, LOADING, LOGOUT_USER } from '../actionTypes'
-import UserContext from '../context/UserContext'
+import LoginManager from '../../helpers/LoginManager'
+import { POPULATE_USER, LOADING, LOGOUT_USER } from '../../actionTypes'
+import UserContext from '../../context/UserContext'
 import { Link } from 'react-router-dom'
 
 
@@ -66,11 +66,11 @@ export default function Login(props){
 
 
     return(
-        <div className="landing">
-            <div className="landing-top">
+        <div className="mt-0 h-full">
+            <div className="opacity-75 h-45pc w-full bg-secondary">
                 <LandingNavbar/>
             </div>
-            <div className="landing-bottom">
+            <div className="white flex flex-col justify-center align-left h-1/2 p-8">
                 
             </div> 
             <div className="border-l-2 border-primary shadow-lg p-10 content-center absolute top-1/4 left-3/10 bg-white w-2/5">

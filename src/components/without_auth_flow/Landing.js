@@ -1,6 +1,6 @@
 import React from 'react'
 import LandingNavbar from './LandingNavbar'
-import Footer from './Footer'
+import Footer from '../Footer'
 import { useHistory } from 'react-router-dom'
 
 export default function Landing(props){
@@ -16,11 +16,11 @@ export default function Landing(props){
     }
 
     return(
-        <div className="landing" >
-            <div className="landing-top">
+        <div className="mt-0 h-full" >
+            <div className="opacity-75 h-45pc w-full bg-secondary">
                 <LandingNavbar/>
                 <img className="logo bounce-2" src={process.env.PUBLIC_URL + '/logo.png'} alt={"logo"}/>
-                <div className="landing-auth-buttons">
+                <div className="m-auto opacity-100 flex justify-center align-center">
                 <button 
                     className="bg-primary hover:bg-black text-white font-bold py-2 px-4 border border-primary hover:border-transparent rounded auth-button focus:outline-none"
                     onClick={signupClick}
@@ -36,7 +36,7 @@ export default function Landing(props){
                 </div>
                 
             </div>
-            <div className="landing-bottom">
+            <div className="white flex flex-col justify-center align-center h-1/2 p-8 text-center">
                 <p className="landing-text text-primary">UpdateItAll is a platform for small businesses like yours to update all of their information in one place.</p>
             </div>
             {/* <img className="bg-img" src={process.env.PUBLIC_URL + '/bg-test.jpg'} alt=""/> */}

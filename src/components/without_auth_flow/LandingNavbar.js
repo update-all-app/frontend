@@ -29,7 +29,7 @@ export default function LandingNavbar(props){
                 className="bg-transparent text-black hover:bg-transparent font-bold py-2 px-4 rounded-l focus:outline-none"
                 onClick={goHome}
                 >
-                    <span className="bold-text">UpdateItAll</span>
+                    <span className="font-bold text-xl">UpdateItAll</span>
                 </button>
             </div>
             <div>
@@ -37,25 +37,25 @@ export default function LandingNavbar(props){
             className="bg-transparent text-black hover:bg-transparent font-bold py-2 px-4 rounded-l focus:outline-none"
             onClick={goToAbout}
             >
-                <span className="bold-text">About</span>
+                <span className="font-bold text-lg">About</span>
             </button>
             <button 
             className="bg-transparent text-black hover:bg-transparent font-bold py-2 px-4 rounded-l focus:outline-none"
             onClick={() => {}}
             >
-                <span className="bold-text">Pricing</span>
+                <span className="font-bold text-lg">Pricing</span>
             </button>
             <button 
             className="bg-transparent text-black hover:bg-transparent font-bold py-2 px-4 rounded-l focus:outline-none"
             onClick={goToSignup}
             >
-                <span className="bold-text">Signup</span>
+                <span className="font-bold text-lg">Signup</span>
             </button>
             <button 
             className="bg-transparent text-black hover:bg-transparent font-bold py-2 px-4 rounded-l focus:outline-none"
             onClick={goToLogin}
             >
-                <span className="bold-text">Login</span>
+                <span className="font-bold text-lg">Login</span>
             </button>
             </div>
         </div>

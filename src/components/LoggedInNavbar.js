@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import UserContext from '../context/UserContext'
 import { LOGOUT_USER } from '../actionTypes'
-
+import LoginManager from '../helpers/LoginManager'
 
 export default function LoggedInNavbar(props){
 
@@ -14,6 +14,7 @@ export default function LoggedInNavbar(props){
     }
 
     const goToLogout = () => {
+        LoginManager.clearLocalStorage()
         dispatch({type: LOGOUT_USER})
         history.push("/")
     }
