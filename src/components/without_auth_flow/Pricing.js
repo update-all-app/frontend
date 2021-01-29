@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../Navbar'
 import Footer from '../Footer'
 
-export default function About(props){
+export default function Pricing(props){
 
 
     return(
@@ -11,10 +11,15 @@ export default function About(props){
                 <Navbar/>
                 <img className="logo bounce-2" src={process.env.PUBLIC_URL + '/logo.png'} alt={"logo"}/>
             </div>
-            <div className="white flex flex-col justify-center align-left h-1/2 p-8">
-                <p className="text-primary text-left m-4">Tired of logging into 5 different websites to update your business hours? Do people show up when you're closed or not come when you're open because Google Maps isn't up to date or your Facebook business page is wrong?</p>
-                <p className="text-primary text-left m-4">That's where we come in. Update your company hours in one spot and have all of the social media companies that you use simultaneously sync!</p>
-                <p className="text-primary text-left m-4">UpdateItAll is a small business founded by a unique mix of restaurant owners, submarine officers, and software experts, all committed to saving your small business time that you can use to focus on making money.</p>
+            <div className="white flex flex-col justify-center align-left h-1/2 p-8 overflow-scroll">
+                <p className="text-primary text-left m-4">
+                    As of now, we provide one subscription package at $5/mo as an all-inclusive package.
+                </p>
+                <p className="text-primary text-left m-4">
+                    With this subscription, you can manage an unlimited number of business, and sync their 
+                    hours of operation with any of the 3rd party social media sites you use to promote it. 
+                    This includes Yelp, Facebook groups, Google Maps, Apple Maps, and Twitter.
+                </p>
             </div>
             <Footer />
         </div>

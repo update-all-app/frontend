@@ -1,6 +1,11 @@
-# TODO
+# TODO / Discussion Points
 
-# Questions
+- CSS/Styles
+    - Breakpoints for small screens
+    - About / Pricing screens --- need to look better. Font change?
+
+- Malicious Users Check
+    - Limit number of requests (per second and total over a few hours)
 
 - Login/Signup
     - LOADING modal is a little abrupt, consider making login button a loader

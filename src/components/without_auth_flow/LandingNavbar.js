@@ -22,6 +22,10 @@ export default function LandingNavbar(props){
         history.push("/about")
     }
 
+    const goToPricing = () => {
+        history.push("/pricing")
+    }
+
     return(
         <div className="landing-navbar">
             <div>
@@ -41,7 +45,7 @@ export default function LandingNavbar(props){
             </button>
             <button 
             className="bg-transparent text-black hover:bg-transparent font-bold py-2 px-4 rounded-l focus:outline-none"
-            onClick={() => {}}
+            onClick={goToPricing}
             >
                 <span className="font-bold text-lg">Pricing</span>
             </button>

@@ -11,6 +11,7 @@ import Landing from './components/without_auth_flow/Landing'
 import Login from './components/without_auth_flow/Login'
 import Home from './components/Home'
 import About from './components/without_auth_flow/About'
+import Pricing from './components/without_auth_flow/Pricing'
 import Signup from './components/without_auth_flow/Signup'
 
 import UserContext from './context/UserContext'
@@ -83,6 +84,9 @@ function App() {
             </Route>
             <Route exact path="/about">
               <About />
+            </Route>
+            <Route exact path="/pricing">
+              <Pricing />
             </Route>
             <Route exact path ="/home">
               <WithAuth>
