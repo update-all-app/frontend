@@ -1,8 +1,9 @@
-import { BACKEND_URL, FRONTEND_URL } from '../constants'
+import { BACKEND_URL, API_SUFFIX, FRONTEND_URL } from '../constants'
 import LoginManager from './LoginManager'
 import AuthenticationError from '../errors/AuthenticationError'
 
 export default class ApiManager{
+
 
     static getHeaders(token){
         const headers = {
@@ -47,8 +48,8 @@ export default class ApiManager{
     static async getUser(){
         const token = await this.getToken()
         if(token){
-            //  return await this.get('/me', token)
-            return await this.get('/businesses', token)
+            const uri = `${API_SUFFIX}/me`
+            return await this.get(uri, token)
         }else{
             return null
         }
@@ -63,13 +64,17 @@ export default class ApiManager{
         })
     }
 
-    static loading(){
-        // set loading
+    static async signup(firstName, lastName, email, password, passwordConfirmation){
+        return await this.post('/signup', {
+            user: {
+                name: `${firstName} ${lastName}`,
+                email,
+                password,
+                passwordConfirmation
+            }
+        })
     }
 
-    static done(){
-        // set not loading
-    }
 
     static async getBusinesses(){
         const token = this.protectedRoute()

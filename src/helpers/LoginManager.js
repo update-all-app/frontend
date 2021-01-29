@@ -1,5 +1,6 @@
 import ApiManager from './ApiManager'
 import TokenTimeManager from './TokenTimeManager'
+import { strip } from './functions'
 
 export default class LoginManager{
 
@@ -52,7 +53,7 @@ export default class LoginManager{
 
     static async login(email, password){
         try{
-            const res = await ApiManager.login(email, password)
+            const res = await ApiManager.login(strip(email), password)
             this.writeTokenToStorage(res)
             return { success: true, user: res.user }
         }catch(err){
@@ -68,6 +69,25 @@ export default class LoginManager{
             }
         }
         
+    }
+
+    static async signup(firstname, lastname, email, password, passwordConfirmation){
+        try{
+            const res = await ApiManager.signup(strip(firstname), strip(lastname), strip(email), password, passwordConfirmation)
+            this.writeTokenToStorage(res)
+            return { success: true, user: res.user }
+        }catch(err){
+            console.log(err)
+            if(!!err.status){
+                switch(err.status){
+
+                }
+                return { success: false }
+            }else{
+                console.log("Connectivity Issues")
+                return { success: false }
+            }
+        }
     }
 
     static writeTokenToStorage(res){

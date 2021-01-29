@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { hash } from '../helpers/functions'
 import ErrorText from './ErrorText'
 
 export default function Input(props){
@@ -13,7 +13,7 @@ export default function Input(props){
     const renderErrors = () => {
         return errors.map(e => {
             return(
-                <ErrorText value={e} />
+                <ErrorText value={e} key={hash(e)} />
             )
         })
     }

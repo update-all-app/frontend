@@ -4,12 +4,12 @@ import { useHistory } from 'react-router-dom'
 import Input from '../subcomponents/Input'
 import Submit from '../subcomponents/Submit'
 import Footer from './Footer'
-
 import LoginManager from '../helpers/LoginManager'
-import { POPULATE_USER } from '../actionTypes'
+import { POPULATE_USER, LOADING, LOGOUT_USER } from '../actionTypes'
 import UserContext from '../context/UserContext'
 import { Link } from 'react-router-dom'
 
+import { validateEmail, validatePassword } from '../helpers/functions'
 
 export default function Signup(props){
 
@@ -24,49 +24,117 @@ export default function Signup(props){
     const [emailErrors, setEmailErrors] = useState([])
     const [passwordErrors, setPasswordErrors] = useState([])
     const [passwordConfirmationErrors, setPasswordConfirmationErrors] = useState([])
+    const [formErrors, setFormErrors] = useState([])
+    const [passwordConfirmationChanged, setPasswordConfirmationChanged] = useState(false)
+    const [emailErrorOccurred, setEmailErrorOccurred] = useState(false)
 
     const {dispatch} = useContext(UserContext)
 
-    const checkEmail = (email) => {
-        return {
-            valid: email !== "",
-            errors: ["Must include an email"]
+    const updatePasswordConfirmation = async (pass) => {
+        setPasswordConfirmation(pass)
+        setPasswordConfirmationChanged(true)
+        const {errors} = checkPasswordConfirmation(pass)
+        setPasswordConfirmationErrors(errors)
+    }
+
+    const updatePassword = pass => {
+        setPassword(pass)
+        const {errors} = checkPassword(pass)
+        setPasswordErrors(errors)
+        if(passwordConfirmationChanged){
+            const passwordConfirmationData = checkPasswordConfirmation()
+            setPasswordConfirmationErrors(passwordConfirmationData.errors)
         }
     }
 
-    const checkPassword = (password) => {
+    const updateEmail = e => {
+        setEmail(e)
+        if(emailErrorOccurred){
+            const {errors} = checkEmail(e)
+            setEmailErrors(errors)
+        }   
+    }
+
+    const checkFirstName = () => {
+        const valid = firstName.length > 0
+        const errors = valid ? [] : ["This field must be populated"]
         return {
-            valid: password.length > 0,
-            errors: ["Must include a password"]
-        
+            valid,
+            errors
+        }
+
+    }
+
+    const checkLastName = () => {
+        const valid = lastName.length > 0
+        const errors = valid ? [] : ["This field must be populated"]
+        return {
+            valid,
+            errors
         }
     }
 
-    const login = async () => {
-        const validEmail = checkEmail(email)
-        const validPassword = checkPassword(password)
-        if(validEmail.valid && validPassword.valid){
-            const res = await LoginManager.login(email, password)
+    const checkEmail = (e=null) => {
+        const emailValue = e !== null ? e : email
+        const validEmail = validateEmail(emailValue)
+        const errors = validEmail ? [] : ["Invalid Email"]
+        return {
+            valid: validEmail,
+            errors
+        }
+    }
+
+    const checkPassword = (pass=null) => {
+        const passwordValue = pass !== null ? pass : password
+        const { valid, errors } = validatePassword(passwordValue)
+        return {
+            valid, 
+            errors
+        }
+    }
+
+    const checkPasswordConfirmation = (pass=null) => {
+        const passwordValue = pass !== null ? pass : passwordConfirmation
+        const allErrors = []
+        const { valid } = validatePassword(password) 
+        const isValid = valid && passwordValue === password
+        if(!valid){
+            allErrors.push("Password does not meet specifications")
+        }
+        if(passwordValue !== password){
+            allErrors.push("Confirmation does not match password")
+        }
+        return {
+            valid: isValid,
+            errors: allErrors
+        }
+
+    }
+
+    const signup = async () => {
+        const validFirstName = checkFirstName()
+        const validLastName = checkLastName()
+        const validEmail = checkEmail()
+        const validPassword = checkPassword()
+        const validPasswordConfirmation = checkPasswordConfirmation()
+        setFirstNameErrors(validFirstName.errors)
+        setLastNameErrors(validLastName.errors)
+        setEmailErrors(validEmail.errors)
+        setPasswordErrors(validPassword.errors)
+        setPasswordConfirmationErrors(validPasswordConfirmation.errors)
+        if(validEmail.valid && validPassword.valid && validFirstName.valid && validLastName.valid && validPasswordConfirmation.valid){
+            dispatch({type: LOADING})
+            const res = await LoginManager.signup(firstName, lastName, email, password, passwordConfirmation)
             if(res.success){
-                console.log(res.user)
-                dispatch({type: POPULATE_USER, payload: { email: res.user.email }})
-                //dispatch{type: POPULATE_USER, payload: {email: res.user.email, name: res.user.name}}
+                dispatch({type: POPULATE_USER, payload: { name: res.user.name, email: res.user.email }})
                 history.push('/home')
             }else{
                 LoginManager.clearLocalStorage()
-                console.log(res)
+                dispatch({type: LOGOUT_USER })
+                setFormErrors(["There was a problem signing you up"])
             }
-        }else{
-            if(!validEmail.valid){
-                setEmailErrors(validEmail.errors)
-            }else{
-                setEmailErrors([])
-            }
-            if(!validPassword.valid){
-                setPasswordErrors(validPassword.errors)
-            }else{
-                setPasswordErrors([])
-            }
+        }else if(!validEmail.valid){
+            setEmailErrorOccurred(true)
         }
     }
 
@@ -94,26 +162,28 @@ export default function Signup(props){
                     />
                     <Input 
                         placeholder="Email"
-                        onChange={ email => setEmail(email) }
+                        onChange={ updateEmail }
                         value={ email }
                         errors={ emailErrors }
                     />
                     <Input
                         placeholder="Password"
                         type="password"
-                        onChange={ pass => setPassword(pass) }
+                        onChange={ pass => updatePassword(pass) }
                         value={ password }
                         errors={ passwordErrors }
                     />
                     <Input 
                         placeholder="Password Confirmation"
-                        onChange={ pass => setPasswordConfirmation(pass) }
+                        type="password"
+                        onChange={ pass => updatePasswordConfirmation(pass) }
                         value={ passwordConfirmation }
                         errors={ passwordConfirmationErrors }
                     />
                     <Submit 
                         value="Sign Up"
-                        onClick={() => {}}
+                        onClick={signup}
+                        errors={formErrors}
                     />
                     <div className="mt-6 ">
                         <Link to="/login">Already have an account? Log in.</Link>

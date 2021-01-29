@@ -6,7 +6,7 @@ import Submit from '../subcomponents/Submit'
 import Footer from './Footer'
 
 import LoginManager from '../helpers/LoginManager'
-import { POPULATE_USER } from '../actionTypes'
+import { POPULATE_USER, LOADING, LOGOUT_USER } from '../actionTypes'
 import UserContext from '../context/UserContext'
 import { Link } from 'react-router-dom'
 
@@ -18,47 +18,42 @@ export default function Login(props){
     const [password, setPassword] = useState("")
     const [emailErrors, setEmailErrors] = useState([])
     const [passwordErrors, setPasswordErrors] = useState([])
+    const [formErrors, setFormErrors] = useState([])
     const {dispatch} = useContext(UserContext)
 
-    const checkEmail = (email) => {
+    const checkEmail = () => {
+        const valid = email.length > 0
+        const errors = valid ? [] : ["Must include an email"]
         return {
-            valid: email !== "",
-            errors: ["Must include an email"]
+            valid,
+            errors
         }
     }
 
-    const checkPassword = (password) => {
+    const checkPassword = () => {
+        const valid = password.length > 0
+        const errors = valid ? [] : ["Must include a password"]
         return {
-            valid: password.length > 0,
-            errors: ["Must include a password"]
-        
+            valid,
+            errors
         }
     }
 
     const login = async () => {
-        const validEmail = checkEmail(email)
-        const validPassword = checkPassword(password)
+        const validEmail = checkEmail()
+        const validPassword = checkPassword()
+        setEmailErrors(validEmail.errors)
+        setPasswordErrors(validPassword.errors)
         if(validEmail.valid && validPassword.valid){
+            dispatch({type: LOADING})
             const res = await LoginManager.login(email, password)
             if(res.success){
-                console.log(res.user)
-                dispatch({type: POPULATE_USER, payload: { email: res.user.email }})
-                //dispatch{type: POPULATE_USER, payload: {email: res.user.email, name: res.user.name}}
+                dispatch({type: POPULATE_USER, payload: { name: res.user.name, email: res.user.email }})
                 history.push('/home')
             }else{
                 LoginManager.clearLocalStorage()
-                console.log(res)
-            }
-        }else{
-            if(!validEmail.valid){
-                setEmailErrors(validEmail.errors)
-            }else{
-                setEmailErrors([])
-            }
-            if(!validPassword.valid){
-                setPasswordErrors(validPassword.errors)
-            }else{
-                setPasswordErrors([])
+                dispatch({type: LOGOUT_USER })
+                setFormErrors(["Improper Credentials Entered"])
             }
         }
     }
@@ -89,6 +84,7 @@ export default function Login(props){
                     <Submit 
                         value="Log In"
                         onClick={login}
+                        errors={formErrors}
                     />
                     <div className="mt-6">
                         <Link to="/">Trouble logging in?</Link>

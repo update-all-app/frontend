@@ -46,9 +46,8 @@ function App() {
     const checkUserStatus = async () => {
       dispatch({type: LOADING})
       const user = await ApiManager.getUser()
-      console.log(user)
       if(user){
-        dispatch({type: POPULATE_USER, payload: {email: user.email}}) //, name: user.name}}
+        dispatch({type: POPULATE_USER, payload: {name: user.name, email: user.email}}) 
       }else{
         LoginManager.clearLocalStorage()
         dispatch({type: LOGOUT_USER})
