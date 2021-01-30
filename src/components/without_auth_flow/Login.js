@@ -3,7 +3,7 @@ import LandingNavbar from './LandingNavbar'
 import { useHistory } from 'react-router-dom'
 import Input from '../../subcomponents/Input'
 import Submit from '../../subcomponents/Submit'
-import Footer from '../Footer'
+import WithFooter from '../../wrappers/WithFooter'
 
 import LoginManager from '../../helpers/LoginManager'
 import { POPULATE_USER, LOADING, LOGOUT_USER } from '../../actionTypes'
@@ -66,41 +66,41 @@ export default function Login(props){
 
 
     return(
-        <div className="mt-0 h-full">
-            <div className="opacity-75 h-45pc w-full bg-secondary">
+
+        <WithFooter >
+            <div className="h-45vh w-full bg-secondary">
                 <LandingNavbar/>
             </div>
-            <div className="white flex flex-col justify-center align-left h-1/2 p-8">
+            <div className="white flex flex-col justify-center align-left ">
                 
             </div> 
-            <div className="border-l-2 border-primary shadow-lg p-10 content-center absolute top-1/4 left-3/10 bg-white w-2/5">
-                    <Input 
-                        placeholder="Email"
-                        onChange={email => setEmail(email) }
-                        value={ email }
-                        errors={emailErrors}
-                    />
-                    <Input
-                        placeholder="Password"
-                        type="password"
-                        onChange={pass => setPassword(pass) }
-                        value={ password }
-                        errors={passwordErrors}
-                    />
-                    <Submit 
-                        value="Log In"
-                        onClick={login}
-                        errors={formErrors}
-                    />
-                    <div className="mt-6">
-                        <Link to="/">Trouble logging in?</Link>
-                    </div> 
-                    <div className="mt-6 ">
-                        <Link to="/signup">Don't have an account? Sign Up.</Link>
-                    </div>   
-                </div>
-                <Footer />
-        </div>
-        
+            <div className="border-l-2 border-primary shadow-lg p-10 content-center absolute top-1/4 left-3/10 bg-white w-2/5 max-h-3/4 overflow-scroll">
+                <Input 
+                    placeholder="Email"
+                    onChange={email => setEmail(email) }
+                    value={ email }
+                    errors={emailErrors}
+                />
+                <Input
+                    placeholder="Password"
+                    type="password"
+                    onChange={pass => setPassword(pass) }
+                    value={ password }
+                    errors={passwordErrors}
+                />
+                <Submit 
+                    value="Log In"
+                    onClick={login}
+                    errors={formErrors}
+                />
+                <div className="mt-6">
+                    <Link to="/">Trouble logging in?</Link>
+                </div> 
+                <div className="mt-6 ">
+                    <Link to="/signup">Don't have an account? Sign Up.</Link>
+                </div>   
+            </div>
+        </ WithFooter>
+
     )
 }

@@ -13,6 +13,7 @@ import Home from './components/Home'
 import About from './components/without_auth_flow/About'
 import Pricing from './components/without_auth_flow/Pricing'
 import Signup from './components/without_auth_flow/Signup'
+import ContactUs from './components/ContactUs'
 
 import UserContext from './context/UserContext'
 import UserReducer from './reducers/UserReducer'
@@ -84,6 +85,9 @@ function App() {
             </Route>
             <Route exact path="/about">
               <About />
+            </Route>
+            <Route exact path='/contact'>
+              <ContactUs />
             </Route>
             <Route exact path="/pricing">
               <Pricing />

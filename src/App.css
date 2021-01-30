@@ -9,23 +9,55 @@ html, body{
   font-family: 'Nunito', sans-serif;
 }
 
+.test{
+  border-left: 2px solid rgb(19, 128, 9);
+  /* border-radius: 5px; */
+}
+
 .logo{
-  height: 55%;
-  animation-duration: 10s;
+  height: 27vh;
+  animation-duration: 20s;
   animation-iteration-count: infinite;
   margin: auto;
+  margin-bottom: 0px;
   transform-origin: bottom;
+  z-index: 10;
 }
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+
+@media only screen and (max-height: 645px) {
+
+  .auth-button{
+    display: none;
+
+  }
+}
+
 
 .bold-text{
   font-weight: bolder;
   font-size: 1.2em;
 }
 
-#root{
-  height: 100%;
+.page{
+  position: relative;
+  min-height: 100vh;
 }
 
+#root{
+  /* height: 100%; */
+  min-height: 100vh;
+}
+
+.info-text{
+  font-size: 0.9em;
+  margin-left: 5em;
+  margin-right: 5em;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
 
 .overlay{
   position: fixed;
@@ -37,24 +69,25 @@ html, body{
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-
-
 .auth-button{
-  margin: 40px;
+  margin: 20px;
 }
 
 .landing-navbar{
   display: flex;
   justify-content: space-between;
+  align-content: center;
+  width: 100%;
 }
 
 .bounce-2 {
   animation-name: bounce-2;
   animation-timing-function: ease;
 }
+
 @keyframes bounce-2 {
   0%   { transform: translateY(0); }
-  50%  { transform: translateY(-30px); }
+  50%  { transform: translateY(-7px); }
   100% { transform: translateY(0); }
 }
 
@@ -67,6 +100,7 @@ html, body{
   width: 1em;
   height: 4em;
 }
+
 .loader {
   color: rgb(0, 0, 0);
   text-indent: -9999em;
@@ -107,6 +141,8 @@ html, body{
     height: 5em;
   }
 }
+
+
 @keyframes load1 {
   0%,
   80%,

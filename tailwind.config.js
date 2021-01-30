@@ -7,11 +7,17 @@ module.exports = {
     extend: {
       colors: {
         primary: '#1E293B',
-        secondary: '#059669'
+        secondary: '#065F46'
       },
       maxHeight: {
         '1/2': '50%',
         '3/4': "75%"
+      },
+      minHeight: {
+        '1/2': '50%'
+      },
+      height: {
+        '22': '5.5em'
       },
       spacing: {
         '1/8': '12.5%',
@@ -19,7 +25,8 @@ module.exports = {
         '3/10': '30%',
         '1/5': '20%',
         '1/2': '50%',
-        '45pc': '45%'
+        '45pc': '45%',
+        '45vh': '45vh'
       }
     },
   },

@@ -3,7 +3,7 @@ import LandingNavbar from './LandingNavbar'
 import { useHistory } from 'react-router-dom'
 import Input from '../../subcomponents/Input'
 import Submit from '../../subcomponents/Submit'
-import Footer from '../Footer'
+import WithFooter from '../../wrappers/WithFooter'
 import LoginManager from '../../helpers/LoginManager'
 import { POPULATE_USER, LOADING, LOGOUT_USER } from '../../actionTypes'
 import UserContext from '../../context/UserContext'
@@ -140,8 +140,8 @@ export default function Signup(props){
 
 
     return(
-        <div className="mt-0 h-full">
-            <div className="opacity-75 h-45pc w-full bg-secondary">
+        <WithFooter>
+            <div className="h-45vh w-full bg-secondary">
                 <LandingNavbar/>
             </div>
             <div className="white flex flex-col justify-center align-left h-1/2 p-8">
@@ -189,8 +189,7 @@ export default function Signup(props){
                         <Link to="/login">Already have an account? Log in.</Link>
                     </div>   
                 </div>
-                <Footer />
-        </div>
+        </WithFooter>
         
     )
 }

@@ -28,15 +28,15 @@ export default function LandingNavbar(props){
 
     return(
         <div className="landing-navbar">
-            <div>
+            <div className="flex justify-center align-center">
                 <button 
                 className="bg-transparent text-black hover:bg-transparent font-bold py-2 px-4 rounded-l focus:outline-none"
                 onClick={goHome}
                 >
-                    <span className="font-bold text-xl">UpdateItAll</span>
+                    <span className="font-bold text-2xl">UpdateItAll</span>
                 </button>
             </div>
-            <div>
+            <div className="flex justify-center align-center">
             <button 
             className="bg-transparent text-black hover:bg-transparent font-bold py-2 px-4 rounded-l focus:outline-none"
             onClick={goToAbout}

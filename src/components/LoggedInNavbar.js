@@ -21,7 +21,7 @@ export default function LoggedInNavbar(props){
 
     return(
         <div className="landing-navbar">
-            <div>
+            <div className="flex justify-center align-center">
                 <button 
                 className="bg-transparent text-black hover:bg-transparent font-bold py-2 px-4 rounded-l focus:outline-none"
                 onClick={goHome}
@@ -29,7 +29,7 @@ export default function LoggedInNavbar(props){
                     <span className="font-bold text-xl">UpdateItAll</span>
                 </button>
             </div>
-            <div>
+            <div className="flex justify-center align-center">
             <button 
             className="bg-transparent text-black hover:bg-transparent font-bold py-2 px-4 rounded-l focus:outline-none"
             onClick={goToLogout}
