@@ -19,6 +19,9 @@ module.exports = {
       height: {
         '22': '5.5em'
       },
+      width: {
+        '160': '40rem'
+      },
       spacing: {
         '1/8': '12.5%',
         '2/5': '40%',
