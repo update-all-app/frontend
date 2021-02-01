@@ -18,19 +18,19 @@ export default function Footer(props){
             </button>
             <button 
             className="bg-transparent text-xs text-black hover:bg-transparent hover:text-secondary py-2 px-4 rounded-l focus:outline-none"
-            onClick={() => {}}
+            onClick={() => history.push('/customer-stories')}
             >
                 <span className="bold-text">Customer Stories</span>
             </button>
             <button 
             className="bg-transparent text-xs text-black hover:bg-transparent hover:text-secondary py-2 px-4 rounded-l focus:outline-none"
-            onClick={() => {}}
+            onClick={() => {history.push('/careers')}}
             >
                 <span className="bold-text">Careers</span>
             </button>
             <button 
             className="bg-transparent text-xs text-black hover:bg-transparent hover:text-secondary py-2 px-4 rounded-l focus:outline-none"
-            onClick={() => {}}
+            onClick={() => {history.push('/privacy')}}
             >
                 <span className="bold-text">Privacy</span>
             </button>
