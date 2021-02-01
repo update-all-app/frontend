@@ -17,7 +17,7 @@ export default function Careers(props) {
         <h1 className="text-center text-2xl font-bold m-10">
           Careers
         </h1>
-        <div className="max-w-sm mx-auto flex p-6 bg-white rounded-lg shadow-lx">
+        <div className="max-w-sm mx-auto flex-col p-6 bg-white rounded-lg shadow-lx">
           {jobOpenings.map(job => <CareerCard job={job} key={hash(job.title)} />)}
         </div>
       </div>

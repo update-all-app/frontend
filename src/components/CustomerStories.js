@@ -12,7 +12,7 @@ export default function CustomerStories(props) {
       <div className="h-12 bg-secondary flex justify-center w-full">
         <Navbar />
       </div>
-      <div className="flex justify-center items-center w-full flex-col">
+      <div className="flex-col justify-center items-center w-full flex-col">
         <h1 className="text-center text-2xl font-bold m-10">
           Customer Stories
         </h1>
