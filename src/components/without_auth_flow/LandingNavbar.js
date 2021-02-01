@@ -27,7 +27,7 @@ export default function LandingNavbar(props){
     }
 
     return(
-        <div className="landing-navbar">
+        <div className="landing-navbar bg-secondary">
             <div className="flex justify-center align-center">
                 <button 
                 className="bg-transparent text-black hover:bg-transparent font-bold py-2 px-4 rounded-l focus:outline-none"

@@ -1,6 +1,6 @@
 import React from 'react'
-import LandingNavbar from './LandingNavbar'
 import WithFooter from '../../wrappers/WithFooter'
+import LandingNavbar from './LandingNavbar'
 import { useHistory } from 'react-router-dom'
 
 export default function Landing(props){
@@ -18,7 +18,7 @@ export default function Landing(props){
     return(
         <WithFooter>
             <div className="h-45vh w-full bg-secondary">
-                <LandingNavbar/>
+                <LandingNavbar />
                 <img className="logo bounce-2" src={process.env.PUBLIC_URL + '/logo.png'} alt={"logo"}/>
                 <div className="m-auto opacity-100 flex justify-center align-center">
                 <button 

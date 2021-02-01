@@ -24,3 +24,7 @@
 - Login/Signup
     - LOADING modal is a little abrupt, consider making login button a loader
     - Or wait a little before displaying it
+
+- Create Business
+    - Google Autocomplet API?
+    - https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform#maps_places_autocomplete_addressform-javascript

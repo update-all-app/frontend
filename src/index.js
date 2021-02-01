@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-
+window.initAutocomplete = null
 
 ReactDOM.render(<App/>, document.getElementById('root'))
 

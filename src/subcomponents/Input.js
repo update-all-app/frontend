@@ -4,7 +4,20 @@ import ErrorText from './ErrorText'
 
 export default function Input(props){
 
-    const { placeholder, value, onChange, type="text", errors=[], required=true, mb=12 } = props
+    const { 
+        placeholder, 
+        value, 
+        onChange, 
+        type="text", 
+        errors=[], 
+        id=null, 
+        onFocus= () => {}, 
+        disabled=false, 
+        required=true, 
+        mb=12,
+        display='block', 
+        w="full"
+    } = props
 
     const propOrEmptyString = (someProp) => {
         return !!someProp ? someProp : ""
@@ -19,18 +32,21 @@ export default function Input(props){
     }
 
     return (
-        <div className={`mb-${mb} w-full`}>
+        <div className={`mb-${mb} w-full ${display}`}>
             <input 
-                className={`w-full h-10 px-3 transition duration-300 text-base text-gray-700 placeholder-gray-600 border-b-2 focus:border-secondary focus:border-b-4 rounded-lg focus:outline-none`}
+                id={id}
+                className={`w-${w} h-10 px-3 transition duration-300 text-base text-gray-700 placeholder-gray-600 border-b-2 focus:border-secondary focus:border-b-4 rounded-lg focus:outline-none`}
                 type={type}
                 placeholder={propOrEmptyString(placeholder)}
                 value={propOrEmptyString(value)}
                 onChange={ e => onChange(e.target.value)}
                 required={required}
+                onFocus={onFocus}
+                disabled={disabled}
             />
             {renderErrors()}
         </div>
     )
-    
+
 }
 
