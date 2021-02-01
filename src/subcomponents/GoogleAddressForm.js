@@ -69,7 +69,7 @@ export default function GoogleAddressForm(props){
 
 
   let autocompleteManager = GoogleAutocompleteAddressManager.get_instance(1)
-  console.log(autocompleteManager)
+  // console.log(autocompleteManager)
   if(!autocompleteManager){
     autocompleteManager = GoogleAutocompleteAddressManager.new_cache(1)
     autocompleteManager.setUpdateStreetAddress(setStreetAddress)
@@ -83,69 +83,72 @@ export default function GoogleAddressForm(props){
   
 
   return autocompleteManager ? (
-    <div>
+    <div className="mt-24">
       <Input
         id="autocomplete"
-        placeholder="Enter your address"
+        placeholder="Search for your address"
         onFocus={autocompleteManager.geolocate} 
         onChange={setAddress}
         value={address}
       />
-      <div className="display-inline-block mb-10">
+      <div className="m-10 mt-24 m-auto w-160 border-l-2 shadow-lg border-primary flex flex-col justify-start pl-10">
+        <h1 className="mb-10 -ml-10 mt-0 bg-primary w-160 p-2 text-white">Address Details</h1>
+        <div className="display-inline-block mb-10">
+          <Input 
+            id="street_number"
+            placeholder="Street Address"
+            onChange={() => {}}
+            value={streetAddress}
+            disabled={true}
+            display='inline'
+            w='1/4'
+          />
+          <Input 
+            id="route"
+            placeholder="Street Name"
+            onChange={() => {}}
+            value={route}
+            disabled={true}
+            display='inline'
+            w='3/4'
+          />
+        </div>
+        
+        <div className="display-inline-block mb-10">
+          <Input 
+            id="locality"
+            placeholder="City"
+            onChange={() => {}}
+            value={city}
+            disabled={true}
+            display='inline'
+            w='1/4'
+          />
+          <Input 
+            id="administrative_area_level_1"
+            placeholder="State"
+            onChange={() => {}}
+            value={state}
+            display='inline'
+            w='1/4'
+          />
+          <Input 
+            id="postal_code"
+            placeholder="Zip Code"
+            onChange={() => {}}
+            value={zipCode}
+            display='inline'
+            w='1/4'
+          />
+        </div>
         <Input 
-          id="street_number"
-          placeholder="Street Address"
+          id="country"
+          placeholder="Country"
           onChange={() => {}}
-          value={streetAddress}
-          disabled={true}
-          display='inline'
-          w='1/4'
-        />
-        <Input 
-          id="route"
-          placeholder="Street Name"
-          onChange={() => {}}
-          value={route}
-          disabled={true}
-          display='inline'
-          w='3/4'
+          value={country}
+          w='1/2'
         />
       </div>
-      
-      <div className="display-inline-block mb-10">
-        <Input 
-          id="locality"
-          placeholder="City"
-          onChange={() => {}}
-          value={city}
-          disabled={true}
-          display='inline'
-          w='1/4'
-        />
-        <Input 
-          id="administrative_area_level_1"
-          placeholder="State"
-          onChange={() => {}}
-          value={state}
-          display='inline'
-          w='1/4'
-        />
-        <Input 
-          id="postal_code"
-          placeholder="Zip Code"
-          onChange={() => {}}
-          value={zipCode}
-          display='inline'
-          w='1/4'
-        />
-      </div>
-      <Input 
-        id="country"
-        placeholder="Country"
-        onChange={() => {}}
-        value={country}
-        w='1/2'
-      />
     </div>
   ) : (
   <>

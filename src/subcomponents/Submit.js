@@ -4,7 +4,7 @@ import { hash } from '../helpers/functions'
 
 export default function Submit(props){
 
-    const {value, onClick, errors=[]} = props
+    const {value, onClick, errors=[], mt=0} = props
     const renderErrors = () => {
         return (
         <div>
@@ -20,7 +20,7 @@ export default function Submit(props){
     return (
         <>
             <button 
-                className="bg-gray-500 transition duration-300 hover:bg-black text-white font-bold py-2 px-4 rounded"
+                className={`bg-gray-500 transition duration-300 hover:bg-black text-white font-bold py-2 px-4 mt-${mt} rounded`}
                 onClick={onClick}
             >
                 {value}

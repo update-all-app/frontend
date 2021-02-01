@@ -35,7 +35,7 @@ export default function Input(props){
         <div className={`mb-${mb} w-full ${display}`}>
             <input 
                 id={id}
-                className={`w-${w} h-10 px-3 transition duration-300 text-base text-gray-700 placeholder-gray-600 border-b-2 focus:border-secondary focus:border-b-4 rounded-lg focus:outline-none`}
+                className={`w-${w} custom-input h-10 px-3 transition duration-300 text-base text-gray-700 placeholder-gray-600 border-b-2 focus:border-primary focus:border-b-2 focus:outline-none`}
                 type={type}
                 placeholder={propOrEmptyString(placeholder)}
                 value={propOrEmptyString(value)}
