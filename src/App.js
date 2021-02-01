@@ -14,6 +14,9 @@ import About from './components/without_auth_flow/About'
 import Pricing from './components/without_auth_flow/Pricing'
 import Signup from './components/without_auth_flow/Signup'
 import ContactUs from './components/ContactUs'
+import CustomerStories from './components/CustomerStories'
+import Careers from './components/Careers'
+import Privacy from './components/Privacy'
 
 import UserContext from './context/UserContext'
 import UserReducer from './reducers/UserReducer'
@@ -88,6 +91,15 @@ function App() {
             </Route>
             <Route exact path='/contact'>
               <ContactUs />
+            </Route>
+            <Route exact path='/customer-stories'>
+              <CustomerStories />
+            </Route>
+            <Route exact path='/careers'>
+              <Careers />
+            </Route>
+            <Route exact path='/privacy'>
+              <Privacy />
             </Route>
             <Route exact path="/pricing">
               <Pricing />
