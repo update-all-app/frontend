@@ -84,24 +84,34 @@ export default function GoogleAddressForm(props){
 
   return autocompleteManager ? (
     <div className="mt-24">
-      <Input
-        id="autocomplete"
-        placeholder="Search for your address"
-        onFocus={autocompleteManager.geolocate} 
-        onChange={setAddress}
-        value={address}
-      />
-      <div className="m-10 mt-24 m-auto w-160 border-l-2 shadow-lg border-primary flex flex-col justify-start pl-10">
-        <h1 className="mb-10 -ml-10 mt-0 bg-primary w-160 p-2 text-white">Address Details</h1>
-        <div className="display-inline-block mb-10">
+      <div className="flex flex-row justify-left items-baseline m-auto w-160">
+        <svg className="w-6 relative top-2 primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <Input
+          id="autocomplete"
+          placeholder="Search for your address"
+          onFocus={autocompleteManager.geolocate} 
+          onChange={setAddress}
+          value={address}
+        />
+      </div>
+      <div className="mt-12 m-auto w-160 border-l-2 shadow-lg border-primary flex flex-col justify-start px-10">
+        <div className="mb-10 -ml-10 mt-0 bg-primary w-160 p-2 text-white flex flex-row justify-start">
+          <svg className="w-4 realtive top-2 primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <h1 className='pl-2'>Address Details</h1>
+        </div>
+        <div className="flex flex-row space-between">
           <Input 
             id="street_number"
             placeholder="Street Address"
             onChange={() => {}}
             value={streetAddress}
             disabled={true}
-            display='inline'
-            w='1/4'
+            w={'11/12'}
           />
           <Input 
             id="route"
@@ -109,36 +119,32 @@ export default function GoogleAddressForm(props){
             onChange={() => {}}
             value={route}
             disabled={true}
-            display='inline'
-            w='3/4'
+            w={'11/12'}
           />
         </div>
         
-        <div className="display-inline-block mb-10">
+        <div className="flex flex-row space-between">
           <Input 
             id="locality"
             placeholder="City"
             onChange={() => {}}
             value={city}
             disabled={true}
-            display='inline'
-            w='1/4'
+            w={'11/12'}
           />
           <Input 
             id="administrative_area_level_1"
             placeholder="State"
             onChange={() => {}}
             value={state}
-            display='inline'
-            w='1/4'
+            w={'11/12'}
           />
           <Input 
             id="postal_code"
             placeholder="Zip Code"
             onChange={() => {}}
             value={zipCode}
-            display='inline'
-            w='1/4'
+            w={'11/12'}
           />
         </div>
         <Input 

@@ -14,8 +14,8 @@ export default function CreateBusiness(props){
 
   return(
     <WithHeaderAndFooter>
-      <h1 className="mt-10 text-2xl text-center">Set up your first business</h1>
-      <h1 className="mt-10 text-xl text-center">Where are you located?</h1>
+      <h1 className="mt-10 text-3xl font-black text-center">Set up your first business</h1>
+      <h1 className="mt-10 text-xl font-thin text-center">Where are you located?</h1>
       <div className='w-1/2 m-auto my-10'>
         <GoogleAddressForm 
           address={address}
@@ -33,11 +33,14 @@ export default function CreateBusiness(props){
           country={country}
           setCountry={setCountry}
         />
-        <Submit 
-          value="Verify Location"
-          mt={4}
-          onClick={() => {}}
-        />
+        <div className="m-auto w-160">
+          <Submit 
+            value="Verify Location"
+            mt={8}
+            onClick={() => {}}
+          />
+        </div>
+        
       </div>
       
     </WithHeaderAndFooter>
