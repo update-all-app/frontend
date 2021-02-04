@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import WithFooter from '../wrappers/WithFooter'
+import WithHeaderAndFooter from '../wrappers/WithHeaderAndFooter'
 import Navbar from './Navbar'
 import Input from '../subcomponents/Input'
 import TextArea from '../subcomponents/TextArea'
@@ -56,11 +56,8 @@ export default function ContactUs(props){
 
 
     return(
-        <WithFooter>
-            <div className="h-12 bg-secondary flex justify-center w-full">
-                <Navbar />
-            </div>
-            <div className="flex justify-center items-center w-full flex-col">
+        <WithHeaderAndFooter>
+            <div className="flex justify-center items-center w-full flex-col overflow-scroll">
                 <h1 className="text-center text-2xl font-bold m-10">
                     Contact Us
                 </h1>
@@ -95,6 +92,6 @@ export default function ContactUs(props){
                 
                 
             </div>
-        </WithFooter>
+        </WithHeaderAndFooter>
     )
 }

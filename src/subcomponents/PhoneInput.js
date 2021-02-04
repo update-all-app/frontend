@@ -2,13 +2,13 @@ import React from 'react'
 import { hash } from '../helpers/functions'
 import ErrorText from './ErrorText'
 import Label from './Label'
-export default function Input(props){
+export default function PhoneInput(props){
 
     const { 
         placeholder, 
         value, 
         onChange, 
-        type="text", 
+        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}",
         errors=[], 
         id=null, 
         onFocus= () => {}, 
@@ -51,13 +51,14 @@ export default function Input(props){
             <input 
                 id={id}
                 className={`w-${w} custom-input h-10 px-3 transition duration-300 text-base text-gray-700 placeholder-gray-600 border-b-2 focus:border-primary focus:border-b-2 focus:outline-none`}
-                type={type}
+                type={'tel'}
                 placeholder={propOrEmptyString(placeholder)}
                 value={propOrEmptyString(value)}
                 onChange={ e => onChange(e.target.value)}
                 required={required}
                 onFocus={onFocus}
                 disabled={disabled}
+                pattern={pattern}
             />
             {renderErrors()}
         </div>

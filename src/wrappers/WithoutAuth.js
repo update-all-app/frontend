@@ -16,7 +16,6 @@ export default function WithAuth(props){
             )
         }
     }
-  
     if(!loading && loggedIn){
         return(
             <Redirect to="/home" />

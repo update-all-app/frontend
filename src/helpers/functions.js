@@ -19,6 +19,26 @@ function validateEmail(email) {
     return re.test(String(email).toLowerCase())
 }
 
+function validatePhoneNumber(num){
+    const re = /[0-9]{3}-[0-9]{3}-[0-9]{4}/
+    return re.test(String(num))
+}
+
+function unformatPhoneNumber(num){
+    return num.replace(/\D/g, '')
+}
+
+function formatPhoneNumber(num){
+    const numStr = String(num)
+    let formatted = numStr.substring(0,3) + '-' + numStr.substring(3,6) + '-' + numStr.substring(6,10)
+    if(numStr.length <= 3){
+        formatted = formatted.substring(0, formatted.length - 2)
+    }else if(numStr.length <= 6){
+        formatted = formatted.substring(0, formatted.length - 1)
+    }
+    return formatted
+}
+
 function validatePassword(pass){
     const errors = []
 
@@ -72,5 +92,8 @@ export {
     strip,
     hash,
     validateEmail,
-    validatePassword
+    validatePassword,
+    validatePhoneNumber,
+    formatPhoneNumber,
+    unformatPhoneNumber
 }

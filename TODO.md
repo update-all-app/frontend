@@ -24,6 +24,7 @@
 - Login/Signup
     - LOADING modal is a little abrupt, consider making login button a loader
     - Or wait a little before displaying it
+    - Should we allow manual changes to address details?
 
 - Create Business
     - Google Autocomplet API?

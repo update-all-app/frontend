@@ -27,6 +27,8 @@ export default class GoogleAutocompleteAddressManager extends Cachable{
       postal_code: this.updatePostalCode
     }
 
+    this.selectionMade = () => {}
+
     this.activeListeners = []
   }
 
@@ -52,6 +54,10 @@ export default class GoogleAutocompleteAddressManager extends Cachable{
 
   setUpdatePostalCode(callback){
     this.updateComponents.postal_code = callback
+  }
+
+  setSelectionMade(callback){
+    this.selectionMade = callback
   }
 
     // Bias the autocomplete object to the user's geographical location,
@@ -121,6 +127,7 @@ export default class GoogleAutocompleteAddressManager extends Cachable{
           this.updateComponents[addressType](val)
         }
       }
+      this.selectionMade()
     }catch(err){
       console.log(err)
       return
