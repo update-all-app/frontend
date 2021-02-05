@@ -6,8 +6,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#1E293B',
-        secondary: '#065F46'
+        primary: '#111827',//'#1F2937',
+        secondary: '#EEF2FF',//'#065F46'
+        tertiary: '#4338CA',
+        terdark: '#3730A3',
+        secdark: '#E0E7FF'
       },
       maxHeight: {
         '1/2': '50%',
@@ -35,6 +38,7 @@ module.exports = {
     },
   },
   variants: {
+    border: ['responsive', 'hover', 'focus', 'group-hover'],
     extend: {},
   },
   plugins: [],

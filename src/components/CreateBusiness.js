@@ -7,6 +7,8 @@ import PhoneInput from '../subcomponents/PhoneInput'
 import WithModal from '../wrappers/WithModal'
 import ErrorText from '../subcomponents/ErrorText'
 
+import UserContext from '../context/UserContext'
+
 import {
   unformatPhoneNumber, 
   formatPhoneNumber, 
@@ -14,6 +16,10 @@ import {
   validatePhoneNumber, 
   hash
 } from '../helpers/functions'
+
+import {
+  ADD_BUSINESS
+} from '../actionTypes'
 
 import { useHistory } from 'react-router-dom'
 
@@ -38,6 +44,9 @@ export default function CreateBusiness(props){
   const [nameErrors, setNameErrors] = useState([])
   const [telephoneErrors, setTelephoneErrors] = useState([])
   const [emailErrors, setEmailErrors] = useState([])
+
+  const history = useHistory()
+  const { dispatch } = useContext(UserContext)
 
   const confirmLocation = () => {
     if(streetAddress && route && city && state && zipCode && country){
@@ -78,7 +87,18 @@ export default function CreateBusiness(props){
       setNameErrors([])
     }
     if(validEmail && validPhoneNumber && validName){
-      alert("YAY")
+      dispatch({type: ADD_BUSINESS, payload: {
+        streetAddress,
+        route,
+        city,
+        state,
+        zipCode,
+        country,
+        businessTelephone,
+        businessEmail,
+        businessName
+      }})
+      history.push('/home')
     }
   }
 
@@ -142,6 +162,7 @@ export default function CreateBusiness(props){
                 label="Business Name"
                 placeholder="My Amazing Business"
                 errors={nameErrors}
+                w='11/12'
               />
               <div className="flex flex-row space-between">
                 <PhoneInput 

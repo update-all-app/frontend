@@ -26,6 +26,8 @@
     - Or wait a little before displaying it
     - Should we allow manual changes to address details?
 
-- Create Business
-    - Google Autocomplet API?
-    - https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform#maps_places_autocomplete_addressform-javascript
+- Logged In Navbar 
+    - Dropdown:
+        - Make new business
+        - Edit profile
+        - Password Reset

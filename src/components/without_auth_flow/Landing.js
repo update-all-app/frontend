@@ -22,13 +22,13 @@ export default function Landing(props){
                 <img className="logo bounce-2" src={process.env.PUBLIC_URL + '/logo.png'} alt={"logo"}/>
                 <div className="m-auto opacity-100 flex justify-center align-center">
                 <button 
-                    className="bg-primary hover:bg-black text-white font-bold py-2 px-4 border border-primary hover:border-transparent rounded auth-button focus:outline-none"
+                    className="bg-tertiary hover:bg-terdark text-white font-bold py-2 px-4 border border-primary hover:border-transparent rounded auth-button focus:outline-none"
                     onClick={signupClick}
                 >
                     Sign Up
                 </button>
                     <button 
-                    className="bg-transparent hover:bg-black text-white font-semibold py-2 px-4 border border-white hover:border-transparent rounded auth-button focus:outline-none"
+                    className="bg-transparent hover:bg-secdark text-tertiary font-semibold py-2 px-4 border border-tertiary hover:text-terdark rounded auth-button focus:outline-none"
                     onClick={loginClick}
                     >
                         Login
