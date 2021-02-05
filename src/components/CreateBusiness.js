@@ -95,7 +95,7 @@ export default function CreateBusiness(props){
     return(
       <WithHeaderAndFooter>
         <WithModal>
-          <h1 className="mt-10 text-3xl font-black text-center">Set up your first business</h1>
+          <h1 className="mt-10 text-3xl font-black text-center">Set up your business</h1>
           <h1 className="mt-10 text-xl font-thin text-center mb-0">Where are you located?</h1>
           <div className='mb-8'>
             <GoogleAddressForm 
@@ -131,7 +131,7 @@ export default function CreateBusiness(props){
     return(
       <WithHeaderAndFooter>
         <WithModal h="3/4">
-          <h1 className="mt-10 text-3xl font-black text-center">Set up your first business</h1>
+          <h1 className="mt-10 text-3xl font-black text-center">Set up your business</h1>
           <h1 className="mt-10 text-xl font-thin text-center mb-0">Tell us your business contact information</h1>
           <div className="flex flex-row justify-left items-baseline m-auto w-160 p-2">
             <div className='mt-10 w-full'>
