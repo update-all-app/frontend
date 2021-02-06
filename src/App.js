@@ -55,15 +55,14 @@ export default function App() {
   }, [])
   
 
-
+  const renderApp = () => {
+    return !!user.data.name ? <AuthorizedApp /> : <UnauthorizedApp />
+  }
 
   return (
     <React.StrictMode>
       <UserContext.Provider value={{state, dispatch}}>
-        <AppDecider>
-          <UnauthorizedApp />
-          <AuthorizedApp />
-        </AppDecider>
+        {renderApp()}
       </UserContext.Provider>
     </React.StrictMode>
   )
