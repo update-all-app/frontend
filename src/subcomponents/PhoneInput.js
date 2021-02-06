@@ -50,7 +50,7 @@ export default function PhoneInput(props){
             {renderLabel()}
             <input 
                 id={id}
-                className={`w-${w} custom-input h-10 px-3 transition duration-300 text-base text-gray-700 placeholder-gray-600 border-b-2 focus:border-primary focus:border-b-2 focus:outline-none`}
+                className={`w-${w} custom-input h-10 px-3 transition duration-300 text-base text-gray-700 placeholder-gray-400 border-b-2 focus:border-primary focus:border-b-2 focus:outline-none`}
                 type={'tel'}
                 placeholder={propOrEmptyString(placeholder)}
                 value={propOrEmptyString(value)}

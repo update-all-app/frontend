@@ -17,6 +17,7 @@ import ContactUs from './components/ContactUs'
 import CustomerStories from './components/CustomerStories'
 import Careers from './components/Careers'
 import Privacy from './components/Privacy'
+import SetupPayment from './components/SetupPayment'
 import CreateBusiness from './components/CreateBusiness'
 
 import UserContext from './context/UserContext'
@@ -109,6 +110,11 @@ function App() {
               <WithAuth>
                 <Home />
               </WithAuth>
+            </Route>
+            <Route exact path="/setup-payment">
+              <WithoutAuth>
+                <SetupPayment />
+              </WithoutAuth>
             </Route>
             <Route exact path="/businesses/new">
               <WithAuth>

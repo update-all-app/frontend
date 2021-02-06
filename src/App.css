@@ -78,10 +78,17 @@ html, body{
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .sidebar-link:hover{
+  border-left: 4px solid #E0E7FF;
+  transition: 0.5s;
+  background: #1F2937;
+  color: white;
+}
+
+.active-sidebar-link{
   border-left: 4px solid #E0E7FF;
   transition: 0.5s;
   background: black;
@@ -89,7 +96,7 @@ html, body{
 }
 
 .custom-shadow{
-  box-shadow: 3px 1px 5px rgba(0,0,0,0.1);
+  box-shadow: 3px 1px 5px rgba(0,0,0,0.25);
 }
 
 .auth-button{

@@ -20,7 +20,7 @@ export default function Submit(props){
     return (
         <>
             <button 
-                className={`bg-tertiary transition duration-300 hover:bg-terdark text-white font-bold py-2 px-4 mt-${mt} rounded`}
+                className={`bg-tertiary transition duration-300 hover:bg-terdark text-white font-bold py-2 px-4 mt-${mt} rounded focus:outline-none`}
                 onClick={onClick}
             >
                 {value}
