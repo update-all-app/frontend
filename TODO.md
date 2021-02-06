@@ -1,4 +1,7 @@
 # TODO / Discussion Points
+- b9de86b3bf3a588110d8912b780830deb0272a599d9513539d48bb4700a6ef52 (REFRESH)
+- Reverse if statement on business creation form
+- 
 
 - Discuss Authorized/UnAuthorized app
     - WithAuth and WithoutAuth
