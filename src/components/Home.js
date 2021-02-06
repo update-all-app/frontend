@@ -18,7 +18,6 @@ export default function Home(props){
             <WithHeaderAndFooter>
                 <div className="h-full min-h-full">
                 <div className="bg-secondary w-full h-full">
-
                 </div>
                     <Sidebar 
                         links={[
