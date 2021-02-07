@@ -9,7 +9,7 @@ export default function Home(props){
 
   const user = useContext(UserContext).state
   const { id } = useParams()
-  const business = user.data.businesses.find(b => Number.parseInt(b.id) === Number.parseInt(id))
+  const business = !!user.data.businesses && user.data.businesses.find(b => Number.parseInt(b.id) === Number.parseInt(id))
   console.log(user.data.businesses)
   const history = useHistory()
   if(!business){
