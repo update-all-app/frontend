@@ -49,20 +49,18 @@ export default function App() {
         dispatch({type: LOGOUT_USER})
       }
     }
-
     checkUserStatus()
-
   }, [])
   
-
-  const renderApp = () => {
-    return !!user.data.name ? <AuthorizedApp /> : <UnauthorizedApp />
-  }
+  // BELOW: Testing to see if this is faster than using wrapper
+  // const renderApp = () => {
+  //   return !!user.data.name ? <AuthorizedApp /> : <UnauthorizedApp />
+  // }
 
   return (
     <React.StrictMode>
       <UserContext.Provider value={{state, dispatch}}>
-        <AppDecider>
+      <AppDecider>
           <UnauthorizedApp />
           <AuthorizedApp />
         </AppDecider>

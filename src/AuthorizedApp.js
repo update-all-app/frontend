@@ -16,6 +16,8 @@ import Careers from './components/Careers'
 import Privacy from './components/Privacy'
 import SetupPayment from './components/SetupPayment'
 import CreateBusiness from './components/CreateBusiness'
+import ManageBusiness from './components/ManageBusiness'
+import NotFound from './components/NotFound'
 
 import UserContext from './context/UserContext'
 import UserReducer from './reducers/UserReducer'
@@ -29,6 +31,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect
 } from 'react-router-dom';
 
 
@@ -41,41 +44,46 @@ export default function AuthorizedApp() {
 
 
   return (
-    <React.StrictMode>
-      <UserContext.Provider value={{state, dispatch}}>
-        <Router>
-          <Switch>
-            <Route exact path="/about">
-              <About />
-            </Route>
-            <Route exact path='/contact'>
-              <ContactUs />
-            </Route>
-            <Route exact path='/customer-stories'>
-              <CustomerStories />
-            </Route>
-            <Route exact path='/careers'>
-              <Careers />
-            </Route>
-            <Route exact path='/privacy'>
-              <Privacy />
-            </Route>
-            <Route exact path="/pricing">
-              <Pricing />
-            </Route>
-            <Route exact path ="/home">
-              <Home />
-            </Route>
-            <Route exact path="/setup-payment">
-              <SetupPayment />
-            </Route>
-            <Route exact path="/businesses/new">
-              <CreateBusiness />
-            </Route>
-          </Switch>
-        </Router>
-      </UserContext.Provider>
-  </React.StrictMode>
+    <Router>
+      <Switch>
+        <Route exact path="/about">
+          <About />
+        </Route>
+        <Route exact path='/contact'>
+          <ContactUs />
+        </Route>
+        <Route exact path='/customer-stories'>
+          <CustomerStories />
+        </Route>
+        <Route exact path='/careers'>
+          <Careers />
+        </Route>
+        <Route exact path='/privacy'>
+          <Privacy />
+        </Route>
+        <Route exact path="/pricing">
+          <Pricing />
+        </Route>
+        <Route exact path ="/">
+          <Home />
+        </Route>
+        <Route exact path="/setup-payment">
+          <SetupPayment />
+        </Route>
+        <Route exact path="/businesses/new">
+          <CreateBusiness />
+        </Route>
+        <Route exact path="/businesses/:id">
+          <ManageBusiness />
+        </Route>
+        <Route exact path="/not-found">
+          <NotFound />
+        </Route>
+        <Route path="/">
+          <Redirect to="/"/>
+        </Route>
+      </Switch>
+    </Router>
   )
 }
 

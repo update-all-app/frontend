@@ -25,6 +25,10 @@ import { useHistory } from 'react-router-dom'
 
 export default function CreateBusiness(props){
 
+  const {dispatch } = useContext(UserContext)
+  const user = useContext(UserContext).state
+
+
   const [address, setAddress] = useState('')
   const [streetAddress, setStreetAddress] = useState('')
   const [route, setRoute] = useState('')
@@ -45,8 +49,12 @@ export default function CreateBusiness(props){
   const [telephoneErrors, setTelephoneErrors] = useState([])
   const [emailErrors, setEmailErrors] = useState([])
 
+  const isFirstBusiness = !user.data.businesses || user.data.businesses.length === 0
+
+  const [shouldRedirectToPayment, setShouldRedirectToPayment] = useState(isFirstBusiness)
+
   const history = useHistory()
-  const { dispatch } = useContext(UserContext)
+  
 
   const confirmLocation = () => {
     if(streetAddress && route && city && state && zipCode && country){
@@ -96,9 +104,15 @@ export default function CreateBusiness(props){
         country,
         businessTelephone,
         businessEmail,
-        businessName
+        businessName,
+        id: 1
       }})
-      history.push('/home')
+      if(shouldRedirectToPayment){
+        history.push('/setup-payment')
+      }else{
+        history.push('/')
+      }
+      
     }
   }
 

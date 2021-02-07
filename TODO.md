@@ -29,6 +29,10 @@
     - Or wait a little before displaying it
     - Should we allow manual changes to address details?
 
+- Groupable Businesses
+    - Do later
+    - like apps in iphone, create novel groups
+
 - Logged In Navbar 
     - Dropdown:
         - Make new business

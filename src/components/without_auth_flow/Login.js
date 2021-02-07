@@ -20,7 +20,7 @@ export default function Login(props){
     const [passwordErrors, setPasswordErrors] = useState([])
     const [formErrors, setFormErrors] = useState([])
     const { loading, setLoading } = useState(false)
-    const { dispatch } = useContext(UserContext)
+    const { state, dispatch } = useContext(UserContext)
     
 
     const checkEmail = () => {
@@ -54,7 +54,8 @@ export default function Login(props){
             console.log(res)
             if(res.success){
                 dispatch({type: POPULATE_USER, payload: { name: res.user.name, email: res.user.email }})
-                history.push('/home')
+                console.log(res.user)
+                console.log(state.data)
             }else{
                 LoginManager.clearLocalStorage()
                 dispatch({type: LOGOUT_USER })
