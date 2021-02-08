@@ -7,7 +7,6 @@ import React,
 } 
 from 'react'
 
-import Home from './components/Home'
 import About from './components/without_auth_flow/About'
 import Pricing from './components/without_auth_flow/Pricing'
 import ContactUs from './components/ContactUs'
@@ -17,15 +16,13 @@ import Privacy from './components/Privacy'
 import SetupPayment from './components/SetupPayment'
 import CreateBusiness from './components/CreateBusiness'
 import ManageBusiness from './components/ManageBusiness'
+import SelectBusiness from './components/SelectBusiness'
 import NotFound from './components/NotFound'
 
 import UserContext from './context/UserContext'
 import UserReducer from './reducers/UserReducer'
-import {
-  POPULATE_USER,
-  LOADING,
-  LOGOUT_USER
-} from './actionTypes'
+
+import LoadFirst from './wrappers/LoadFirst'
 
 import { 
   BrowserRouter as Router,
@@ -65,7 +62,7 @@ export default function AuthorizedApp() {
           <Pricing />
         </Route>
         <Route exact path ="/">
-          <Home />
+          <SelectBusiness />
         </Route>
         <Route exact path="/setup-payment">
           <SetupPayment />

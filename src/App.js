@@ -15,18 +15,16 @@ import UserReducer from './reducers/UserReducer'
 import {
   POPULATE_USER,
   LOADING,
-  LOGOUT_USER
+  LOGOUT_USER,
+  POPULATE_BUSINESSES,
+  LOADING_COMPLETE
 } from './actionTypes'
 
-import { 
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory
-} from 'react-router-dom';
+
 
 import LoginManager from './helpers/LoginManager'
 import ApiManager from './helpers/ApiManager';
+import Parser from './helpers/Parser'
 
 import AppDecider from './wrappers/AppDecider'
 
@@ -40,15 +38,19 @@ export default function App() {
   useEffect(() => {
 
     const checkUserStatus = async () => {
-      dispatch({type: LOADING})
       const user = await ApiManager.getUser()
       if(user){
-        dispatch({type: POPULATE_USER, payload: {name: user.name, email: user.email}}) 
+        const businesses = await ApiManager.getBusinesses()
+        console.log(businesses)
+        const businessesForContext = businesses.map(b => Parser.parseBusinessForContext(b))
+        dispatch({type: POPULATE_USER, payload: {name: user.name, email: user.email, businesses: businessesForContext}}) 
       }else{
         LoginManager.clearLocalStorage()
         dispatch({type: LOGOUT_USER})
       }
     }
+  
+    dispatch({type: LOADING})
     checkUserStatus()
   }, [])
   

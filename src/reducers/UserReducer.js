@@ -4,7 +4,8 @@ import {
     LOADING,
     LOADING_COMPLETE,
     LOGOUT_USER,
-    ADD_BUSINESS
+    ADD_BUSINESS,
+    POPULATE_BUSINESSES
 } from '../actionTypes'
 
 export default function UserReducer(state, action){
@@ -13,11 +14,18 @@ export default function UserReducer(state, action){
             return { data: action.payload, loading: false }
         case ADD_BUSINESS:
             const businesses = state.data.businesses ? state.data.businesses : []
-            console.log(businesses)
             return {
                 data: {
                     ...state.data, 
                     businesses: [...businesses, action.payload]
+                },
+                loading: false
+            }
+        case POPULATE_BUSINESSES:
+            return {
+                data: {
+                    ...state.data,
+                    businesses: action.payload
                 },
                 loading: false
             }

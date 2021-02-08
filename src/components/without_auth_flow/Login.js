@@ -6,6 +6,8 @@ import Submit from '../../subcomponents/Submit'
 import WithFooter from '../../wrappers/WithFooter'
 
 import LoginManager from '../../helpers/LoginManager'
+import ApiManager from '../../helpers/ApiManager'
+import Parser from '../../helpers/Parser'
 import { POPULATE_USER, LOADING, LOGOUT_USER } from '../../actionTypes'
 import UserContext from '../../context/UserContext'
 import { Link } from 'react-router-dom'
@@ -53,7 +55,9 @@ export default function Login(props){
             const res = await LoginManager.login(email, password)
             console.log(res)
             if(res.success){
-                dispatch({type: POPULATE_USER, payload: { name: res.user.name, email: res.user.email }})
+                const businesses = await ApiManager.getBusinesses()
+                const businessesForContext = businesses.map(b => Parser.parseBusinessForContext(b))
+                dispatch({type: POPULATE_USER, payload: { name: res.user.name, email: res.user.email, businesses: businessesForContext }})
                 console.log(res.user)
                 console.log(state.data)
             }else{

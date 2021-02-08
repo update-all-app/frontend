@@ -33,7 +33,7 @@ export default class ApiManager{
     static async protectedRoute(){
         try{
             const token = await this.getToken()
-            if(!!token){ throw new AuthenticationError()}
+            if(!token){ throw new AuthenticationError()}
             return token
         }catch(err){
             if(err instanceof AuthenticationError){
@@ -77,8 +77,13 @@ export default class ApiManager{
 
 
     static async getBusinesses(){
-        const token = this.protectedRoute()
-        return await this.get('/bussinesses', token)
+        const token = await this.protectedRoute()
+        return await this.get(`${API_SUFFIX}/businesses`, token)
+    }
+
+    static async createBusiness(businessParams){
+        const token = await this.protectedRoute()
+        return await this.post(`${API_SUFFIX}/businesses`, businessParams, token)
     }
 
     static async get(path, token=null){

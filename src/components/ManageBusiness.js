@@ -7,11 +7,12 @@ import { useHistory, useParams, Redirect } from 'react-router-dom'
 
 export default function Home(props){
 
+  const history = useHistory()
+
   const user = useContext(UserContext).state
   const { id } = useParams()
   const business = !!user.data.businesses && user.data.businesses.find(b => Number.parseInt(b.id) === Number.parseInt(id))
-  console.log(user.data.businesses)
-  const history = useHistory()
+  
   if(!business){
     return <Redirect to="/not-found" />
   }
@@ -33,7 +34,7 @@ export default function Home(props){
           ]}
 
           activeLink={0}
-          header={business.businessName}
+          header={business.name}
 
         >
           <svg className="w-8 h-8 inline pr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

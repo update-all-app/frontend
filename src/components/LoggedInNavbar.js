@@ -1,24 +1,33 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import UserContext from '../context/UserContext'
 import { LOGOUT_USER } from '../actionTypes'
 import LoginManager from '../helpers/LoginManager'
 import Avatar from '../subcomponents/Avatar'
-
+import Dropdown from '../subcomponents/Dropdown'
 
 export default function LoggedInNavbar(props){
 
     const history = useHistory()
     const {state, dispatch} = useContext(UserContext)
+
+    const [displayDropdown, setDisplayDropdown] = useState(false)
+
     const initials = state.data.name.split(" ").map(n => n[0]).join("")
     const goHome = () => {
-        history.push("/home")
+        history.push("/")
     }
 
     const goToLogout = () => {
+        setDisplayDropdown(false)
         LoginManager.clearLocalStorage()
         dispatch({type: LOGOUT_USER})
         history.push("/")
+    }
+
+    const goToNewBusiness = () => {
+        setDisplayDropdown(false)
+        history.push('/businesses/new')
     }
 
     return(
@@ -32,16 +41,35 @@ export default function LoggedInNavbar(props){
                     {/* <span className="font-bold text-xl">UpdateItAll</span> */}
                 </button>
             </div>
-            <div className="flex justify-center items-center">
-                <button className="focus:outline-none">
-                    <Avatar initials={initials}/>
-                </button>
-                <button 
+            <div className="flex justify-center items-center mr-10">
+                <div className="relative inline-block text-left">
+                    <button 
+                        className="focus:outline-none" 
+                        id="options-menu" 
+                        aria-haspopup="true" 
+                        aria-expanded="true"
+                        onClick={() => setDisplayDropdown(!displayDropdown)}
+                    >
+                        <Avatar initials={initials}/>
+                    </button>
+                    <Dropdown 
+                        hidden={!displayDropdown}
+                        links={
+                            {
+                                "Create New Business": goToNewBusiness,
+                                "Account Settings": () => {},
+                                "Manage Payment": () => {},
+                                "Logout": goToLogout
+                            }
+                        }
+                    />
+                </div>
+                {/* <button 
                 className="bg-transparent text-secondary hover:bg-transparent font-bold py-2 px-4 rounded-l focus:outline-none"
                 onClick={goToLogout}
                 >
                 <span className="font-bold text-lg">Logout</span>
-            </button>
+                </button> */}
             </div>
         </div>
     )

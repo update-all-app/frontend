@@ -19,7 +19,7 @@ export default function Landing(props){
         <WithFooter>
             <div className="h-45vh w-full bg-secondary">
                 <LandingNavbar />
-                <img className="logo bounce-2" src={process.env.PUBLIC_URL + '/logo.png'} alt={"logo"}/>
+                <img className="logo bounce-2 border-2 rounded-full border-gray-600" src={process.env.PUBLIC_URL + '/logo.png'} alt={"logo"}/>
                 <div className="m-auto opacity-100 flex justify-center align-center">
                 <button 
                     className="bg-tertiary hover:bg-terdark text-white font-bold py-2 px-4 border border-tertiary hover:border-transparent rounded auth-button focus:outline-none"

@@ -9,6 +9,9 @@ import ErrorText from '../subcomponents/ErrorText'
 
 import UserContext from '../context/UserContext'
 
+import ApiManager from '../helpers/ApiManager'
+import Parser from '../helpers/Parser'
+
 import {
   unformatPhoneNumber, 
   formatPhoneNumber, 
@@ -18,7 +21,9 @@ import {
 } from '../helpers/functions'
 
 import {
-  ADD_BUSINESS
+  LOADING,
+  ADD_BUSINESS,
+  LOADING_COMPLETE
 } from '../actionTypes'
 
 import { useHistory } from 'react-router-dom'
@@ -40,6 +45,7 @@ export default function CreateBusiness(props){
   const [addressErrors, setAddressErrors] = useState([])
 
   const [addressSet, setAddressSet] = useState(false)
+  const [basicInfoSet, setBasicInfoSet] = useState(false)
 
   const [businessName, setBusinessName] = useState('')
   const [businessTelephone, setBusinessTelephone] = useState('')
@@ -48,18 +54,48 @@ export default function CreateBusiness(props){
   const [nameErrors, setNameErrors] = useState([])
   const [telephoneErrors, setTelephoneErrors] = useState([])
   const [emailErrors, setEmailErrors] = useState([])
+  const [submitErrors, setSubmitErrors] = useState([])
 
   const isFirstBusiness = !user.data.businesses || user.data.businesses.length === 0
 
-  const [shouldRedirectToPayment, setShouldRedirectToPayment] = useState(isFirstBusiness)
 
   const history = useHistory()
   
+  const saveBusiness = async () => {
+    const businessParams = Parser.parseBusinessForRequest({
+      businessName, businessEmail, businessTelephone, streetAddress,
+      route, city, state, zipCode, country
+    })
+    console.log(businessParams)
+    try{
+      dispatch({type: LOADING})
+      const res = await ApiManager.createBusiness(businessParams)
+      console.log(res)
+      const business = Parser.parseBusinessForContext(res)
+      console.log(business)
+      dispatch({type: ADD_BUSINESS, payload: business})
+      if(isFirstBusiness){
+        history.push('/setup-payment')
+      }else{
+        history.push('/')
+      }
+    }catch(err){
+      dispatch({type: LOADING_COMPLETE})
+      setSubmitErrors(["An error occurred while making this business"])
+      console.log(err)
+    }
+  }
+
+  const goHome = () => {
+    history.push('/')
+  }
 
   const confirmLocation = () => {
     if(streetAddress && route && city && state && zipCode && country){
       setAddressSet(true)
       setAddressErrors([])
+      saveBusiness()
+      
     }else{
       setAddressErrors(['Please select your address'])
     }
@@ -75,7 +111,7 @@ export default function CreateBusiness(props){
     setBusinessEmail(email)
   }
 
-  const confirmInformation = () => {
+  const confirmInformation = async () => {
     const validEmail = validateEmail(businessEmail)
     const validPhoneNumber = validatePhoneNumber(businessTelephone)
     const validName = businessName.length > 0
@@ -95,24 +131,7 @@ export default function CreateBusiness(props){
       setNameErrors([])
     }
     if(validEmail && validPhoneNumber && validName){
-      dispatch({type: ADD_BUSINESS, payload: {
-        streetAddress,
-        route,
-        city,
-        state,
-        zipCode,
-        country,
-        businessTelephone,
-        businessEmail,
-        businessName,
-        id: 1
-      }})
-      if(shouldRedirectToPayment){
-        history.push('/setup-payment')
-      }else{
-        history.push('/')
-      }
-      
+      setBasicInfoSet(true)
     }
   }
 
@@ -125,10 +144,28 @@ export default function CreateBusiness(props){
     ))
   }
 
-  if(!addressSet){
+  const renderExit = () => {
+    if(isFirstBusiness){
+      return null
+    }else{
+      return (
+      <div 
+        className="absolute top-0 right-0 h-10 w-10 text-tertiary hover:text-terdark transition-500 cursor-pointer"
+        onClick={goHome}  
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      )
+    }
+  }
+
+  if(basicInfoSet){
     return(
       <WithHeaderAndFooter>
         <WithModal>
+          {renderExit()}
           <h1 className="mt-10 text-3xl font-black text-center">Set up your business</h1>
           <h1 className="mt-10 text-xl font-thin text-center mb-0">Where are you located?</h1>
           <div className='mb-8'>
@@ -148,14 +185,22 @@ export default function CreateBusiness(props){
               country={country}
               setCountry={setCountry}
             />
-            <div className="m-auto w-160">
+            <div className="m-auto w-160 flex justify-between">
               <Submit 
                 value="Confirm Location"
                 mt={8}
                 onClick={confirmLocation}
               />
               {renderAddressErrors()}
+              <div className="float-right">
+              <Submit 
+                value="Back"
+                mt={8}
+                onClick={() => setBasicInfoSet(false)}
+                />
+              </div>
             </div>
+            
             
           </div>
         </WithModal>
@@ -165,6 +210,7 @@ export default function CreateBusiness(props){
     return(
       <WithHeaderAndFooter>
         <WithModal h="3/4">
+          {renderExit()}
           <h1 className="mt-10 text-3xl font-black text-center">Set up your business</h1>
           <h1 className="mt-10 text-xl font-thin text-center mb-0">Tell us your business contact information</h1>
           <div className="flex flex-row justify-left items-baseline m-auto w-160 p-2">
@@ -204,12 +250,9 @@ export default function CreateBusiness(props){
                 value="Confirm Information"
                 mt={8}
                 onClick={confirmInformation}
+                errors={submitErrors}
               />
-              <Submit 
-                value="Back"
-                mt={8}
-                onClick={() => setAddressSet(false)}
-              />
+              
           </div>
         </WithModal>
       </WithHeaderAndFooter>

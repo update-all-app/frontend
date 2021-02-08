@@ -126,7 +126,7 @@ export default function Signup(props){
             // dispatch({type: LOADING})
             const res = await LoginManager.signup(firstName, lastName, email, password, passwordConfirmation)
             if(res.success){
-                dispatch({type: POPULATE_USER, payload: { name: res.user.name, email: res.user.email }})
+                dispatch({type: POPULATE_USER, payload: { name: res.user.name, email: res.user.email, businesses: [] }})
                 history.push('/setup-payment')
             }else{
                 LoginManager.clearLocalStorage()
