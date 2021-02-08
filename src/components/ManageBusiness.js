@@ -17,6 +17,39 @@ export default function Home(props){
     return <Redirect to="/not-found" />
   }
 
+  const links = [
+    "Update It",
+    "View Calendar",
+    "Edit Regular Schedule",
+    "Edit Specific Dates",
+    "Manage Endpoints",
+    "Edit This Business"
+  ]
+
+  const callbacks = [
+    () => {},
+    () => {},
+    () => {},
+    () => {},
+    () => {},
+    () => {}
+  ]
+
+  if(user.data.businesses.length > 1){
+    links.push("Go back")
+    callbacks.push(() => {history.push('/')})
+  }
+
+
+  const renderBackIcon = () => {
+    if(user.data.businesses.length > 1){
+      return(
+        <svg className="w-8 h-8 inline pr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+      )
+    }
+  }
 
   return(
     <WithHeaderAndFooter>
@@ -24,15 +57,8 @@ export default function Home(props){
       <div className="bg-secondary w-full h-full">
       </div>
         <Sidebar 
-          links={[
-            "Update It",
-            "View Calendar",
-            "Edit Regular Schedule",
-            "Edit Specific Dates",
-            "Manage Endpoints",
-            "Edit This Business"
-          ]}
-
+          links={links}
+          callbacks={callbacks}
           activeLink={0}
           header={business.name}
 
@@ -56,6 +82,7 @@ export default function Home(props){
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
+          {renderBackIcon()}
         </Sidebar>
           
       </div>

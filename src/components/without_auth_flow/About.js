@@ -9,7 +9,7 @@ export default function About(props){
         <WithFooter>
             <div className="h-45vh w-full bg-secondary">
                 <Navbar/>
-                <img className="logo bounce-2" src={process.env.PUBLIC_URL + '/logo.png'} alt={"logo"}/>
+                <img className="logo bounce-2 border-2 rounded-full border-gray-600" src={process.env.PUBLIC_URL + '/logo.png'} alt={"logo"}/>
             </div>
             <div className="info-text white flex flex-col justify-center align-left h-1/2 p-8 overflow-scroll">
                 <div className="border-l-2 border-primary shadow-sm">   
