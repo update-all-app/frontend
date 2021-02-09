@@ -41,7 +41,6 @@ export default function App() {
       const user = await ApiManager.getUser()
       if(user){
         const businesses = await ApiManager.getBusinesses()
-        console.log(businesses)
         const businessesForContext = businesses.map(b => Parser.parseBusinessForContext(b))
         dispatch({type: POPULATE_USER, payload: {name: user.name, email: user.email, businesses: businessesForContext}}) 
       }else{

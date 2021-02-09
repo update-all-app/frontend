@@ -1,4 +1,5 @@
 import React from 'react'
+import {hash} from '../helpers/functions'
 
 export default function Sidebar(props){
 
@@ -36,7 +37,7 @@ export default function Sidebar(props){
       }
 
       return(
-        <li className="mr-3 flex-1 mb-5 block h-full">
+        <li key={hash(link)} className="mr-3 flex-1 mb-5 block h-full">
           <a onClick={callback} className={`ml-2 ${mtClass}block ${activatedClass} py-2 pl-4 align-middle text-gray-500 no-underline border-l border-secdark sidebar-link cursor-pointer`}>
           {icon}<span className="pb-1 text-base inline">{link}</span>
           </a>

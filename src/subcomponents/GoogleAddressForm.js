@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import GoogleAutocompleteAddressManager from '../helpers/GoogleAutocompleteAddressManager'
 import Input from './Input'
-import Label from './Label'
-
-import { hash } from '../helpers/functions'
 
 export default function GoogleAddressForm(props){
 
@@ -24,12 +21,10 @@ export default function GoogleAddressForm(props){
     setCountry
   } = props
 
-  const [autocompleteHash, setAutocompleteHash] = useState('')
 
 
   useEffect(() => {
-    // const id = hash(String(new Date()))
-    // setAutocompleteHash(id)
+
     let autocompleteManager = GoogleAutocompleteAddressManager.get_instance(1)
     if(!autocompleteManager){
       autocompleteManager = GoogleAutocompleteAddressManager.new_cache(1)
@@ -51,7 +46,6 @@ export default function GoogleAddressForm(props){
       script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBI6tsN2PSJg4LyI0R2fmmR-dBM_VRYPuQ&callback=initAutocomplete&libraries=places&v=weekly'
       script.async = false
       document.body.appendChild(script)
-      console.log('Script added')
     }else{
       autocompleteManager.initAutocomplete()
     }
@@ -64,15 +58,14 @@ export default function GoogleAddressForm(props){
       const script = document.querySelector("#places_script")
       if(!!script){
         script.remove()
-        console.log("removed")
       }
       GoogleAutocompleteAddressManager.remove_instance(1)
     }
-  }, [setStreetAddress, setRoute, setCity, setState, setZipCode, setCountry])
+  }, [setStreetAddress, setAddress, setRoute, setCity, setState, setZipCode, setCountry])
 
 
   let autocompleteManager = GoogleAutocompleteAddressManager.get_instance(1)
-  // console.log(autocompleteManager)
+
   if(!autocompleteManager){
     autocompleteManager = GoogleAutocompleteAddressManager.new_cache(1)
     autocompleteManager.setUpdateStreetAddress(setStreetAddress)

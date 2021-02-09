@@ -1,19 +1,17 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext } from 'react'
 import UserContext from '../context/UserContext'
 import WithHeaderAndFooter from '../wrappers/WithHeaderAndFooter'
 
-import ApiManager from '../helpers/ApiManager'
-import Parser from '../helpers/Parser'
+import { hash } from '../helpers/functions'
 
-import { useHistory, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import BusinessCard from '../subcomponents/BusinessCard'
 
 
 export default function SelectBusiness(props){
 
-    const {state, dispatch} = useContext(UserContext)
+    const {state } = useContext(UserContext)
     const user = state
-    const history = useHistory()
 
 
 
@@ -21,6 +19,7 @@ export default function SelectBusiness(props){
         return user.data.businesses.map(b => (
             <BusinessCard
                 business={b}
+                key={hash(b.name)}
             />
         ))
     }
@@ -28,7 +27,6 @@ export default function SelectBusiness(props){
     if(!user.data.businesses|| user.loading){
         return <></>
     }else if(user.data.businesses.length === 0){
-        console.log(user.data.businesses)
         return <Redirect to="/businesses/new" />
     }else if(user.data.businesses.length > 1){
         return (
@@ -40,7 +38,6 @@ export default function SelectBusiness(props){
             </WithHeaderAndFooter>
         )
     }else{
-        console.log(user.data.businesses)
         return <Redirect to={`/businesses/${user.data.businesses[0].id}`} />
     }
     

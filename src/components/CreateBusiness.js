@@ -66,13 +66,11 @@ export default function CreateBusiness(props){
       businessName, businessEmail, businessTelephone, streetAddress,
       route, city, state, zipCode, country
     })
-    console.log(businessParams)
+
     try{
       dispatch({type: LOADING})
       const res = await ApiManager.createBusiness(businessParams)
-      console.log(res)
       const business = Parser.parseBusinessForContext(res)
-      console.log(business)
       dispatch({type: ADD_BUSINESS, payload: business})
       if(isFirstBusiness){
         history.push('/setup-payment')
@@ -82,7 +80,6 @@ export default function CreateBusiness(props){
     }catch(err){
       dispatch({type: LOADING_COMPLETE})
       setSubmitErrors(["An error occurred while making this business"])
-      console.log(err)
     }
   }
 

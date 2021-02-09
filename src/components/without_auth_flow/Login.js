@@ -51,21 +51,16 @@ export default function Login(props){
         setPasswordErrors(validPassword.errors)
         if(validEmail.valid && validPassword.valid){
             dispatch({type: LOADING})
-            // window.setTimeout( async () =>{
             const res = await LoginManager.login(email, password)
-            console.log(res)
             if(res.success){
                 const businesses = await ApiManager.getBusinesses()
                 const businessesForContext = businesses.map(b => Parser.parseBusinessForContext(b))
                 dispatch({type: POPULATE_USER, payload: { name: res.user.name, email: res.user.email, businesses: businessesForContext }})
-                console.log(res.user)
-                console.log(state.data)
             }else{
                 LoginManager.clearLocalStorage()
                 dispatch({type: LOGOUT_USER })
                 setFormErrors(["Improper Credentials Entered"])
             }
-            // }, 2000)
         }
     }
 

@@ -6,8 +6,6 @@ import useAuth from '../hooks/useAuth'
 export default function AppDecider(props){
 
     const [loggedIn, loading] = useAuth()
-    console.log(loggedIn)
-    console.log(loading)
 
     const renderModal = () => {
         if(loading){
@@ -21,7 +19,6 @@ export default function AppDecider(props){
     }
     
     if(!loggedIn){
-      console.log('NOT LOGGED IN')
       return(
         <>
           {renderModal()}
@@ -29,7 +26,6 @@ export default function AppDecider(props){
         </>
       )
     }else{
-      console.log("LOGGED IN")
       return(
           <>
               {renderModal()}

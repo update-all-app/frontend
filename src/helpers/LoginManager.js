@@ -57,14 +57,12 @@ export default class LoginManager{
             this.writeTokenToStorage(res)
             return { success: true, user: res.user }
         }catch(err){
-            console.log(err)
             if(!!err.status){
                 switch(err.status){
                     
                 }
                 return { success: false }
             }else{
-                console.log("Connectivity Issues")
                 return { success: false }
             }
         }
@@ -77,14 +75,12 @@ export default class LoginManager{
             this.writeTokenToStorage(res)
             return { success: true, user: res.user }
         }catch(err){
-            console.log(err)
             if(!!err.status){
                 switch(err.status){
-
+                    // TODO: DO different things for different statuses
                 }
                 return { success: false }
             }else{
-                console.log("Connectivity Issues")
                 return { success: false }
             }
         }

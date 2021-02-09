@@ -107,7 +107,6 @@ export default class GoogleAutocompleteAddressManager extends Cachable{
   }
 
   fillInAddress() {
-    console.log("LISTENER CALLED!")
 
     // Get the place details from the autocomplete object.
     const place = this.autocomplete.getPlace()
@@ -129,7 +128,6 @@ export default class GoogleAutocompleteAddressManager extends Cachable{
       }
       this.selectionMade()
     }catch(err){
-      console.log(err)
       return
     }
   }
