@@ -44,7 +44,6 @@ export default function CreateBusiness(props){
 
   const [addressErrors, setAddressErrors] = useState([])
 
-  const [addressSet, setAddressSet] = useState(false)
   const [basicInfoSet, setBasicInfoSet] = useState(false)
 
   const [businessName, setBusinessName] = useState('')
@@ -89,7 +88,6 @@ export default function CreateBusiness(props){
 
   const confirmLocation = () => {
     if(streetAddress && route && city && state && zipCode && country){
-      setAddressSet(true)
       setAddressErrors([])
       saveBusiness()
       

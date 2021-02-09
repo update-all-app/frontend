@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import WithHeaderAndFooter from '../wrappers/WithHeaderAndFooter'
-import Navbar from './Navbar'
 import Input from '../subcomponents/Input'
 import TextArea from '../subcomponents/TextArea'
 import Submit from '../subcomponents/Submit'
@@ -18,7 +17,7 @@ export default function ContactUs(props){
 
     const updateEmail = input => {
         setEmail(input)
-        if(input.length == 0){
+        if(input.length === 0){
             setEmailErrors([])
         }else{
             const validEmail = validateEmail(input)

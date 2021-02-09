@@ -15,7 +15,7 @@ export default function Dropdown(props){
     const linkComponents = []
     for(let link in links){
       linkComponents.push(
-        <a onClick={links[link]} key={hash(link)} className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">{link}</a>
+        <button onClick={links[link]} key={hash(link)} className="w-full text-left cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">{link}</button>
       )
     }
     return linkComponents

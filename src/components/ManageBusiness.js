@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import UserContext from './../context/UserContext'
 import WithHeaderAndFooter from '../wrappers/WithHeaderAndFooter'
 import Sidebar from '../subcomponents/Sidebar'
 import { useHistory, useParams, Redirect } from 'react-router-dom'
-import {hash} from '../helpers/functions'
+
 
 export default function Home(props){
 

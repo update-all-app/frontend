@@ -1,11 +1,5 @@
 import './App.css';
-import React,
-{
-  useEffect, 
-  useReducer,
-  useContext
-} 
-from 'react'
+import React from 'react'
 
 import About from './components/without_auth_flow/About'
 import Pricing from './components/without_auth_flow/Pricing'
@@ -19,10 +13,7 @@ import ManageBusiness from './components/ManageBusiness'
 import SelectBusiness from './components/SelectBusiness'
 import NotFound from './components/NotFound'
 
-import UserContext from './context/UserContext'
-import UserReducer from './reducers/UserReducer'
 
-import LoadFirst from './wrappers/LoadFirst'
 
 import { 
   BrowserRouter as Router,
@@ -34,9 +25,6 @@ import {
 
 
 export default function AuthorizedApp() {
-
-  const user = useContext(UserContext)
-  const [state, dispatch] = useReducer(UserReducer, user)
 
 
 

@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react'
 import LandingNavbar from './LandingNavbar'
-import { useHistory } from 'react-router-dom'
 import Input from '../../subcomponents/Input'
 import Submit from '../../subcomponents/Submit'
 import WithFooter from '../../wrappers/WithFooter'
@@ -15,14 +14,12 @@ import { Link } from 'react-router-dom'
 
 export default function Login(props){
 
-    const history = useHistory()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [emailErrors, setEmailErrors] = useState([])
     const [passwordErrors, setPasswordErrors] = useState([])
     const [formErrors, setFormErrors] = useState([])
-    const { loading, setLoading } = useState(false)
-    const { state, dispatch } = useContext(UserContext)
+    const { dispatch } = useContext(UserContext)
     
 
     const checkEmail = () => {

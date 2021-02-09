@@ -123,7 +123,7 @@ export default function Signup(props){
         setPasswordErrors(validPassword.errors)
         setPasswordConfirmationErrors(validPasswordConfirmation.errors)
         if(validEmail.valid && validPassword.valid && validFirstName.valid && validLastName.valid && validPasswordConfirmation.valid){
-            // dispatch({type: LOADING})
+            dispatch({type: LOADING})
             const res = await LoginManager.signup(firstName, lastName, email, password, passwordConfirmation)
             if(res.success){
                 dispatch({type: POPULATE_USER, payload: { name: res.user.name, email: res.user.email, businesses: [] }})

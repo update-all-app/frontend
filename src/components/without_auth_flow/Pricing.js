@@ -1,6 +1,5 @@
 import React from 'react'
 import Navbar from '../Navbar'
-import Footer from '../Footer'
 import { useHistory } from 'react-router-dom'
 import WithFooter from '../../wrappers/WithFooter'
 

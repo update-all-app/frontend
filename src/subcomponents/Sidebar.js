@@ -19,14 +19,14 @@ export default function Sidebar(props){
     return links.map((link, i) => {
       let mtClass = ""
       let topVal = !!header ? 10 : 20
-      if(i == 0){
+      if(i === 0){
         mtClass = `mt-${topVal} `
       }
       let icon = (props.children && props.children.length > i) ? props.children[i] : null
 
       let callback = (callbacks && callbacks.length > i) ? callbacks[i] : () => {}
 
-      if(i == 0 && !icon && props.children){
+      if(i === 0 && !icon && props.children){
         icon = props.children
       }
 
@@ -38,9 +38,9 @@ export default function Sidebar(props){
 
       return(
         <li key={hash(link)} className="mr-3 flex-1 mb-5 block h-full">
-          <a onClick={callback} className={`ml-2 ${mtClass}block ${activatedClass} py-2 pl-4 align-middle text-gray-500 no-underline border-l border-secdark sidebar-link cursor-pointer`}>
+          <button onClick={callback} className={`ml-2 ${mtClass} block ${activatedClass} py-2 pl-4 w-full text-left text-gray-500 no-underline border-l border-secdark sidebar-link cursor-pointer`}>
           {icon}<span className="pb-1 text-base inline">{link}</span>
-          </a>
+          </button>
         </li>
       )
     })
