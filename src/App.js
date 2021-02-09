@@ -15,9 +15,7 @@ import UserReducer from './reducers/UserReducer'
 import {
   POPULATE_USER,
   LOADING,
-  LOGOUT_USER,
-  POPULATE_BUSINESSES,
-  LOADING_COMPLETE
+  LOGOUT_USER
 } from './actionTypes'
 
 
