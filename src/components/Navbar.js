@@ -6,7 +6,7 @@ import LoggedInNavbar from './LoggedInNavbar'
 
 export default function Navbar(props){
 
-    const [loggedIn, loading] = useAuth()
+    const [loggedIn, ] = useAuth()
     return loggedIn ? <LoggedInNavbar /> : <LandingNavbar />
 
 }
