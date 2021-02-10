@@ -38,7 +38,7 @@ export default function Sidebar(props){
 
       return(
         <li key={hash(link)} className="mr-3 flex-1 mb-5 block h-full">
-          <button onClick={callback} className={`ml-2 ${mtClass} block ${activatedClass} py-2 pl-4 w-full text-left text-gray-500 no-underline border-l border-secdark sidebar-link cursor-pointer`}>
+          <button onClick={callback} className={`ml-2 ${mtClass} block ${activatedClass} py-2 pl-4 w-full text-left text-gray-500 no-underline border-l border-secdark sidebar-link cursor-pointer focus:outline-none`}>
           {icon}<span className="pb-1 text-base inline">{link}</span>
           </button>
         </li>
