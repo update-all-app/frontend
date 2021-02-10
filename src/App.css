@@ -80,6 +80,10 @@ html, body{
   margin-bottom: 3rem;
 }
 
+.mt-8{
+  margin-top: 2rem;
+}
+
 .overlay-dark{
   position: absolute;
   top: 0;
