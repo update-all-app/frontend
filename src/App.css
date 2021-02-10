@@ -72,6 +72,14 @@ html, body{
   min-height: 100vh;
 }
 
+.w-11\/12{
+  width: 91.667%;
+}
+
+.mb-12{
+  margin-bottom: 3rem;
+}
+
 .overlay-dark{
   position: absolute;
   top: 0;
