@@ -181,12 +181,14 @@ export default function CreateBusiness(props){
               setCountry={setCountry}
             />
             <div className="m-auto w-160 flex justify-between">
+              <div>
               <Submit 
                 value="Confirm Location"
                 mt={8}
                 onClick={confirmLocation}
               />
               {renderAddressErrors()}
+              </div>
               <div className="float-right">
               <Submit 
                 value="Back"
