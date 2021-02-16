@@ -64,12 +64,6 @@ export default function LoggedInNavbar(props){
                         }
                     />
                 </div>
-                {/* <button 
-                className="bg-transparent text-secondary hover:bg-transparent font-bold py-2 px-4 rounded-l focus:outline-none"
-                onClick={goToLogout}
-                >
-                <span className="font-bold text-lg">Logout</span>
-                </button> */}
             </div>
         </div>
     )

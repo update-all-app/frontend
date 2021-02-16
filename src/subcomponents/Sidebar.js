@@ -47,9 +47,9 @@ export default function Sidebar(props){
   }
 
   return(
-    <div className="w-1/5 min-h-screen h-full custom-shadow bg-primary relative bottom:0 left:0 h-full top:0 float-left">
+    <div className="w-1/5 min-w-1/5 min-h-screen h-full custom-shadow bg-primary relative bottom:0 left:0 h-full top:0 float-left">
       {renderHeader()}
-      <div className="mx-auto">
+      <div className="mx-auto inline">
         <ul className="list-reset bg-primary flex flex-col text-left">
           {renderLinks()}
         </ul>

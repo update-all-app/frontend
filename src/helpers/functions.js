@@ -88,6 +88,46 @@ function validatePassword(pass){
 
 }
 
+function dateTo24Time(date){
+    return `${pad(date.getHours(),2)}:${pad(date.getMinutes(),2)}`
+}
+
+function protectNullArgs(val, fn, ...args){
+    return function (){
+        if(args !== null){
+            return fn(...args)
+        }else{
+            return val
+        }     
+    }
+}
+
+function safeCallWithDefault(val, fn, ...args){
+    try{
+        return fn(...args)
+    }catch(err){
+        return val
+    }
+}
+
+function dateToHTMLString(date){
+    return `${date.getFullYear()}-${pad(String(date.getMonth() + 1), 2)}-${pad(String(date.getDate()),2)}`
+}
+
+function pad(val, padLen, padVal="0"){
+    val = String(val)
+    if(val.length < padLen){
+        const padAmount = padLen - val.length
+        let newVal = val
+        for(let i = 0; i < padAmount; i++){
+            newVal = padVal + newVal
+        }
+        return newVal
+    }else{
+        return val
+    }
+}
+
 export {
     strip,
     hash,
@@ -95,5 +135,9 @@ export {
     validatePassword,
     validatePhoneNumber,
     formatPhoneNumber,
-    unformatPhoneNumber
+    unformatPhoneNumber,
+    dateTo24Time,
+    protectNullArgs,
+    safeCallWithDefault,
+    dateToHTMLString
 }

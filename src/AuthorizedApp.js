@@ -14,7 +14,6 @@ import SelectBusiness from './components/SelectBusiness'
 import NotFound from './components/NotFound'
 
 
-
 import { 
   BrowserRouter as Router,
   Switch,
@@ -59,7 +58,7 @@ export default function AuthorizedApp() {
           <CreateBusiness />
         </Route>
         <Route exact path="/businesses/:id">
-          <ManageBusiness />
+            <ManageBusiness />
         </Route>
         <Route exact path="/not-found">
           <NotFound />

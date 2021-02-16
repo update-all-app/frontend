@@ -57,13 +57,13 @@ export default function App() {
   // }
 
   return (
-    <React.StrictMode>
+    // <React.StrictMode>
       <UserContext.Provider value={{state, dispatch}}>
       <AppDecider>
           <UnauthorizedApp />
           <AuthorizedApp />
         </AppDecider>
       </UserContext.Provider>
-    </React.StrictMode>
+    // </React.StrictMode>
   )
 }

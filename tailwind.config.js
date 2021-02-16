@@ -20,10 +20,16 @@ module.exports = {
         '1/2': '50%'
       },
       height: {
-        '22': '5.5em'
+        '22': '5.5em',
+        '100': '25rem',
+        '160': '40rem',
+        '120': '30rem'
       },
       width: {
-        '160': '40rem'
+        '160': '40rem',
+        '100': '25rem',
+        '120': '30rem',
+        '200': '50rem'
       },
       spacing: {
         '1/8': '12.5%',
@@ -43,6 +49,7 @@ module.exports = {
   variants: {
     border: ['responsive', 'hover', 'focus', 'group-hover'],
     extend: {},
+    opacity: ({ after }) => after(['disabled'])
   },
   plugins: [],
 }

@@ -84,6 +84,66 @@ html, body{
   margin-top: 2rem;
 }
 
+.left-center-96{
+  /* Firefox */
+  left: -moz-calc(50% - 12rem);
+  /* WebKit */
+  left: -webkit-calc(50% - 12rem);
+  /* Opera */
+  left: -o-calc(50% - 12rem);
+  /* Standard */
+  left: calc(50% - 12rem);
+  top: 10rem;
+  }
+
+.left-center-160{
+  /* Firefox */
+  left: -moz-calc(50% - 20rem);
+  /* WebKit */
+  left: -webkit-calc(50% - 20rem);
+  /* Opera */
+  left: -o-calc(50% - 20rem);
+  /* Standard */
+  left: calc(50% - 20rem);
+  top: 10rem;
+}
+
+.left-center-200{
+  /* Firefox */
+  left: -moz-calc(50% - 50rem);
+  /* WebKit */
+  left: -webkit-calc(50% - 50rem);
+  /* Opera */
+  left: -o-calc(50% - 50rem);
+  /* Standard */
+  left: calc(50% - 50rem);
+  top: 10rem;
+}
+
+.left-center-120{
+  /* Firefox */
+  left: -moz-calc(50% - 15rem);
+  /* WebKit */
+  left: -webkit-calc(50% - 15rem);
+  /* Opera */
+  left: -o-calc(50% - 15rem);
+  /* Standard */
+  left: calc(50% - 15rem);
+  top: 10rem;
+}
+
+.left-center-100{
+  /* Firefox */
+  left: -moz-calc(50% - 12.5rem);
+  /* WebKit */
+  left: -webkit-calc(50% - 12.5rem);
+  /* Opera */
+  left: -o-calc(50% - 12.5rem);
+  /* Standard */
+  left: calc(50% - 12.5rem);
+  top: 10rem;
+}
+
 .overlay-dark{
   position: absolute;
   top: 0;
