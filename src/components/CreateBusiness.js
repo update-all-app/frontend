@@ -182,19 +182,19 @@ export default function CreateBusiness(props){
             />
             <div className="m-auto w-160 flex justify-between">
               <div>
-              <Submit 
-                value="Confirm Location"
-                mt={8}
-                onClick={confirmLocation}
-              />
-              {renderAddressErrors()}
+                <Submit 
+                  value="Back"
+                  mt={8}
+                  onClick={() => setBasicInfoSet(false)}
+                />
               </div>
               <div className="float-right">
-              <Submit 
-                value="Back"
-                mt={8}
-                onClick={() => setBasicInfoSet(false)}
+                <Submit 
+                  value="Confirm Location"
+                  mt={8}
+                  onClick={confirmLocation}
                 />
+                {renderAddressErrors()}
               </div>
             </div>
             
@@ -242,14 +242,13 @@ export default function CreateBusiness(props){
     
             </div>
           </div>
-          <div className="m-auto w-160 flex justify-between">
+          <div className="m-auto w-160 flex justify-end">
             <Submit 
-                value="Confirm Information"
-                mt={8}
-                onClick={confirmInformation}
-                errors={submitErrors}
-              />
-              
+              value="Confirm Information"
+              mt={8}
+              onClick={confirmInformation}
+              errors={submitErrors}
+            />
           </div>
         </WithModal>
       </WithHeaderAndFooter>
