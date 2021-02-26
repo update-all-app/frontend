@@ -52,7 +52,7 @@ export default function Login(props){
             if(res.success){
                 const businesses = await ApiManager.getBusinesses()
                 const businessesForContext = businesses.map(b => Parser.parseBusinessForContext(b))
-                dispatch({type: POPULATE_USER, payload: { name: res.user.name, email: res.user.email, businesses: businessesForContext }})
+                dispatch({type: POPULATE_USER, payload: { name: res.user.name, email: res.user.email, paymentStatusCurrent: res.user.payment_status_current, businesses: businessesForContext }})
             }else{
                 LoginManager.clearLocalStorage()
                 dispatch({type: LOGOUT_USER })
