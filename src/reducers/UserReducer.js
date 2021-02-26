@@ -5,7 +5,8 @@ import {
     LOADING_COMPLETE,
     LOGOUT_USER,
     ADD_BUSINESS,
-    POPULATE_BUSINESSES
+    POPULATE_BUSINESSES,
+    VALIDATE_PAYMENT
 } from '../actionTypes'
 
 export default function UserReducer(state, action){
@@ -35,6 +36,11 @@ export default function UserReducer(state, action){
             return { data: {...state.data}, loading: false}
         case LOGOUT_USER:
             return { data: {}, loading: false}
+        case VALIDATE_PAYMENT:
+            return {
+                data: {...state.data, paymentStatusCurrent: true},
+                loading: false
+            }
         default:
             return state
     }

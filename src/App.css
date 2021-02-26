@@ -108,6 +108,18 @@ html, body{
   top: 10rem;
 }
 
+.left-center-160-top-1{
+  /* Firefox */
+  left: -moz-calc(50% - 20rem);
+  /* WebKit */
+  left: -webkit-calc(50% - 20rem);
+  /* Opera */
+  left: -o-calc(50% - 20rem);
+  /* Standard */
+  left: calc(50% - 20rem);
+  top: 1rem;
+}
+
 .left-center-200{
   /* Firefox */
   left: -moz-calc(50% - 50rem);
@@ -118,6 +130,18 @@ html, body{
   /* Standard */
   left: calc(50% - 50rem);
   top: 10rem;
+}
+
+.left-center-120-top-0{
+  /* Firefox */
+  left: -moz-calc(50% - 15rem);
+  /* WebKit */
+  left: -webkit-calc(50% - 15rem);
+  /* Opera */
+  left: -o-calc(50% - 15rem);
+  /* Standard */
+  left: calc(50% - 15rem);
+  top: 0rem;
 }
 
 .left-center-120{

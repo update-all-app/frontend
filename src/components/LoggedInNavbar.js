@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import UserContext from '../context/UserContext'
 import { LOGOUT_USER } from '../actionTypes'
 import LoginManager from '../helpers/LoginManager'
 import Avatar from '../subcomponents/Avatar'
 import Dropdown from '../subcomponents/Dropdown'
+import InvalidPaymentBanner from '../subcomponents/InvalidPaymentBanner'
 
 export default function LoggedInNavbar(props){
 
@@ -14,8 +15,18 @@ export default function LoggedInNavbar(props){
     const [displayDropdown, setDisplayDropdown] = useState(false)
 
     const initials = state.data.name.split(" ").map(n => n[0]).join("")
+    const location = useLocation()
+
     const goHome = () => {
         history.push("/")
+    }
+
+    const renderPaymentBanner = () => {
+        if(!state.data.paymentStatusCurrent && location.pathname != "/setup-payment"){
+            return(
+                <InvalidPaymentBanner />
+            )
+        }
     }
 
     const goToLogout = () => {
@@ -31,6 +42,7 @@ export default function LoggedInNavbar(props){
     }
 
     return(
+        <>
         <div className="landing-navbar bg-terdark">
             <div className="flex justify-center align-center">
                 <button 
@@ -66,6 +78,8 @@ export default function LoggedInNavbar(props){
                 </div>
             </div>
         </div>
+        {renderPaymentBanner()}
+        </>
     )
 }
 
