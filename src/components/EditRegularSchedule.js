@@ -1,12 +1,19 @@
 import React, {
   useEffect,
-  useState
+  useState,
+  useContext
 } from 'react'
 import Calendar from '../subcomponents/Calendar'
+import EventContext from '../context/EventContext'
 
 export default function EditRegularSchedule(props){
 
   const [events, setEvents] = useState([])
+  const {state, dispatch} = useContext(EventContext)
+
+  // NOTE: STATE WORKS
+  // TODO: put appropriate logic in context
+  console.log(state)
 
   const onSave = event => {
     const isNewEvent = !event.id
@@ -105,6 +112,7 @@ export default function EditRegularSchedule(props){
     }
   }
 
+  //TODO: Logic from this method to context
   const createNewEvent = event => {
     
     setEvents(events => {
@@ -120,6 +128,7 @@ export default function EditRegularSchedule(props){
     })
   }
 
+  // TODO: Logic from this method to context
   const updateEvent = event => {
     setEvents(events => (
       events.map(e => {
@@ -128,6 +137,7 @@ export default function EditRegularSchedule(props){
     ))
   }
 
+  // TODO: Logic from this method to context
   const onDelete = event => {
     setEvents(events => (
       events.filter(e => {
@@ -146,7 +156,6 @@ export default function EditRegularSchedule(props){
     }
   })
 
-  console.log(events)
 
   return (
     <Calendar 

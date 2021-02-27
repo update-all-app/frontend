@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react'
+import React, {useReducer, useContext} from 'react'
 
 import About from './components/without_auth_flow/About'
 import Pricing from './components/without_auth_flow/Pricing'
@@ -13,6 +13,8 @@ import ManageBusiness from './components/ManageBusiness'
 import SelectBusiness from './components/SelectBusiness'
 import NotFound from './components/NotFound'
 
+import EventReducer from './reducers/EventReducer'
+import EventContext from './context/EventContext'
 
 import { 
   BrowserRouter as Router,
@@ -25,6 +27,8 @@ import {
 
 export default function AuthorizedApp() {
 
+  const events = useContext(EventContext)
+  const [state, dispatch] = useReducer(EventReducer, events)
 
 
   return (
@@ -58,7 +62,9 @@ export default function AuthorizedApp() {
           <CreateBusiness />
         </Route>
         <Route exact path="/businesses/:id">
+          <EventContext.Provider value={{state, dispatch}}>
             <ManageBusiness />
+          </EventContext.Provider>
         </Route>
         <Route exact path="/not-found">
           <NotFound />

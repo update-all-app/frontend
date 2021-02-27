@@ -18,9 +18,8 @@ export default function Sidebar(props){
   const renderLinks = () => {
     return links.map((link, i) => {
       let mtClass = ""
-      let topVal = !!header ? 10 : 20
       if(i === 0){
-        mtClass = `mt-${topVal} `
+        mtClass = !!header ? 'mt-10' : 'mt-20'
       }
       let icon = (props.children && props.children.length > i) ? props.children[i] : null
 
