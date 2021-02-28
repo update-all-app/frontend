@@ -4,6 +4,9 @@ export default function ViewBusinessCalendar(props){
 
 
   return (
-    <h1>Viewing Business Calendar...</h1>
-  )
+    <div className="p-4">
+      <h1>Viewing Business Calendar...</h1>
+    </div>
+  );
+  
 }

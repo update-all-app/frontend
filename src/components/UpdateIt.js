@@ -13,7 +13,7 @@ export default function UpdateIt(props){
   }
 
   return(
-    <div>
+    <div className="p-4">
       <h1>Update main page</h1>
       <div className="mt-10">
         <LoadingButton

@@ -72,17 +72,6 @@ html, body{
   min-height: 100vh;
 }
 
-.w-11\/12{
-  width: 91.667%;
-}
-
-.mb-12{
-  margin-bottom: 3rem;
-}
-
-.mt-8{
-  margin-top: 2rem;
-}
 
 .left-center-96{
   /* Firefox */
@@ -105,7 +94,6 @@ html, body{
   left: -o-calc(50% - 20rem);
   /* Standard */
   left: calc(50% - 20rem);
-  top: 10rem;
 }
 
 .left-center-160-top-1{

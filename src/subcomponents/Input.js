@@ -14,9 +14,9 @@ export default function Input(props){
         onFocus= () => {}, 
         disabled=false, 
         required=true, 
-        mb=12,
+        mb='mb-12',
         display='block', 
-        w="full", 
+        w="w-full", 
         label=null
     } = props
 
@@ -46,11 +46,11 @@ export default function Input(props){
     }
 
     return (
-        <div className={`mb-${mb} w-full ${display}`}>
+        <div className={`${mb} w-full ${display}`}>
             {renderLabel()}
             <input 
                 id={id}
-                className={`w-${w} custom-input h-10 px-3 transition duration-300 text-base text-gray-700 placeholder-gray-400 border-b-2 focus:border-primary focus:border-b-2 focus:outline-none`}
+                className={`${w} custom-input h-10 px-3 transition duration-300 text-base text-gray-700 placeholder-gray-400 border-b-2 focus:border-primary focus:border-b-2 focus:outline-none`}
                 type={type}
                 placeholder={propOrEmptyString(placeholder)}
                 value={propOrEmptyString(value)}

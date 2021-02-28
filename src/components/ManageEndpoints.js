@@ -4,8 +4,8 @@ import React from 'react'
 export default function ManageEndpoints(props){
 
 
-  return(
-    <div>
+  return (
+    <div className="p-4">
       <h1 className="text-2xl">Manage Endpoints</h1>
       <ul>
         <li>Google Maps</li>
@@ -15,5 +15,5 @@ export default function ManageEndpoints(props){
         <li>Trip Advisor</li>
       </ul>
     </div>
-  )
+  );
 }

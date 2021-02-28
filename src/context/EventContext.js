@@ -1,3 +1,6 @@
 import React from 'react'
 
-export default React.createContext({regularEvents: [], irregularEvents: []})
+const EventContext = React.createContext({ regularEvents: [], irregularEvents: [] })
+EventContext.displayName = "EventContext"
+
+export default EventContext

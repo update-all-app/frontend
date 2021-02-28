@@ -114,7 +114,7 @@ export default function Home(props){
             </svg>
             {renderBackIcon()}
           </Sidebar>
-          <div className="w-full m-4">
+          <div className="w-full">
             <TabContent 
               business={business}
             />

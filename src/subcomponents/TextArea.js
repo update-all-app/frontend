@@ -5,7 +5,7 @@ import Label from './Label'
 
 export default function TextArea(props){
 
-    const { value, onChange, errors=[], mb=12, id=null, label=null, w=160, h=96 } = props
+    const { value, onChange, errors = [], mb = 12, id = null, label = null, w = 'w-160', h ='h-96' } = props
 
     const propOrEmptyString = (someProp) => {
         return !!someProp ? someProp : ""
@@ -36,11 +36,11 @@ export default function TextArea(props){
 
 
     return (
-        <div className={`mb-${mb} w-full`}>
+        <div className={`${mb} w-full`}>
             {renderLabel()}
             <textarea
                 id={id}
-                className={`w-${w} h-${h} px-3 transition duration-300 shadow-sm text-base text-gray-700 placeholder-gray-600 border-2 focus:border-secondary focus:border-b-4 rounded-lg focus:outline-none overflow-scroll resize-none`}
+                className={`${w} ${h} px-3 transition duration-300 shadow-sm text-base text-gray-700 placeholder-gray-600 border-2 focus:border-secondary focus:border-b-4 rounded-lg focus:outline-none overflow-scroll resize-none`}
                 value={propOrEmptyString(value)}
                 onChange={e => onChange(e.target.value)}
             />

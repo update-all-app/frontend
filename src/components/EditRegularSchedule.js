@@ -171,7 +171,6 @@ export default function EditRegularSchedule(props){
       onSave={onSave}
       onDelete={onDelete}
       toolbar={false}
-      modalh={200}
     />
   )
 }
