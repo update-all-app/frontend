@@ -75,6 +75,19 @@ export default class ApiManager{
         })
     }
 
+    static async completePayment(userData){
+        const { email, name } = userData
+        const token = await this.protectedRoute()
+        const body = {
+            user: {
+                email,
+                name,
+                payment_status_current: true
+            }
+        }
+        return await this.put("/signup", body, token)
+    }
+
 
     static async getBusinesses(){
         const token = await this.protectedRoute()
@@ -92,6 +105,10 @@ export default class ApiManager{
 
     static async post(path, body, token=null){
         return await this.request("POST", path, body, token)
+    }
+
+    static async put(path, body, token=null){
+        return await this.request("PUT", path, body, token)
     }
 
     static async patch(path, body, token=null){
