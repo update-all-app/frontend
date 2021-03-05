@@ -3,7 +3,7 @@ import ErrorText from "./ErrorText";
 import { hash } from "../helpers/functions";
 
 export default function Submit(props) {
-  const { value, onClick, type = "primary", errors = [], mt = "mt-0" } = props;
+  const { value, onClick = () => {}, type = "primary", errors = [], mt = "mt-0" } = props;
 
   const bgColor = () => {
     switch (type) {

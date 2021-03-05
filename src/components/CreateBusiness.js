@@ -54,6 +54,13 @@ export default function CreateBusiness(props) {
 
   const history = useHistory();
 
+  if(address.length >= 0 && address.length < 2){
+    const acomp = document.getElementById("autocomplete")
+    if(acomp){
+      acomp.setAttribute("autocomplete", "new-password")
+    }
+  }
+
   const saveBusiness = async () => {
     const businessParams = Parser.parseBusinessForRequest({
       businessName,

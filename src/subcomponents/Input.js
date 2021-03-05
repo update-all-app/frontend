@@ -17,7 +17,8 @@ export default function Input(props){
         mb='mb-12',
         display='block', 
         w="w-full", 
-        label=null
+        label=null,
+        autoComplete="on"
     } = props
 
     const propOrEmptyString = (someProp) => {
@@ -58,6 +59,7 @@ export default function Input(props){
                 required={required}
                 onFocus={onFocus}
                 disabled={disabled}
+                autoComplete={autoComplete}
             />
             {renderErrors()}
         </div>

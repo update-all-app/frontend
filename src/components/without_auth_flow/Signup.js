@@ -3,6 +3,7 @@ import LandingNavbar from './LandingNavbar'
 import { useHistory } from 'react-router-dom'
 import Input from '../../subcomponents/Input'
 import Submit from '../../subcomponents/Submit'
+import Form from '../../subcomponents/Form'
 import WithFooter from '../../wrappers/WithFooter'
 import LoginManager from '../../helpers/LoginManager'
 import { POPULATE_USER, LOADING, LOGOUT_USER } from '../../actionTypes'
@@ -148,43 +149,44 @@ export default function Signup(props){
                 
             </div> 
             <div className="border-l-2 border-primary shadow-lg p-10 content-center absolute top-1/8 left-1/3 bg-white w-1/3 max-h-3/4 overflow-scroll">
-                    <Input 
-                        placeholder="First Name"
-                        onChange={ firstName => setFirstName(firstName) }
-                        value={ firstName }
-                        errors={ firstNameErrors }
-                    />
-                    <Input 
-                        placeholder="Last Name"
-                        onChange={ lastName => setLastName(lastName) }
-                        value={ lastName }
-                        errors={ lastNameErrors}
-                    />
-                    <Input 
-                        placeholder="Email"
-                        onChange={ updateEmail }
-                        value={ email }
-                        errors={ emailErrors }
-                    />
-                    <Input
-                        placeholder="Password"
-                        type="password"
-                        onChange={ pass => updatePassword(pass) }
-                        value={ password }
-                        errors={ passwordErrors }
-                    />
-                    <Input 
-                        placeholder="Password Confirmation"
-                        type="password"
-                        onChange={ pass => updatePasswordConfirmation(pass) }
-                        value={ passwordConfirmation }
-                        errors={ passwordConfirmationErrors }
-                    />
-                    <Submit 
-                        value="Sign Up"
-                        onClick={signup}
-                        errors={formErrors}
-                    />
+                    <Form onSubmit={signup}>
+                        <Input 
+                            placeholder="First Name"
+                            onChange={ firstName => setFirstName(firstName) }
+                            value={ firstName }
+                            errors={ firstNameErrors }
+                        />
+                        <Input 
+                            placeholder="Last Name"
+                            onChange={ lastName => setLastName(lastName) }
+                            value={ lastName }
+                            errors={ lastNameErrors}
+                        />
+                        <Input 
+                            placeholder="Email"
+                            onChange={ updateEmail }
+                            value={ email }
+                            errors={ emailErrors }
+                        />
+                        <Input
+                            placeholder="Password"
+                            type="password"
+                            onChange={ pass => updatePassword(pass) }
+                            value={ password }
+                            errors={ passwordErrors }
+                        />
+                        <Input 
+                            placeholder="Password Confirmation"
+                            type="password"
+                            onChange={ pass => updatePasswordConfirmation(pass) }
+                            value={ passwordConfirmation }
+                            errors={ passwordConfirmationErrors }
+                        />
+                        <Submit 
+                            value="Sign Up"
+                            errors={formErrors}
+                        />
+                    </Form>
                     <div className="mt-6 ">
                         <Link to="/login">Already have an account? Log in.</Link>
                     </div>   

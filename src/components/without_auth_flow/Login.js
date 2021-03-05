@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import LandingNavbar from './LandingNavbar'
 import Input from '../../subcomponents/Input'
 import Submit from '../../subcomponents/Submit'
+import Form from '../../subcomponents/Form'
 import WithFooter from '../../wrappers/WithFooter'
 
 import LoginManager from '../../helpers/LoginManager'
@@ -71,24 +72,25 @@ export default function Login(props){
                 
             </div> 
             <div className="border-l-2 border-primary shadow-lg p-10 content-center absolute top-1/4 left-3/10 bg-white w-2/5 max-h-3/4 overflow-scroll">
-                <Input 
-                    placeholder="Email"
-                    onChange={email => setEmail(email) }
-                    value={ email }
-                    errors={emailErrors}
-                />
-                <Input
-                    placeholder="Password"
-                    type="password"
-                    onChange={pass => setPassword(pass) }
-                    value={ password }
-                    errors={passwordErrors}
-                />
-                <Submit 
-                    value="Log In"
-                    onClick={login}
-                    errors={formErrors}
-                />
+                <Form onSubmit={login}>
+                    <Input 
+                        placeholder="Email"
+                        onChange={email => setEmail(email) }
+                        value={ email }
+                        errors={emailErrors}
+                    />
+                    <Input
+                        placeholder="Password"
+                        type="password"
+                        onChange={pass => setPassword(pass) }
+                        value={ password }
+                        errors={passwordErrors}
+                    />
+                    <Submit 
+                        value="Log In"
+                        errors={formErrors}
+                    />
+                </Form>
                 <div className="mt-6">
                     <Link to="/">Trouble logging in?</Link>
                 </div> 

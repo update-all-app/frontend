@@ -20,6 +20,8 @@ export default function GoogleAddressForm(props) {
     setCountry,
   } = props;
 
+  const showAddressForm = !([streetAddress, route, city, state].every(item => item === ""))
+
   useEffect(() => {
     let autocompleteManager = GoogleAutocompleteAddressManager.get_instance(1);
     if (!autocompleteManager) {
@@ -108,13 +110,14 @@ export default function GoogleAddressForm(props) {
           onFocus={autocompleteManager.geolocate}
           onChange={setAddress}
           value={address}
+          autoComplete="new-password"
           mb="mb-0"
         />
       </div>
-      <div className="mt-12 m-auto w-full border-l-2 shadow-lg border-primary flex flex-col justify-start">
+      <div className="mt-12 m-auto w-full border-l-2 shadow-lg border-primary flex flex-col justify-start" style={{visibility: showAddressForm ? "visible" : "hidden"}}>
         <div className="mb-10 mt-0 bg-primary w-full p-2 text-white flex flex-row justify-start">
           <svg
-            className="w-4 relative top-2 primary"
+            className="w-4 relative primary"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
