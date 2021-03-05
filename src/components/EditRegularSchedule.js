@@ -1,19 +1,16 @@
 import React, {
   useEffect,
-  useState,
   useContext
 } from 'react'
 import Calendar from '../subcomponents/Calendar'
 import EventContext from '../context/EventContext'
+import { ADD_REGULAR_EVENT, DELETE_REGULAR_EVENT, EDIT_REGULAR_EVENT } from '../actionTypes'
 
 export default function EditRegularSchedule(props){
 
-  const [events, setEvents] = useState([])
+  
   const {state, dispatch} = useContext(EventContext)
-
-  // NOTE: STATE WORKS
-  // TODO: put appropriate logic in context
-  console.log(state)
+  const events = state.regularEvents
 
   const onSave = event => {
     const isNewEvent = !event.id
@@ -114,36 +111,17 @@ export default function EditRegularSchedule(props){
 
   //TODO: Logic from this method to context
   const createNewEvent = event => {
-    
-    setEvents(events => {
-      const id = events.length + 1
-      event.id = id
-      event.start = new Date(event.start)
-      event.end = new Date(event.end)
-      return [
-        ...events,
-        {...event}
-      ]
-    
-    })
+    dispatch({type: ADD_REGULAR_EVENT, payload: event})
   }
 
   // TODO: Logic from this method to context
   const updateEvent = event => {
-    setEvents(events => (
-      events.map(e => {
-        return e.id === event.id ? {...event} : e
-      })
-    ))
+    dispatch({type: EDIT_REGULAR_EVENT, payload: event})
   }
 
   // TODO: Logic from this method to context
   const onDelete = event => {
-    setEvents(events => (
-      events.filter(e => {
-        return e.id !== event.id
-      })
-    ))
+    dispatch({type: DELETE_REGULAR_EVENT, payload: event})
   }
 
   useEffect(() => {

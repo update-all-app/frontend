@@ -1,5 +1,6 @@
-import React, { useContext, useState } from 'react'
-import UserContext from './../context/UserContext'
+import React, { useContext, useState, useEffect } from 'react'
+import UserContext from '../context/UserContext'
+import EventContext from '../context/EventContext'
 import WithHeaderAndFooter from '../wrappers/WithHeaderAndFooter'
 import Sidebar from '../subcomponents/Sidebar'
 import { useHistory, useParams, Redirect } from 'react-router-dom'
@@ -10,6 +11,7 @@ import UpdateIt from './UpdateIt'
 import ViewBusinessCalendar from './ViewBusinessCalendar'
 import ManageEndpoints from './ManageEndpoints'
 import EditBusiness from './EditBusiness'
+import { CLEAR_EVENTS } from '../actionTypes'
 
 
 export default function Home(props){
@@ -17,6 +19,8 @@ export default function Home(props){
   const history = useHistory()
 
   const user = useContext(UserContext).state
+  const { dispatch } = useContext(EventContext)
+
   const { id } = useParams()
   const business = !!user.data.businesses && user.data.businesses.find(b => Number.parseInt(b.id) === Number.parseInt(id))
 
@@ -30,6 +34,12 @@ export default function Home(props){
     ManageEndpoints,
     EditBusiness
   ][activeTab]
+
+  useEffect(() => {
+    return () => {
+      dispatch({type: CLEAR_EVENTS})
+    }
+  }, [])
 
   if(!business && !user.data.loading){
     return <Redirect to="/not-found" />
@@ -55,7 +65,9 @@ export default function Home(props){
 
   if(user.data.businesses.length > 1){
     links.push("Go back")
-    callbacks.push(() => {history.push('/')})
+    callbacks.push(() => {
+      history.push('/')
+    })
   }
 
 

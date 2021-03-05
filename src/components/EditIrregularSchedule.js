@@ -1,38 +1,28 @@
 import React, {
-  useState
+  useContext
 } from 'react'
 
 import Calendar from '../subcomponents/Calendar'
-
+import EventContext from '../context/EventContext'
+import { ADD_IRREGULAR_EVENT, DELETE_IRREGULAR_EVENT, EDIT_IRREGULAR_EVENT } from '../actionTypes'
 
 export default function EditIrregularSchedule(props){
 
-  const [events, setEvents] = useState([])
+  const {state, dispatch} = useContext(EventContext)
+
+  const events = state.irregularEvents
 
   const onSave = event => {
     const isNewEvent = !event.id
     if(isNewEvent){
-      const id = events.length + 1
-      event.id = id
-      setEvents([
-        ...events,
-        event
-      ])
+      dispatch({type: ADD_IRREGULAR_EVENT, payload: event})
     }else{
-      setEvents(
-        events.map(e => {
-          return e.id === event.id ? event : e
-        })
-      )
+      dispatch({type: EDIT_IRREGULAR_EVENT, payload: event})
     }
   }
 
   const onDelete = event => {
-    setEvents(
-      events.filter(e => {
-        return e.id !== event.id
-      })
-    )
+    dispatch({type: DELETE_IRREGULAR_EVENT, payload: event})
   }
 
   return(
