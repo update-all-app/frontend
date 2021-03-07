@@ -43,7 +43,7 @@ export default function Dropdown(props){
   }
 
   return (
-    <div className={`absolute z-30 origin-top-right  right-0 mt-2 w-56 rounded-sm shadow-lg bg-white ring-1 ring-black ring-opacity-5 border-terdark border-t-4 border-l-2 border-b-2 border-r-2 ${className}`}>
+    <div className={`absolute z-30 origin-top-right right-0 mt-2 w-56 rounded-sm shadow-lg bg-white ring-1 ring-black ring-opacity-5 border-terdark border-t-4 border-l-2 border-b-2 border-r-2 ${className}`}>
       <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
         {renderLinks()}
       </div>

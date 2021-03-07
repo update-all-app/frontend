@@ -41,7 +41,7 @@ export default function WithModalToggle(props) {
 
   return (
     <>
-      <div className={`overlay-wrapper transition p-4 withModalToggle`}>
+      <div className={`relative h-screen transition-opacity duration-300 p-4 withModalToggle`}>
         {props.children}
         <div className={`overlay-dark ${hiddenClass}`}></div>
         {/* <div className="w-full h-full flex justify-center items-center"> */}
