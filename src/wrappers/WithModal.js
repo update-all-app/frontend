@@ -11,7 +11,7 @@ export default function WithModal(props){
   } = props
 
   return(
-    <div className="overlay-wrapper transition withModal">
+    <div className="relative h-screen transition duration-300 withModal">
       <div className="overlay-dark"></div>
       {background}
       <div className="w-full h-full flex justify-center items-center">
