@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useReducer, useContext} from 'react'
+import React, {useReducer, useContext, useEffect } from 'react'
 
 import About from './components/without_auth_flow/About'
 import Pricing from './components/without_auth_flow/Pricing'
@@ -16,6 +16,10 @@ import NotFound from './components/NotFound'
 import EventReducer from './reducers/EventReducer'
 import EventContext from './context/EventContext'
 
+import { initFBSDK } from './apiClients/FBClient'
+
+import { LOADING, LOADING_COMPLETE } from './actionTypes'
+
 import { 
   BrowserRouter as Router,
   Switch,
@@ -29,6 +33,14 @@ export default function AuthorizedApp() {
 
   const events = useContext(EventContext)
   const [state, dispatch] = useReducer(EventReducer, events)
+
+  
+  useEffect(() => {
+    dispatch({type: LOADING })
+    initFBSDK().then(() => {
+      dispatch({type: LOADING_COMPLETE})
+    })
+  }, [])
 
 
   return (
