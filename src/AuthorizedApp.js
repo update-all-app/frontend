@@ -23,7 +23,7 @@ import { LOADING, LOADING_COMPLETE } from './actionTypes'
 import { 
   BrowserRouter as Router,
   Switch,
-  Route,
+  Route, 
   Redirect
 } from 'react-router-dom';
 
