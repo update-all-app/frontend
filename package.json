@@ -23,7 +23,8 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "HTTPS=true SSL_CRT_FILE=./.cert/cert.pem SSL_KEY_FILE=./.cert/key.pem craco start",
+    "start": "HTTPS=true SSL_CRT_FILE=./.cert/cert.pem SSL_KEY_FILE=./.cert/key.pem API_URL=https://update-it-all.dakotaleemartinez.com craco start",
+    "dev": "HTTPS=true SSL_CRT_FILE=./.cert/cert.pem SSL_KEY_FILE=./.cert/key.pem API_URL=http://localhost:3001 craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
