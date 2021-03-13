@@ -1,4 +1,4 @@
-import { BACKEND_URL, API_SUFFIX, FRONTEND_URL } from '../constants'
+import { BACKEND_URL, API_SUFFIX } from '../constants'
 import LoginManager from './LoginManager'
 import AuthenticationError from '../errors/AuthenticationError'
 
@@ -38,7 +38,7 @@ export default class ApiManager{
         }catch(err){
             if(err instanceof AuthenticationError){
                 LoginManager.clearLocalStorage()
-                window.location.replace(`${FRONTEND_URL}/`)
+                window.location.replace(window.location.origin)
             }else{
                 throw err
             }
