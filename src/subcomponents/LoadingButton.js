@@ -11,6 +11,7 @@ export default function LoadingButton(props) {
     errors = [],
     mt = "mt-0",
     loadingValue = null,
+    disabled = false
   } = props;
 
   const loadingVal = !!loadingValue ? loadingValue : value;
@@ -49,11 +50,11 @@ export default function LoadingButton(props) {
   };
 
   const loadingClass = () => {
-    return loading ? "" : "hidden";
+    return (loading) ? "" : "hidden";
   };
 
   const buttonClass = () => {
-    return loading ? "pointer-events-none" : "";
+    return (loading || disabled) ? "pointer-events-none" : "";
   };
 
   return (

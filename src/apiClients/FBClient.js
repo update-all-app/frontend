@@ -4,7 +4,7 @@ export function initFBSDK(){
   return new Promise(resolve => {
     window.fbAsyncInit = function() {
       window.FB.init({
-        appId      : '703424633669376',
+        appId      : '205727007974727',
         cookie     : true,
         xfbml      : true,
         version    : 'v9.0'
@@ -27,5 +27,20 @@ export function initFBSDK(){
        js.src = "https://connect.facebook.net/en_US/sdk.js";
        fjs.parentNode.insertBefore(js, fjs);
      }(document, 'script', 'facebook-jssdk'));
+  })
+}
+
+export function fbLogin(){
+  return new Promise((resolve, err) => {
+    window.FB.login(function(response){
+      if(response.authResponse){
+        console.log("Success!")
+        console.log(response)
+        resolve(response.authResponse)
+      }else{
+        console.log("Login failed")
+        err({msg: "Login failed"})
+      }
+    }, {scope: 'pages_manage_metadata'})
   })
 }
