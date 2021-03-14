@@ -1,43 +1,46 @@
-import React, { useState, useContext } from 'react'
-import LoadingButton from '../subcomponents/LoadingButton'
-import { fbLogin } from "../apiClients/FBClient"
+import React, { useState, useContext } from "react";
+import LoadingButton from "../subcomponents/LoadingButton";
+import { fbLogin } from "../apiClients/FBClient";
+import ApiManager from "../helpers/ApiManager";
 
-import UserContext from '../context/UserContext'
-import { ADD_BUSINESS_SERVICE } from '../actionTypes'
+import UserContext from "../context/UserContext";
+import { ADD_BUSINESS_SERVICE } from "../actionTypes";
 
-export default function ManageEndpoints({business}){
+export default function ManageEndpoints({ business }) {
+  const [loading, setLoading] = useState(false);
 
-  const [loading, setLoading] = useState(false)
+  const { dispatch } = useContext(UserContext);
 
-  const { dispatch } = useContext(UserContext)
-
-  const fbConnected = business.connectedServices && business.connectedServices.includes("fb")
-  const fbButtonText = fbConnected ? "FB is synced" : "Sync with FB"
-  console.log(business)
+  const fbConnected =
+    business.connectedServices && business.connectedServices.includes("fb");
+  const fbButtonText = fbConnected ? "FB is synced" : "Sync with FB";
+  console.log(business);
 
   const syncFacebook = async () => {
-    setLoading(true)
-    try{
-      const { accessToken } = await fbLogin()
-      console.log(`AccessToken: ${accessToken}`)
-      //send access token to backend
-      dispatch({type: ADD_BUSINESS_SERVICE, payload: { business, service: "fb" }})
-    }catch(err){
+    setLoading(true);
+    try {
+      const { accessToken } = await fbLogin();
+      console.log(`AccessToken: ${accessToken}`);
+      const res = await ApiManager.getAccessTokenFor('facebook', accessToken)
+      dispatch({
+        type: ADD_BUSINESS_SERVICE,
+        payload: { business, service: "fb" }
+      });
+    } catch (err) {
       // alert that fb login failed
     }
-    setLoading(false)
-  }
-
+    setLoading(false);
+  };
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl">Manage Endpoints</h1>
+    <div className='p-4'>
+      <h1 className='text-2xl'>Manage Endpoints</h1>
       <ul>
         <li>Google Maps</li>
         <li>Facebook Business</li>
         <LoadingButton
           value={fbButtonText}
-          loadingValue="Syncing..."
+          loadingValue='Syncing...'
           loading={loading}
           onClick={syncFacebook}
           disabled={fbConnected}
