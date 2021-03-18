@@ -17,19 +17,19 @@ export default function ManageEndpoints({ business }) {
   console.log(business);
 
   const syncFacebook = async () => {
-    setLoading(true);
-    try {
-      const { accessToken } = await fbLogin();
-      console.log(`AccessToken: ${accessToken}`);
-      const res = await ApiManager.getAccessTokenFor('facebook', accessToken)
-      dispatch({
-        type: ADD_BUSINESS_SERVICE,
-        payload: { business, service: "fb" }
-      });
-    } catch (err) {
-      // alert that fb login failed
-    }
-    setLoading(false);
+    // setLoading(true);
+    // try {
+    //   const { accessToken } = await fbLogin();
+    //   console.log(`AccessToken: ${accessToken}`);
+    //   const res = await ApiManager.getAccessTokenFor('facebook', accessToken)
+    //   dispatch({
+    //     type: ADD_BUSINESS_SERVICE,
+    //     payload: { business, service: "fb" }
+    //   });
+    // } catch (err) {
+    //   // alert that fb login failed
+    // }
+    // setLoading(false);
   };
 
   return (

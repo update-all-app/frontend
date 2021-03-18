@@ -11,6 +11,7 @@ import SetupPayment from './components/SetupPayment'
 import CreateBusiness from './components/CreateBusiness'
 import ManageBusiness from './components/ManageBusiness'
 import SelectBusiness from './components/SelectBusiness'
+import AuthorizeServices from './components/AuthorizeServices'
 import NotFound from './components/NotFound'
 
 import EventReducer from './reducers/EventReducer'
@@ -69,6 +70,9 @@ export default function AuthorizedApp() {
         </Route>
         <Route exact path="/setup-payment">
           <SetupPayment />
+        </Route>
+        <Route exact path="/authorize-services">
+          <AuthorizeServices />
         </Route>
         <Route exact path="/businesses/new">
           <CreateBusiness />
