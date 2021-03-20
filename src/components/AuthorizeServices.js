@@ -28,9 +28,12 @@ export default function AuthorizeServices(props){
   const syncFacebook = async () => {
     setLoadingFb(true);
     try {
-      const { accessToken } = await fbLogin();
+      const { accessToken, userID } = await fbLogin();
       console.log(`AccessToken: ${accessToken}`);
-      const res = await ApiManager.getAccessTokenFor('facebook', accessToken)
+      const res = await ApiManager.getAccessTokenForFacebook(
+        accessToken,
+        userID
+      );
       // dispatch({
       //   type: ADD_BUSINESS_SERVICE,
       //   payload: { business, service: "fb" }

@@ -104,14 +104,15 @@ export default class ApiManager {
     return await this.post(`${API_SUFFIX}/businesses`, businessParams, token);
   }
 
-  static async getAccessTokenFor(provider, exchangeToken) {
+  static async getAccessTokenForFacebook(accessToken, userID) {
     const token = await this.protectedRoute();
     return await this.post(
       `${API_SUFFIX}/provider_oauth_tokens`,
       {
         provider_oauth_token: {
-          exchange_token: exchangeToken,
-          provider
+          exchange_token: accessToken,
+          provider: 'facebook',
+          provider_uid: userID
         }
       },
       token
