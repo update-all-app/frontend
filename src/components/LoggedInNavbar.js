@@ -15,7 +15,7 @@ export default function LoggedInNavbar(props){
     const [displayDropdown, setDisplayDropdown] = useState(false)
 
     const initials = state.data.name.split(" ").map(n => n[0]).join("")
-    const hasAuthorizedServices = state.data.authorizedServices && state.data.authorizedServices.length > 0
+    const hasAuthorizedServices = state.data.services && state.data.services.length > 0
 
     const location = useLocation()
 

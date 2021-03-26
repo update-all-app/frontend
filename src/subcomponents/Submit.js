@@ -3,7 +3,14 @@ import ErrorText from "./ErrorText";
 import { hash } from "../helpers/functions";
 
 export default function Submit(props) {
-  const { value, onClick = () => {}, type = "primary", errors = [], mt = "mt-0" } = props;
+  const { 
+    value, 
+    onClick = () => {}, 
+    type = "primary",
+    btnType="submit",
+    errors = [], 
+    mt = "mt-0" 
+  } = props;
 
   const bgColor = () => {
     switch (type) {
@@ -40,8 +47,9 @@ export default function Submit(props) {
   return (
     <>
       <button
-        className={`${bgColor()} transition duration-300 ${bgHover()} text-white font-bold py-2 px-4 ${mt} rounded focus:outline-none`}
+        className={`${bgColor()} transition duration-300 font-thin ${bgHover()} text-white font-bold py-2 px-4 ${mt} rounded focus:outline-none`}
         onClick={onClick}
+        type={btnType}
       >
         {value}
       </button>

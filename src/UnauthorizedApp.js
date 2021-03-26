@@ -16,7 +16,8 @@ import NotFound from './components/NotFound'
 import { 
   BrowserRouter as Router,
   Switch,
-  Route
+  Route, 
+  Redirect
 } from 'react-router-dom';
 
 
@@ -54,7 +55,7 @@ export default function UnauthorizedApp() {
             <Pricing />
           </Route>
           <Route path="/">
-            <NotFound />
+            <Redirect to="/"/>
           </Route>
         </Switch>
       </Router>

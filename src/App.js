@@ -22,39 +22,30 @@ export default function App() {
     const checkUserStatus = async () => {
       try {
         const user = await ApiManager.getUser();
+        console.log(user)
         if (user) {
           const businesses = await ApiManager.getBusinesses();
           const businessesForContext = businesses.map((b) =>
             Parser.parseBusinessForContext(b)
           );
+          const formattedServices = user.services.map(s => ({
+            provider: s.provider,
+            userID: s.provider_uid,
+            label: s.label
+          }))
           dispatch({
             type: POPULATE_USER,
             payload: {
               name: user.name,
               email: user.email,
               paymentStatusCurrent: user.payment_status_current,
-              businesses: businessesForContext
+              businesses: businessesForContext,
+              services: formattedServices
             }
           });
         } else {
-          if (user) {
-            const businesses = await ApiManager.getBusinesses();
-            const businessesForContext = businesses.map((b) =>
-              Parser.parseBusinessForContext(b)
-            );
-            dispatch({
-              type: POPULATE_USER,
-              payload: {
-                name: user.name,
-                email: user.email,
-                paymentStatusCurrent: user.payment_status_current,
-                businesses: businessesForContext
-              }
-            });
-          } else {
-            LoginManager.clearLocalStorage();
-            dispatch({ type: LOGOUT_USER });
-          }
+          LoginManager.clearLocalStorage();
+          dispatch({ type: LOGOUT_USER });
         }
       } catch {
         LoginManager.clearLocalStorage();

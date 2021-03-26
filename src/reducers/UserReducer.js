@@ -7,7 +7,8 @@ import {
     ADD_BUSINESS,
     POPULATE_BUSINESSES,
     VALIDATE_PAYMENT,
-    ADD_BUSINESS_SERVICE
+    ADD_BUSINESS_SERVICE,
+    ADD_AUTHORIZED_SERVICE
 } from '../actionTypes'
 
 export default function UserReducer(state, action){
@@ -57,6 +58,26 @@ export default function UserReducer(state, action){
                         return b.id === foundBusiness.id ? foundBusiness : b
                     })},
                     loading: false
+                }
+            }
+        case ADD_AUTHORIZED_SERVICE:
+            let updated = false
+            const services = state.data.services.map(s => {
+                if(s.userID == action.payload.userID && s.provider == action.payload.provider){
+                    updated = true
+                    return action.payload
+                }else{
+                    return s
+                }
+            })
+            if(!updated){
+                services.push(action.payload)
+            }
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    services
                 }
             }
         default:

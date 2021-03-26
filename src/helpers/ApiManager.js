@@ -76,7 +76,7 @@ export default class ApiManager {
         name: `${firstName} ${lastName}`,
         email,
         password,
-        passwordConfirmation
+        password_confirmation: passwordConfirmation
       }
     });
   }

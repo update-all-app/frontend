@@ -16,8 +16,8 @@ export default function UserReducer(state, action){
       case ADD_REGULAR_EVENT:
         const newRegEvent = action.payload
         newRegEvent.id = state.regularEvents.length + 1
-        newRegEvent.start = new Date(newRegEvent.start)
-        newRegEvent.end = new Date(newRegEvent.end)
+        // newRegEvent.start = new Date(newRegEvent.start)
+        // newRegEvent.end = new Date(newRegEvent.end)
         return {
           ...state,
           regularEvents: [...state.regularEvents, newRegEvent]

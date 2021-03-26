@@ -46,7 +46,7 @@ export default function WithModalToggle(props) {
         <div className={`overlay-dark ${hiddenClass}`}></div>
         {/* <div className="w-full h-full flex justify-center items-center"> */}
         <div
-          className={`z-20 absolute ${leftCenterWidth} ${w} ${h} ${position} bg-white overflow-scroll shadow-2xl p-10  ${hiddenClass}`}
+          className={`z-20 absolute ${leftCenterWidth} ${w} ${h} ${position} bg-white overflow-scroll hide-scroll shadow-2xl p-10  ${hiddenClass}`}
         >
           {renderExit()}
           {modal}

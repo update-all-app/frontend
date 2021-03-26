@@ -128,6 +128,34 @@ function pad(val, padLen, padVal="0"){
     }
 }
 
+function time24To12(milTime){
+    const [hourStr, minStr] = milTime.split(":")
+    const hour = Number.parseInt(hourStr)
+    const min = Number.parseInt(minStr)
+    if(hour === 0){
+        return `12:${pad(min,2)} AM`
+    }else if(hour < 12){
+        return `${hour}:${pad(min,2)} AM`
+    }else{
+        return `${hour - 12}:${pad(min,2)} PM`
+    }
+}
+
+function time12To24(timeStr){
+    const [time, suffix] = timeStr.split(" ")
+    const [hrStr, minStr] = time.split(":")
+    const hour = Number.parseInt(hrStr)
+    const min = Number.parseInt(minStr)
+    if(suffix == "AM"){
+        if(hour === 12){
+            return `00:${pad(min,2)}`
+        }
+        return `${pad(hour,2)}:${pad(min,2)}`
+    }else{
+        return `${hour + 12}:${pad(min,2)}`
+    }
+}
+
 export {
     strip,
     hash,
@@ -139,5 +167,7 @@ export {
     dateTo24Time,
     protectNullArgs,
     safeCallWithDefault,
-    dateToHTMLString
+    dateToHTMLString,
+    time24To12,
+    time12To24
 }

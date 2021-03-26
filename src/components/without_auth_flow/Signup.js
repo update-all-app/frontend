@@ -148,7 +148,7 @@ export default function Signup(props){
             <div className="white flex flex-col justify-center align-left h-1/2 p-8">
                 
             </div> 
-            <div className="border-l-2 border-primary shadow-lg p-10 content-center absolute top-1/8 left-1/3 bg-white w-1/3 max-h-3/4 overflow-scroll">
+            <div className="border-l-2 border-primary shadow-lg p-10 content-center absolute top-1/8 left-1/3 bg-white w-1/3 max-h-3/4 overflow-scroll hide-scroll">
                     <Form onSubmit={signup}>
                         <Input 
                             placeholder="First Name"

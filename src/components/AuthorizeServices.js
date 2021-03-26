@@ -8,7 +8,7 @@ import LoadingButton from '../subcomponents/LoadingButton'
 import { fbLogin } from '../apiClients/FBClient'
 import ApiManager from '../helpers/ApiManager'
 
-import { ADD_BUSINESS_SERVICE } from '../actionTypes'
+import { ADD_AUTHORIZED_SERVICE } from '../actionTypes'
 
 export default function AuthorizeServices(props){
 
@@ -18,7 +18,7 @@ export default function AuthorizeServices(props){
   const [loadingGgl, setLoadingGgl] = useState(false)
   const {state, dispatch} = useContext(UserContext)
 
-  const authorizedServices = state.data.authorizedServices ? state.data.authorizedServices : []
+  const authorizedServices = state.data.services
 
   const buttonText = service => {
     const isAuthorized = hasService(service)
@@ -34,10 +34,20 @@ export default function AuthorizeServices(props){
         accessToken,
         userID
       );
-      // dispatch({
-      //   type: ADD_BUSINESS_SERVICE,
-      //   payload: { business, service: "fb" }
-      // });
+      const {
+        provider,
+        provider_uid,
+        label
+      } = res
+      const service = {
+        provider,
+        userID: provider_uid,
+        label
+      }
+      dispatch({
+        type: ADD_AUTHORIZED_SERVICE,
+        payload: service
+      });
     } catch (err) {
       // alert that fb login failed
     }
@@ -66,17 +76,17 @@ export default function AuthorizeServices(props){
   }
 
   const hasService = service => {
-    return !!authorizedServices.find(s => s.serviceName === service)
+    return !!authorizedServices.find(s => s.provider === service)
   }
 
   const servicesFor = service => {
-    return authorizedServices.filter(s => s.serviceName === service)
+    return authorizedServices.filter(s => s.provider === service)
   }
 
   const renderServicesFor = service => {
     return servicesFor(service).map(s => (
-      <div className="border border-primary rounded-sm">
-        <p>{s.ownerName}</p>
+      <div className="rounded bg-gray-200 text-xs p-1 m-2">
+        <p>{`Auth: ${s.label}`}</p>
       </div>
     ))
   }
@@ -104,12 +114,12 @@ export default function AuthorizeServices(props){
       <div className="m-12">
         {/* <h1 className="text-center w-full text-2xl">Authorize</h1> */}
         <Card clickable={false}>
-          <div className="flex flex-column align-center justify-center mb-4">
+          <div className="flex flex-row align-center justify-center mb-4">
             <h1>Facebook</h1>
             {renderIcon('facebook')}
           </div>
-          <div className="flex flex-column justify-center items-center">
-            <div>
+          <div className="flex flex-col justify-between items-center">
+            <div className="flex flex-col">
               {renderServicesFor('facebook')}
             </div>
             <LoadingButton

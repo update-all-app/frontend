@@ -5,7 +5,7 @@ import WithHeaderAndFooter from '../wrappers/WithHeaderAndFooter'
 import Sidebar from '../subcomponents/Sidebar'
 import { useHistory, useParams, Redirect } from 'react-router-dom'
 import Calendar from '../subcomponents/Calendar'
-import EditRegularSchedule from './EditRegularSchedule'
+import EditRegularScheduleSimple from './EditRegularScheduleSimple'
 import EditIrregularSchedule from './EditIrregularSchedule'
 import UpdateIt from './UpdateIt'
 import ViewBusinessCalendar from './ViewBusinessCalendar'
@@ -29,7 +29,7 @@ export default function Home(props){
   const TabContent = [
     UpdateIt,
     ViewBusinessCalendar,
-    EditRegularSchedule,
+    EditRegularScheduleSimple,
     EditIrregularSchedule,
     ManageEndpoints,
     EditBusiness

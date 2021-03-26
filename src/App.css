@@ -187,12 +187,25 @@ html, body{
   margin: 20px;
 }
 
+
+
 .custom-input:focus{
   outline: none;
   /* border: none;
   border-left: 5px solid black; */
   /* border-bottom: 1px solid black; */
   /* transition: 0.3s; */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 .landing-navbar{
