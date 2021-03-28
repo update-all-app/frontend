@@ -22,7 +22,7 @@ export default function BusinessCard(props){
 
 
   const goToBusiness = () => {
-    history.push(`/businesses/${id}`)
+    history.push(`/businesses/${id}/update`)
   }
 
 

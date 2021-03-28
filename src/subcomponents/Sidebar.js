@@ -38,7 +38,7 @@ export default function Sidebar(props){
       return(
         <li key={hash(link)} className="mr-3 flex-1 mb-5 block h-full">
           <button onClick={callback} className={`ml-2 ${mtClass} block ${activatedClass} py-2 pl-4 w-full text-left text-gray-500 no-underline border-l border-secdark sidebar-link cursor-pointer focus:outline-none`}>
-          {icon}<span className="pb-1 text-base inline">{link}</span>
+          {icon}<span className="pb-1 inline text-xs hidden md:inline lg:text-base">{link}</span>
           </button>
         </li>
       )
@@ -46,13 +46,17 @@ export default function Sidebar(props){
   }
 
   return(
-    <div className="w-1/5 min-w-1/5 min-h-screen h-full custom-shadow bg-primary relative bottom:0 left:0 h-full top:0 float-left">
-      {renderHeader()}
-      <div className="mx-auto inline">
-        <ul className="list-reset bg-primary flex flex-col text-left">
-          {renderLinks()}
-        </ul>
+
+    <>
+      <div className="w-1/5 min-w-1/5 min-h-screen h-full custom-shadow bg-primary relative bottom:0 left:0 h-full top:0 float-left">
+        {renderHeader()}
+        <div className="mx-auto inline">
+          <ul className="list-reset bg-primary flex flex-col text-left">
+            {renderLinks()}
+          </ul>
+        </div>
       </div>
-    </div>
+    </>
+    
   )
 }

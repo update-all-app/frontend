@@ -76,7 +76,7 @@ export default function AuthorizedApp() {
         <Route exact path="/businesses/new">
           <CreateBusiness />
         </Route>
-        <Route exact path="/businesses/:id">
+        <Route path="/businesses/:id">
           <EventContext.Provider value={{state, dispatch}}>
             <ManageBusiness />
           </EventContext.Provider>
