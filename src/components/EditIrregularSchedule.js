@@ -46,6 +46,7 @@ export default function EditIrregularSchedule(props){
 
     if(event.title === "Closed"){
       if(event.start.getHours() !== 0 || event.start.getMinutes() !== 0 || event.end.getHours() !== 23 || event.end.getMinutes() !== 59){
+        event.start = new Date(event.start)
         event.start.setHours(0)
         event.start.setMinutes(0)
         event.end.setHours(23)
@@ -124,7 +125,7 @@ export default function EditIrregularSchedule(props){
       />
     ) : null
   }
-  
+
   return(
     <>
       {renderErrorBanner()}
