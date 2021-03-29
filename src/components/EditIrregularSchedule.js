@@ -10,7 +10,8 @@ import InformationBanner from '../subcomponents/InformationBanner'
 import { ADD_IRREGULAR_EVENT, DELETE_IRREGULAR_EVENT, EDIT_IRREGULAR_EVENT } from '../actionTypes'
 import {
   dateRangesHaveSameDay,
-  dateRangesOverlap
+  dateRangesOverlap,
+  datesInSameDay
 } from '../helpers/functions'
 
 export default function EditIrregularSchedule(props){
@@ -42,6 +43,33 @@ export default function EditIrregularSchedule(props){
 
   const validateEvent = event => {
     let message = ""
+
+    if(event.title === "Closed"){
+      if(event.start.getHours() !== 0 || event.start.getMinutes() !== 0 || event.end.getHours() !== 23 || event.end.getMinutes() !== 59){
+        event.start.setHours(0)
+        event.start.setMinutes(0)
+        event.end.setHours(23)
+        event.end.setMinutes(59)
+        setInfoMessage("Closed Events must be all day. We changed it for you!")
+      }
+    }
+
+    if(event.start > event.end){
+      message = "Event must start before it ends"
+      return [false, message]
+    }
+
+    const rightNow = new Date(Date.now())
+
+    if(event.end < rightNow){
+      message = "Events must be in the future"
+      return [false, message]
+    }else if(event.start < rightNow && !datesInSameDay(event.start, rightNow)){
+      alert('here')
+      message = "Events must be in the future"
+      return [false, message]
+    }
+
     const overlappingEvents = events.filter(e => {
       if(event.id && event.id === e.id){ return false }
       return dateRangesOverlap(event.start, event.end, e.start, e.end)
@@ -63,13 +91,7 @@ export default function EditIrregularSchedule(props){
         message = "Closed events cannot have any other events in the same day."
         return [false, message]
       }
-      if(event.start.getHours() !== 0 || event.start.getMinutes() !== 0 || event.end.getHours() !== 23 || event.end.getMinutes() !== 59){
-        event.start.setHours(0)
-        event.start.setMinutes(0)
-        event.end.setHours(23)
-        event.end.setMinutes(59)
-        setInfoMessage("Closed Events must be all day. We changed it for you!")
-      }
+      
     }else{
       event.title = "Open"
 
@@ -102,7 +124,7 @@ export default function EditIrregularSchedule(props){
       />
     ) : null
   }
-
+  
   return(
     <>
       {renderErrorBanner()}
