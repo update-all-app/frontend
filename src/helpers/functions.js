@@ -156,6 +156,51 @@ function time12To24(timeStr){
     }
 }
 
+function dateRangesOverlap(d1start, d1end, d2start, d2end){
+    const maxStart = max([d1start, d2start], (a,b) => a > b)
+    const minEnd = min([d1end, d2end], (a,b) => a < b)
+    return minEnd > maxStart
+}
+
+function dateRangesHaveSameDay(d1start, d1end, d2start, d2end){
+    const overlapExists = dateRangesOverlap(d1start, d1end, d2start, d2end)
+    if(overlapExists){ return true }
+    return (
+        datesInSameDay(d1start, d2start) ||
+        datesInSameDay(d1start, d2end) ||
+        datesInSameDay(d2end, d1start) ||
+        datesInSameDay(d2end, d1end)
+    )
+
+}
+
+function datesInSameDay(d1, d2){
+    return (d1.getFullYear() === d2.getFullYear() && 
+        d1.getMonth() === d2.getMonth() &&
+        d1.getDate() === d2.getDate()
+    )
+}
+
+function min(coll, isLessThan){
+    let min = null
+    for(let el of coll){
+        if(min === null || isLessThan(el, min)){
+            min = el
+        }
+    }
+    return min
+}
+
+function max(coll, isGreaterThan){
+    let max = null
+    for(let el of coll){
+        if(max === null || isGreaterThan(el, max)){
+            max = el
+        }
+    }
+    return max
+}
+
 export {
     strip,
     hash,
@@ -169,5 +214,10 @@ export {
     safeCallWithDefault,
     dateToHTMLString,
     time24To12,
-    time12To24
+    time12To24,
+    min,
+    max,
+    datesInSameDay,
+    dateRangesHaveSameDay,
+    dateRangesOverlap
 }
