@@ -11,38 +11,26 @@ export default function ManageEndpoints({ business }) {
 
   const { dispatch } = useContext(UserContext);
 
-  const fbConnected =
-    business.connectedServices && business.connectedServices.includes("fb");
-  const fbButtonText = fbConnected ? "FB is synced" : "Sync with FB";
+  const fbConnected = business.connecedServices && business.connectedServices.find(s => s.provider === "facebook")
+  const fbButtonText = fbConnected ? "FB is connected" : "Connect Authorized FB account";
   console.log(business);
 
-  const syncFacebook = async () => {
-    // setLoading(true);
-    // try {
-    //   const { accessToken } = await fbLogin();
-    //   console.log(`AccessToken: ${accessToken}`);
-    //   const res = await ApiManager.getAccessTokenFor('facebook', accessToken)
-    //   dispatch({
-    //     type: ADD_BUSINESS_SERVICE,
-    //     payload: { business, service: "fb" }
-    //   });
-    // } catch (err) {
-    //   // alert that fb login failed
-    // }
-    // setLoading(false);
-  };
 
   return (
     <div className='p-4'>
       <h1 className='text-2xl'>Manage Endpoints</h1>
       <ul>
         <li>Google Maps</li>
-        <li>Facebook Business</li>
         <LoadingButton
           value={fbButtonText}
-          loadingValue='Syncing...'
+          loadingValue='Connecting Facebook Account...'
           loading={loading}
-          onClick={syncFacebook}
+          onClick={() => {
+            setLoading(true)
+            window.setTimeout(() => {
+              setLoading(false)
+            }, 3000)
+          }}
           disabled={fbConnected}
         />
         <li>Apple Maps</li>
