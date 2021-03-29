@@ -8,6 +8,7 @@ import React, {
   } from '../helpers/functions'
   import OpenHoursForm from '../subcomponents/OpenHoursForm'
   import EventContext from '../context/EventContext'
+  import ErrorBanner from '../subcomponents/ErrorBanner'
   import { ADD_REGULAR_EVENT, DELETE_REGULAR_EVENT, EDIT_REGULAR_EVENT } from '../actionTypes'
   
   export default function EditRegularScheduleSimple(props){
@@ -17,103 +18,7 @@ import React, {
     const events = state.regularEvents
 
     const [displayFormForDays, setDisplayFormForDays] = useState([false, false, false, false, false, false, false])
-
-    const onSave = event => {
-      const isNewEvent = !event.id
-      
-      if(isNewEvent){
-        if(event.repeat && event.repeat !== "No Repeat"){
-          const repeatEvents = getEventsForRepeat(event)
-          for(let event of repeatEvents.additional){
-            createNewEvent(event)
-          }
-        }else{
-          createNewEvent({
-            title: event.title,
-            start: event.start,
-            end: event.end
-          })
-        }
-      }else{
-        if(event.repeat && event.repeat !== "No Repeat"){
-          const repeatEvents = getEventsForRepeat({...event})
-          onDelete(event)
-          for(let event of repeatEvents.additional){
-            createNewEvent(event)
-          }
-        }else{
-          const eventToSave = {
-            id: event.id,
-            title: event.title,
-            start: event.start,
-            end: event.end
-          }
-          updateEvent(eventToSave)
-        }
-        
-      }
-    }
-  
-    const getEventsForRepeat = (event) => {
-      const everydayEvents = []
-      const dayOfWeek = event.start.getDay()
-      const dayOfMonth = event.start.getDate()
-      const dayOfWeekToDate = weekDay => {
-        return dayOfMonth - dayOfWeek + weekDay
-      }
-      if(event.end.getDate() !== dayOfMonth){
-        return {
-          original: event,
-          additional: [event]
-        }
-      }
-      switch(event.repeat){
-        case "No Repeat":
-          return {
-            original: event,
-            additional: [event]
-          }
-        case "Every Day":
-          
-          for(let i = 0; i < 7; i++){
-            const newStart = new Date(event.start)
-            newStart.setDate(dayOfWeekToDate(i))
-            const newEnd = new Date(event.end)
-            newEnd.setDate(dayOfWeekToDate(i))
-            everydayEvents.push({
-              title: event.title, 
-              start: newStart,
-              end: newEnd
-            })
-          }
-          return {
-            original: event,
-            additional: everydayEvents
-          }
-        case "Every Weekday":
-          
-          for(let i = 1; i < 6; i++){
-            const newStart = new Date(event.start)
-            newStart.setDate(dayOfWeekToDate(i))
-            const newEnd = new Date(event.end)
-            newEnd.setDate(dayOfWeekToDate(i))
-            everydayEvents.push({
-              title: event.title, 
-              start: newStart,
-              end: newEnd
-            })
-          }
-          return {
-            original: event,
-            additional: everydayEvents
-          }
-        default:
-          return {
-            original: event,
-            additional: [event]
-          }
-      }
-    }
+    const [errorMessage, setErrorMessage] = useState(null)
 
     const setDisplayFormForDaysToVal = (day, val) => {
         setDisplayFormForDays(prevState => {
@@ -125,7 +30,13 @@ import React, {
   
     //TODO: Logic from this method to context
     const createNewEvent = event => {
-      dispatch({type: ADD_REGULAR_EVENT, payload: event})
+      const [validated, msg] = validateEvent(event)
+      if(validated){
+        dispatch({type: ADD_REGULAR_EVENT, payload: event})
+      }else{
+        setErrorMessage(msg)
+      }
+      
     }
   
     // TODO: Logic from this method to context
@@ -146,7 +57,6 @@ import React, {
     }
 
     for(let dayEvents of eventsByDay){
-        console.log(dayEvents)
         dayEvents.sort((a,b) => {
             if(a > b) return 1
             if(a < b) return -1
@@ -160,15 +70,6 @@ import React, {
             return(
                 <div className="p-1 bg-secondary w-1/3 flex flex-row items-center justify-between">
                     <span>{time24To12(e.start)} - {time24To12(e.end)}</span>
-                    
-                    {/* <button
-                        className="hover:text-tertiary focus:outline-none"
-                        onClick={() => {}}
-                    >
-                        <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
-                        </svg>
-                    </button> */}
                     
                     <button
                         className="hover:text-tertiary focus:outline-none"
@@ -204,7 +105,7 @@ import React, {
             )
         }else{
             return(
-                <div className="w-1/2 mb-8 bg-secondary p-6 ml-8 shadow-lg">
+                <div className="w-120 mb-8 bg-secondary p-6 ml-8 shadow-lg">
                     <OpenHoursForm 
                         onSubmit={e => {
                             e.day = day
@@ -218,7 +119,49 @@ import React, {
         }
     }
 
+    const milTimeToNum = (time) => {
+      return Number.parseInt(time.split(":").join(""))
+    }
+
+    const validateEvent = (newEvent) => {
+      let message = ""
+      const newStart = milTimeToNum(newEvent.start)
+      const newEnd = milTimeToNum(newEvent.end)
+      if(newStart >= newEnd){
+        message = "Events must start before they end"
+        return [false, message]
+      }
+      const overlapValidation = eventsByDay[newEvent.day].filter(e => {
+        const [eStart, eEnd] = [milTimeToNum(e.start), milTimeToNum(e.end)]
+        const maxMins = Math.max(newStart, eStart)
+        const minMaxs = Math.min(newEnd, eEnd)
+        return minMaxs >= maxMins
+      }).length === 0
+      
+      if(!overlapValidation){ 
+        message = "Open hours cannot overlap"
+      }
+
+      return [overlapValidation, message]
+
+    }
+
+    const renderErrorBanner = () => {
+      if(errorMessage){
+        return(
+          <ErrorBanner 
+            message={errorMessage} 
+            onExit={() => setErrorMessage(null)}
+          />
+        )
+      }else{
+        return null
+      }
+    }
+
     return (
+      <>
+      {renderErrorBanner()}
       <div className="flex m-4 ml-24 flex-col">
           <div className="mt-4">
             <h1><span className="my-2.5 float-left w-32 text-2xl">Sunday</span>
@@ -333,5 +276,6 @@ import React, {
             </div>
           </div>
       </div>
+      </>
     )
   }
