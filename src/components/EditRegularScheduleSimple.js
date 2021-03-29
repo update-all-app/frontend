@@ -164,8 +164,8 @@ import React, {
       {renderErrorBanner()}
       <div className="flex m-4 ml-24 flex-col">
           <div className="mt-4">
-            <h1><span className="my-2.5 float-left w-32 text-2xl">Sunday</span>
-            <span className="my-4 ml-4 inline-flex justify-center px-2 text-tertiary border-primary border-b-2 rounded-sm font-bold">
+            <h1><span className="my-3 float-left w-32 text-2xl">Sunday</span>
+            <span className="my-4 ml-4 inline-flex justify-center px-2 text-tertiary text-lg rounded-sm font-bold">
                 {dayStatuses[0]}
             </span>
             </h1>
@@ -180,8 +180,8 @@ import React, {
             </div>
           </div>
           <div className="mt-4">
-            <h1><span className="my-2.5 float-left w-32 text-2xl">Monday</span>
-            <span className="my-4 ml-4 inline-flex justify-center px-2 text-tertiary border-primary border-b-2 rounded-sm font-bold">
+            <h1><span className="my-3 float-left w-32 text-2xl">Monday</span>
+            <span className="my-4 ml-4 inline-flex justify-center px-2 text-tertiary text-lg rounded-sm font-bold">
                 {dayStatuses[1]}
             </span>
             </h1>
@@ -196,8 +196,8 @@ import React, {
             </div>
           </div>
           <div className="mt-4">
-            <h1><span className="my-2.5 float-left w-32 text-2xl">Tuesday</span>
-            <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary border-primary border-b-2 rounded-sm font-bold">
+            <h1><span className="my-3 float-left w-32 text-2xl">Tuesday</span>
+            <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary text-lg rounded-sm font-bold">
                 {dayStatuses[2]}
             </span>
             </h1>
@@ -212,8 +212,8 @@ import React, {
             </div>
           </div>
           <div className="mt-4">
-            <h1><span className="my-2.5 float-left w-32 text-2xl">Wednesday</span>
-            <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary border-primary border-b-2 rounded-sm font-bold">
+            <h1><span className="my-3 float-left w-32 text-2xl">Wednesday</span>
+            <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary text-lg rounded-sm font-bold">
                 {dayStatuses[3]}
             </span>
             </h1>
@@ -228,8 +228,8 @@ import React, {
             </div>
           </div>
           <div className="mt-4">
-            <h1><span className="my-2.5 float-left w-32 text-2xl">Thursday</span>
-            <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary border-primary border-b-2 rounded-sm font-bold">
+            <h1><span className="my-3 float-left w-32 text-2xl">Thursday</span>
+            <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary text-lg rounded-sm font-bold">
                 {dayStatuses[4]}
             </span>
             </h1>
@@ -244,8 +244,8 @@ import React, {
             </div>
           </div>
           <div className="mt-4">
-            <h1><span className="my-2.5 float-left w-32 text-2xl">Friday</span>
-            <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary border-primary border-b-2 rounded-sm font-bold">
+            <h1><span className="my-3 float-left w-32 text-2xl">Friday</span>
+            <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary text-lg rounded-sm font-bold">
                 {dayStatuses[5]}
             </span>
             </h1>
@@ -260,8 +260,8 @@ import React, {
             </div>
           </div>
           <div className="mt-4">
-            <h1><span className="my-2.5 float-left w-32 text-2xl">Saturday</span>
-            <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary border-primary border-b-2 rounded-sm font-bold">
+            <h1><span className="my-3 float-left w-32 text-2xl">Saturday</span>
+            <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary text-lg rounded-sm font-bold">
                 {dayStatuses[6]}
             </span>
             </h1>
