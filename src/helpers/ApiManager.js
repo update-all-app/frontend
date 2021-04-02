@@ -119,6 +119,15 @@ export default class ApiManager {
     );
   }
 
+  static async createRegularEventForBusiness(businessId, event){
+    const token = await this.protectedRoute();
+    return await this.post(
+      `${API_SUFFIX}/businesses/${businessId}/regular_events`,
+      { regular_event: event },
+      token
+    )
+  }
+
   static async get(path, token = null) {
     return await this.request("GET", path, null, token);
   }
