@@ -57,7 +57,7 @@ import React, {
           dispatch({type: ADD_REGULAR_EVENT, payload: newEvent})
         }catch(err){
           dispatch({type: DELETE_REGULAR_EVENT, payload: dispatchedEvent})
-          setErrorMessage("There was a problem saving your event")
+          setErrorMessage("There was a problem saving your event. Please try again.")
         }
       }else{
         setErrorMessage(msg)
@@ -66,13 +66,20 @@ import React, {
     }
   
     // TODO: Logic from this method to context
-    const updateEvent = event => {
-      dispatch({type: EDIT_REGULAR_EVENT, payload: event})
-    }
+    // const updateEvent = event => {
+    //   dispatch({type: EDIT_REGULAR_EVENT, payload: event})
+    // }
   
     // TODO: Logic from this method to context
     const onDelete = event => {
       dispatch({type: DELETE_REGULAR_EVENT, payload: event})
+      try{
+        const res = ApiManager.deleteRegularEvent(event.id)
+      }catch(err){
+        dispatch({type: ADD_REGULAR_EVENT, payload: event})
+        setErrorMessage("There was a problem deleting your event. Please try again.")
+      }
+      
     }
 
     const eventsByDay = [[],[],[],[],[],[],[]]
