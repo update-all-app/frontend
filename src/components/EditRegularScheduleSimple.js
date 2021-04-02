@@ -9,11 +9,13 @@ import React, {
   import OpenHoursForm from '../subcomponents/OpenHoursForm'
   import EventContext from '../context/EventContext'
   import ErrorBanner from '../subcomponents/ErrorBanner'
+  import ApiManager from '../helpers/ApiManager'
   import { ADD_REGULAR_EVENT, DELETE_REGULAR_EVENT, EDIT_REGULAR_EVENT } from '../actionTypes'
-  
+  import { v4 as uuidv4} from 'uuid';
+
   export default function EditRegularScheduleSimple(props){
   
-    
+    const { business } = props
     const {state, dispatch} = useContext(EventContext)
     const events = state.regularEvents
 
@@ -29,10 +31,34 @@ import React, {
     }
   
     //TODO: Logic from this method to context
-    const createNewEvent = event => {
+    const createNewEvent = async (event) => {
       const [validated, msg] = validateEvent(event)
       if(validated){
-        dispatch({type: ADD_REGULAR_EVENT, payload: event})
+        const newId = uuidv4()
+        const dispatchedEvent = {
+          ...event,
+          id: newId
+        }
+        dispatch({type: ADD_REGULAR_EVENT, payload: dispatchedEvent})
+        try{
+          const eventToSend = {
+            day_of_week: event.day,
+            start_time: event.start,
+            end_time: event.end
+          }
+          const res = await ApiManager.createRegularEventForBusiness(business.id, eventToSend)
+          dispatch({type: DELETE_REGULAR_EVENT, payload: dispatchedEvent})
+          const newEvent = {
+            id: res.id,
+            start: res.start_time,
+            end: res.end_time,
+            day: res.day_of_week
+          }
+          dispatch({type: ADD_REGULAR_EVENT, payload: newEvent})
+        }catch(err){
+          dispatch({type: DELETE_REGULAR_EVENT, payload: dispatchedEvent})
+          setErrorMessage("There was a problem saving your event")
+        }
       }else{
         setErrorMessage(msg)
       }
@@ -158,124 +184,124 @@ import React, {
         return null
       }
     }
-
+    console.log(events)
     return (
       <>
-      {renderErrorBanner()}
-      <div className="flex m-4 ml-24 flex-col">
-          <div className="mt-4">
-            <h1><span className="my-3 float-left w-32 text-2xl">Sunday</span>
-            <span className="my-4 ml-4 inline-flex justify-center px-2 text-tertiary text-lg rounded-sm font-bold">
-                {dayStatuses[0]}
-            </span>
-            </h1>
-            <div>
-                {displayEvents(eventsByDay[0])}
-                <div className="m-4">
-                    {displayButtonOrForm(0)}
-                </div>
+        {renderErrorBanner()}
+        <div className="flex m-4 ml-24 flex-col">
+            <div className="mt-4">
+              <h1><span className="my-3 float-left w-32 text-2xl">Sunday</span>
+              <span className="my-4 ml-4 inline-flex justify-center px-2 text-tertiary text-lg rounded-sm font-bold">
+                  {dayStatuses[0]}
+              </span>
+              </h1>
+              <div>
+                  {displayEvents(eventsByDay[0])}
+                  <div className="m-4">
+                      {displayButtonOrForm(0)}
+                  </div>
+              </div>
+              <div>
+                  
+              </div>
             </div>
-            <div>
-                
+            <div className="mt-4">
+              <h1><span className="my-3 float-left w-32 text-2xl">Monday</span>
+              <span className="my-4 ml-4 inline-flex justify-center px-2 text-tertiary text-lg rounded-sm font-bold">
+                  {dayStatuses[1]}
+              </span>
+              </h1>
+              <div>
+                  {displayEvents(eventsByDay[1])}
+                  <div className="m-4">
+                      {displayButtonOrForm(1)}
+                  </div>
+              </div>
+              <div>
+                  
+              </div>
             </div>
-          </div>
-          <div className="mt-4">
-            <h1><span className="my-3 float-left w-32 text-2xl">Monday</span>
-            <span className="my-4 ml-4 inline-flex justify-center px-2 text-tertiary text-lg rounded-sm font-bold">
-                {dayStatuses[1]}
-            </span>
-            </h1>
-            <div>
-                {displayEvents(eventsByDay[1])}
-                <div className="m-4">
-                    {displayButtonOrForm(1)}
-                </div>
+            <div className="mt-4">
+              <h1><span className="my-3 float-left w-32 text-2xl">Tuesday</span>
+              <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary text-lg rounded-sm font-bold">
+                  {dayStatuses[2]}
+              </span>
+              </h1>
+              <div>
+                  {displayEvents(eventsByDay[2])}
+                  <div className="m-4">
+                      {displayButtonOrForm(2)}
+                  </div>
+              </div>
+              <div>
+                  
+              </div>
             </div>
-            <div>
-                
+            <div className="mt-4">
+              <h1><span className="my-3 float-left w-32 text-2xl">Wednesday</span>
+              <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary text-lg rounded-sm font-bold">
+                  {dayStatuses[3]}
+              </span>
+              </h1>
+              <div>
+                  {displayEvents(eventsByDay[3])}
+                  <div className="m-4">
+                      {displayButtonOrForm(3)}
+                  </div>
+              </div>
+              <div>
+                  
+              </div>
             </div>
-          </div>
-          <div className="mt-4">
-            <h1><span className="my-3 float-left w-32 text-2xl">Tuesday</span>
-            <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary text-lg rounded-sm font-bold">
-                {dayStatuses[2]}
-            </span>
-            </h1>
-            <div>
-                {displayEvents(eventsByDay[2])}
-                <div className="m-4">
-                    {displayButtonOrForm(2)}
-                </div>
+            <div className="mt-4">
+              <h1><span className="my-3 float-left w-32 text-2xl">Thursday</span>
+              <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary text-lg rounded-sm font-bold">
+                  {dayStatuses[4]}
+              </span>
+              </h1>
+              <div>
+                  {displayEvents(eventsByDay[4])}
+                  <div className="m-4">
+                      {displayButtonOrForm(4)}
+                  </div>
+              </div>
+              <div>
+                  
+              </div>
             </div>
-            <div>
-                
+            <div className="mt-4">
+              <h1><span className="my-3 float-left w-32 text-2xl">Friday</span>
+              <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary text-lg rounded-sm font-bold">
+                  {dayStatuses[5]}
+              </span>
+              </h1>
+              <div>
+                  {displayEvents(eventsByDay[5])}
+                  <div className="m-4">
+                      {displayButtonOrForm(5)}
+                  </div>
+              </div>
+              <div>
+                  
+              </div>
             </div>
-          </div>
-          <div className="mt-4">
-            <h1><span className="my-3 float-left w-32 text-2xl">Wednesday</span>
-            <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary text-lg rounded-sm font-bold">
-                {dayStatuses[3]}
-            </span>
-            </h1>
-            <div>
-                {displayEvents(eventsByDay[3])}
-                <div className="m-4">
-                    {displayButtonOrForm(3)}
-                </div>
+            <div className="mt-4">
+              <h1><span className="my-3 float-left w-32 text-2xl">Saturday</span>
+              <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary text-lg rounded-sm font-bold">
+                  {dayStatuses[6]}
+              </span>
+              </h1>
+              <div>
+                  {displayEvents(eventsByDay[6])}
+                  <div className="m-4">
+                      {displayButtonOrForm(6)}
+                  </div>
+              </div>
+              <div>
+                  
+              </div>
             </div>
-            <div>
-                
-            </div>
-          </div>
-          <div className="mt-4">
-            <h1><span className="my-3 float-left w-32 text-2xl">Thursday</span>
-            <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary text-lg rounded-sm font-bold">
-                {dayStatuses[4]}
-            </span>
-            </h1>
-            <div>
-                {displayEvents(eventsByDay[4])}
-                <div className="m-4">
-                    {displayButtonOrForm(4)}
-                </div>
-            </div>
-            <div>
-                
-            </div>
-          </div>
-          <div className="mt-4">
-            <h1><span className="my-3 float-left w-32 text-2xl">Friday</span>
-            <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary text-lg rounded-sm font-bold">
-                {dayStatuses[5]}
-            </span>
-            </h1>
-            <div>
-                {displayEvents(eventsByDay[5])}
-                <div className="m-4">
-                    {displayButtonOrForm(5)}
-                </div>
-            </div>
-            <div>
-                
-            </div>
-          </div>
-          <div className="mt-4">
-            <h1><span className="my-3 float-left w-32 text-2xl">Saturday</span>
-            <span className="my-4 ml-4 inline-flex justify-center px-2 w-16 text-tertiary text-lg rounded-sm font-bold">
-                {dayStatuses[6]}
-            </span>
-            </h1>
-            <div>
-                {displayEvents(eventsByDay[6])}
-                <div className="m-4">
-                    {displayButtonOrForm(6)}
-                </div>
-            </div>
-            <div>
-                
-            </div>
-          </div>
-      </div>
+        </div>
       </>
     )
   }
