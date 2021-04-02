@@ -128,6 +128,15 @@ export default class ApiManager {
     )
   }
 
+
+  static async deleteRegularEvent(eventId){
+    const token = await this.protectedRoute();
+    return await this.delete(
+      `${API_SUFFIX}/regular_events/${eventId}`,
+      token
+    )
+  }
+
   static async get(path, token = null) {
     return await this.request("GET", path, null, token);
   }
@@ -144,8 +153,8 @@ export default class ApiManager {
     return await this.request("PATCH", path, body, token);
   }
 
-  static async delete(path, body = null, token = null) {
-    return await this.request("DELETE", path, body, token);
+  static async delete(path, token = null) {
+    return await this.request("DELETE", path, null, token);
   }
 
   static async request(method, path, body = null, token = null) {
