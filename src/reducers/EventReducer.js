@@ -9,15 +9,13 @@ import {
   SET_REGULAR_EVENTS,
   SET_IRREGULAR_EVENTS,
   CLEAR_EVENTS
-} from '../actionTypes'
+} from '../actionTypes';
+
 
 export default function UserReducer(state, action){
   switch(action.type){
       case ADD_REGULAR_EVENT:
         const newRegEvent = action.payload
-        newRegEvent.id = state.regularEvents.length + 1
-        // newRegEvent.start = new Date(newRegEvent.start)
-        // newRegEvent.end = new Date(newRegEvent.end)
         return {
           ...state,
           regularEvents: [...state.regularEvents, newRegEvent]
