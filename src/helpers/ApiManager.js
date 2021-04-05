@@ -119,6 +119,73 @@ export default class ApiManager {
     );
   }
 
+  static async createRegularEventForBusiness(businessId, event){
+    const token = await this.protectedRoute();
+    return await this.post(
+      `${API_SUFFIX}/businesses/${businessId}/regular_events`,
+      { regular_event: event },
+      token
+    )
+  }
+
+  static async deleteRegularEvent(eventId){
+    const token = await this.protectedRoute();
+    return await this.delete(
+      `${API_SUFFIX}/regular_events/${eventId}`,
+      token
+    )
+  }
+
+  static async getRegularEventsForBusiness(businessId){
+    const token = await this.protectedRoute();
+    return await this.get(
+      `${API_SUFFIX}/businesses/${businessId}/regular_events`,
+      token
+    )
+  }
+
+
+  static async createIrregularEventForBusiness(businessId, event){
+    const token = await this.protectedRoute();
+    return await this.post(
+      `${API_SUFFIX}/businesses/${businessId}/irregular_events`,
+      { irregular_event: event },
+      token
+    )
+  }
+
+  static async updateIrregularEvent(event){
+    const token = await this.protectedRoute()
+    const body = {
+      irregular_event: {
+        status: event.status,
+        start_time: event.start_time,
+        end_time: event.end_time
+      }
+    }
+    return await this.patch(
+      `${API_SUFFIX}/irregular_events/${event.id}`,
+      body, 
+      token
+    )
+  }
+
+  static async deleteIrregularEvent(eventId){
+    const token = await this.protectedRoute()
+    return await this.delete(
+      `${API_SUFFIX}/irregular_events/${eventId}`,
+      token
+    )
+  }
+
+  static async getIrregularEventsForBusiness(businessId){
+    const token = await this.protectedRoute()
+    return await this.get(
+      `${API_SUFFIX}/businesses/${businessId}/irregular_events`,
+      token
+    )
+  }
+
   static async get(path, token = null) {
     return await this.request("GET", path, null, token);
   }
@@ -135,8 +202,8 @@ export default class ApiManager {
     return await this.request("PATCH", path, body, token);
   }
 
-  static async delete(path, body = null, token = null) {
-    return await this.request("DELETE", path, body, token);
+  static async delete(path, token = null) {
+    return await this.request("DELETE", path, null, token);
   }
 
   static async request(method, path, body = null, token = null) {

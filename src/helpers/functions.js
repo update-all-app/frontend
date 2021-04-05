@@ -191,6 +191,16 @@ function min(coll, isLessThan){
     return min
 }
 
+function formatDateTimeForBackend(date){
+    return `${dateToHTMLString(date)} ${dateTo24Time(date)}:00`
+}
+
+function formatDateToUTCForBackend(date){
+    const dateStr = `${date.getUTCFullYear()}-${pad(String(date.getUTCMonth() + 1), 2)}-${pad(String(date.getUTCDate()),2)}`
+    const timeStr = `${pad(date.getUTCHours(),2)}:${pad(date.getUTCMinutes(),2)}:00`
+    return `${dateStr} ${timeStr}`
+}
+
 function max(coll, isGreaterThan){
     let max = null
     for(let el of coll){
@@ -199,6 +209,11 @@ function max(coll, isGreaterThan){
         }
     }
     return max
+}
+
+function capitalize(str){
+    if (typeof str !== 'string') return ''
+    return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
 export {
@@ -219,5 +234,8 @@ export {
     max,
     datesInSameDay,
     dateRangesHaveSameDay,
-    dateRangesOverlap
+    dateRangesOverlap,
+    formatDateTimeForBackend,
+    formatDateToUTCForBackend,
+    capitalize
 }
