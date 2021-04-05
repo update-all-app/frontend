@@ -16,7 +16,6 @@ import {
   capitalize
 } from '../helpers/functions'
 
-import OptimisticRenderer from '../helpers/OptimisticRenderer'
 import ApiManager from '../helpers/ApiManager'
 
 import { v4 as uuidv4} from 'uuid';
