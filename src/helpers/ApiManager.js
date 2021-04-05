@@ -128,7 +128,6 @@ export default class ApiManager {
     )
   }
 
-
   static async deleteRegularEvent(eventId){
     const token = await this.protectedRoute();
     return await this.delete(
@@ -141,6 +140,48 @@ export default class ApiManager {
     const token = await this.protectedRoute();
     return await this.get(
       `${API_SUFFIX}/businesses/${businessId}/regular_events`,
+      token
+    )
+  }
+
+
+  static async createIrregularEventForBusiness(businessId, event){
+    const token = await this.protectedRoute();
+    return await this.post(
+      `${API_SUFFIX}/businesses/${businessId}/irregular_events`,
+      { irregular_event: event },
+      token
+    )
+  }
+
+  static async updateIrregularEvent(event){
+    const token = await this.protectedRoute()
+    const body = {
+      irregular_event: {
+        status: event.status,
+        start_time: event.start_time,
+        end_time: event.end_time
+      }
+    }
+    return await this.patch(
+      `${API_SUFFIX}/irregular_events/${event.id}`,
+      body, 
+      token
+    )
+  }
+
+  static async deleteIrregularEvent(eventId){
+    const token = await this.protectedRoute()
+    return await this.delete(
+      `${API_SUFFIX}/irregular_events/${eventId}`,
+      token
+    )
+  }
+
+  static async getIrregularEventsForBusiness(businessId){
+    const token = await this.protectedRoute()
+    return await this.get(
+      `${API_SUFFIX}/businesses/${businessId}/irregular_events`,
       token
     )
   }
