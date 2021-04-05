@@ -83,7 +83,7 @@ import React, {
     }
 
     const eventsByDay = [[],[],[],[],[],[],[]]
-
+    console.log(events)
     for(let event of events){
         const dayOfWeek = event.day
         eventsByDay[dayOfWeek].push(event)

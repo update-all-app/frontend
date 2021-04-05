@@ -11,7 +11,7 @@ import ViewBusinessCalendar from './ViewBusinessCalendar'
 import ManageEndpoints from './ManageEndpoints'
 import NotFound from './NotFound'
 import EditBusiness from './EditBusiness'
-import { CLEAR_EVENTS } from '../actionTypes'
+import ErrorBanner from '../subcomponents/ErrorBanner'
 
 import {
   BrowserRouter as Router,
@@ -23,6 +23,17 @@ import {
   useRouteMatch,
   Route
 } from 'react-router-dom'
+
+import ApiManager from '../helpers/ApiManager'
+import {
+  capitalize
+} from '../helpers/functions'
+
+import {
+  CLEAR_EVENTS,
+  SET_REGULAR_EVENTS,
+  SET_IRREGULAR_EVENTS
+} from '../actionTypes'
 
 
 export default function Home(props){
@@ -36,18 +47,45 @@ export default function Home(props){
   const business = !!user.data.businesses && user.data.businesses.find(b => Number.parseInt(b.id) === Number.parseInt(id))
 
   const [activeTab, setActiveTab] = useState(0)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const { path, url } = useRouteMatch()
 
 
 
   useEffect(() => {
+
+    async function getAndSaveEvents(){
+      try{
+        const regularEvents = await ApiManager.getRegularEventsForBusiness(business.id)  
+        const formattedRegularEvents = regularEvents.map(re => ({
+          start: re.start_time,
+          end: re.end_time,
+          day: re.day_of_week,
+          id: re.id
+        }))
+        const irregularEvents = await ApiManager.getIrregularEventsForBusiness(business.id)
+        const formattedIrregularEents = irregularEvents.map(ie => ({
+          id: ie.id,
+          title: capitalize(ie.status),
+          start: new Date(ie.start_time),
+          end: new Date(ie.end_time)
+        }))
+
+        dispatch({type: SET_REGULAR_EVENTS, payload: formattedRegularEvents})
+        dispatch({type: SET_IRREGULAR_EVENTS, payload: formattedIrregularEents})
+      }catch(err){
+        setErrorMessage("There was a problem loading your data")
+      }
+    }
     
+    getAndSaveEvents()
+
     return () => {
       dispatch({type: CLEAR_EVENTS})
     }
     
-  }, [])
+  }, [business])
 
   
 
@@ -109,16 +147,19 @@ export default function Home(props){
     }
   }
 
-  const renderSpecificDates = () => {
-    return (
-      <Calendar 
-        allowedEventValues={["title","start", "end"]}
-        disabledEventValues={["title"]}
-      />
-    )
+
+  const renderErrorBanner = () => {
+    if(errorMessage){
+      return (
+        <ErrorBanner
+          message={errorMessage}
+          onExit={() => setErrorMessage(null)}
+        />
+      )
+    }else{
+      return null
+    }
   }
-
-
 
   return(
     <>
@@ -156,6 +197,7 @@ export default function Home(props){
               {renderBackIcon()}
             </Sidebar>
             <div className="w-full">
+            {renderErrorBanner()}
             <Switch>
               <Route exact path={`${url}/${urlSuffixes[0]}`}>
                 <UpdateIt business={business} />
