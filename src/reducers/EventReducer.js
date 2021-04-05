@@ -29,7 +29,6 @@ export default function UserReducer(state, action){
         }
       case ADD_IRREGULAR_EVENT:
         const newIrregEvent = action.payload
-        newIrregEvent.id = state.irregularEvents.length + 1
         newIrregEvent.start = new Date(newIrregEvent.start)
         newIrregEvent.end = new Date(newIrregEvent.end)
         return {
@@ -60,12 +59,12 @@ export default function UserReducer(state, action){
       case SET_REGULAR_EVENTS:
         return {
           ...state,
-          regularEvents: {...action.payload}
+          regularEvents: [...action.payload]
         }
       case SET_IRREGULAR_EVENTS:
         return {
           ...state,
-          irregularEvents: {...action.payload}
+          irregularEvents: [...action.payload]
         }
       case CLEAR_EVENTS:
         return {
