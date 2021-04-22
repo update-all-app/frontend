@@ -2,4 +2,5 @@ const BACKEND_URL = process.env.REACT_APP_API_URL;
 const API_SUFFIX = "/api/v1";
 const BACKEND_API_URL = `${BACKEND_URL}${API_SUFFIX}`;
 
+
 export { BACKEND_URL, API_SUFFIX, BACKEND_API_URL };

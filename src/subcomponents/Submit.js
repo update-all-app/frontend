@@ -35,13 +35,13 @@ export default function Submit(props) {
   };
 
   const renderErrors = () => {
-    return (
+    return errors.length > 0 ? (
       <div>
         {errors.map((e) => {
           return <ErrorText value={e} key={hash(e)} />;
         })}
       </div>
-    );
+    ) : null;
   };
 
   return (

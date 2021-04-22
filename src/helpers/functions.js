@@ -114,6 +114,11 @@ function dateToHTMLString(date){
     return `${date.getFullYear()}-${pad(String(date.getMonth() + 1), 2)}-${pad(String(date.getDate()),2)}`
 }
 
+
+function formatDateShort(date){
+    return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+}
+
 function pad(val, padLen, padVal="0"){
     val = String(val)
     if(val.length < padLen){
@@ -216,6 +221,14 @@ function capitalize(str){
     return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+
+function datePlusDays(date, days){
+    const dateCpy = new Date(date)
+    const dateDate = dateCpy.getDate()
+    const newDate = dateDate + days
+    return new Date(dateCpy.setDate(newDate))
+}
+
 export {
     strip,
     hash,
@@ -237,5 +250,7 @@ export {
     dateRangesOverlap,
     formatDateTimeForBackend,
     formatDateToUTCForBackend,
-    capitalize
+    capitalize,
+    formatDateShort,
+    datePlusDays
 }
