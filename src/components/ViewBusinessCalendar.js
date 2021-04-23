@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react'
 import { businessCalendarData } from '../dummyData/businessCalendar'
 import { DAYS } from '../helpers/Days'
 import Button from '../subcomponents/Submit'
+import Card from '../wrappers/Card'
+
 import {
   formatDateShort,
   time24To12,
@@ -79,7 +81,11 @@ export default function ViewBusinessCalendar(props){
   }
 
   const renderDateRange = () => {
-    return `${formatDateShort(dateRangeStart)} to ${formatDateShort(dateRangeEnd)}`
+    return (
+      <>
+        <span className="font-bold">{formatDateShort(dateRangeStart)}</span> to <span className="font-bold">{formatDateShort(dateRangeEnd)}</span>
+      </>
+    )
   }
 
   const displayEvents = dayEvents => {
@@ -95,9 +101,10 @@ export default function ViewBusinessCalendar(props){
     const isClosed = dayEvents.length === 0
     const currentDate = datePlusDays(dateRangeStart, getDaysFromStartFromDayOfWeek(dayNumber)) 
     const displayDate = currentDate.getDate()
-    return (
-      <div className="m-12">
-        <h1 className="text-xl tertiary mb-2 p-4 bg-secdark">{DAYS.GET(dayNumber).displayValue}, {displayDate} - {isClosed ? "Closed" : "Open"}</h1>
+    
+    return(
+      <div className="m-8">
+        <h1 className="rounded text-xl tertiary mb-2 p-4 bg-secdark">{DAYS.GET(dayNumber).displayValue}, {displayDate} - {isClosed ? "Closed" : "Open"}</h1>
         {displayEvents(dayEvents)}
       </div>
     )
@@ -124,24 +131,35 @@ export default function ViewBusinessCalendar(props){
     <h1>Loading...</h1>
   )
   : (
-    <div className="m-12">
-      <div className="mb-4">
-        <Button
-          value="This Week"
+    <div className="m-8">
+      <div className="border-b-2 p-2">
+        <button
+          className="focus:outline-none mr-4 bg-transparent hover:bg-gray-100 text-gray-800 font-thin py-1 px-3 border border-gray-500 rounded"
           onClick={getThisWeek}
-        /> 
+        >
+          Today
+        </button> 
+        <button 
+          className="align-bottom focus:outline-none mt-2 text-center h-8 w-8 bg-transparent hover:bg-gray-100 text-gray-800 font-semibold hover:text-black pl-1 rounded-full"
+          onClick={getPrevDateRange}
+        >
+          <svg className="relative" xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg> 
+        </button>
+          <span className="align-text-bottom p-2 text-sm mb-2 align-middle"></span>
+        <button 
+          className="align-bottom focus:outline-none mt-2 text-center h-8 w-8 bg-transparent hover:bg-gray-100 text-gray-800 font-semibold hover:text-black pl-1 rounded-full"
+          onClick={getNextDateRange} 
+        >
+          <svg className="relative" xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+        <h1 className="pl-4 pt-4 align-bottom leading-3 inline-block text-3xl mb-0 mt-4 secdark p-2">{dateRangeStart.toLocaleString('default', {month: 'long'})}, {dateRangeStart.getFullYear()}</h1>
+        <span className="text-xs ml-8 align-bottom">{renderDateRange()}</span>
       </div>
-      <Button 
-        value="Prev"
-        onClick={getPrevDateRange}
-      />
-        <span className="p-4 text-sm">{renderDateRange()}</span>
-      <Button 
-        value="Next"
-        onClick={getNextDateRange} 
-      />
       <div>
-        <h1 className="text-3xl mb-0 mt-4 secdark p-2">{dateRangeStart.toLocaleString('default', {month: 'long'})}, {dateRangeStart.getFullYear()}</h1>
         {renderDays()}
       </div>
     </div>
