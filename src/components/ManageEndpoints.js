@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import LoadingButton from "../subcomponents/LoadingButton";
 import { fbLogin } from "../apiClients/FBClient";
 import ApiManager from "../helpers/ApiManager";
+import Accordion from '../subcomponents/Accordion'
 
 import UserContext from "../context/UserContext";
 import { ADD_BUSINESS_SERVICE } from "../actionTypes";
@@ -19,8 +20,10 @@ export default function ManageEndpoints({ business }) {
   return (
     <div className='p-4'>
       <h1 className='text-2xl'>Manage Endpoints</h1>
-      <ul>
-        <li>Google Maps</li>
+      <Accordion headerText="Google Maps">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </Accordion>
+      <Accordion headerText="Facebook">
         <LoadingButton
           value={fbButtonText}
           loadingValue='Connecting Facebook Account...'
@@ -33,10 +36,10 @@ export default function ManageEndpoints({ business }) {
           }}
           disabled={fbConnected}
         />
-        <li>Apple Maps</li>
-        <li>Yelp</li>
-        <li>Trip Advisor</li>
-      </ul>
+      </Accordion>
+      <Accordion headerText="Apple Maps">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </Accordion>
     </div>
   );
 }
