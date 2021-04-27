@@ -11,7 +11,8 @@ export default function LoadingButton(props) {
     errors = [],
     mt = "mt-0",
     loadingValue = null,
-    disabled = false
+    disabled = false,
+    size='md'
   } = props;
 
   const loadingVal = !!loadingValue ? loadingValue : value;
@@ -49,6 +50,19 @@ export default function LoadingButton(props) {
     );
   };
 
+  const sizeClasses = () => {
+    switch (size){
+      case 'lg':
+        return 'px-6 py-3'
+      case 'md':
+        return 'px-4 py-2'
+      case 'sm':
+        return 'px-2 py-1'
+      default: 
+        return 'px-4 py-2'
+    }
+  }
+
   const loadingClass = () => {
     return (loading) ? "" : "hidden"
   };
@@ -60,7 +74,7 @@ export default function LoadingButton(props) {
   return(
     <span className="inline-flex rounded-md shadow-sm">
       <button 
-        className={`${bgColor()} ${bgHover()} disabled:opacity-50 transition duration-300 inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-rose-600 focus:outline-none active:bg-rose-700 transition ease-in-out duration-150 ${buttonClass()}`}
+        className={`${bgColor()} ${bgHover()} disabled:opacity-50 transition duration-300 inline-flex items-center ${sizeClasses()} border border-transparent text-base leading-6 font-medium rounded-md text-white bg-rose-600 focus:outline-none active:bg-rose-700 transition ease-in-out duration-150 ${buttonClass()}`}
         disabled={loading || disabled}
         onClick={onClick}
       >

@@ -47,7 +47,7 @@ export default function EditIrregularSchedule(props){
 
         dispatch({type: ADD_IRREGULAR_EVENT, payload: optimisticEvent})
         try{
-          const res = await ApiManager.createIrregularEventForBusiness(business.id, formattedEvent)
+          const res = await ApiManager.createIrregularEventForLocation(business.locationIds[0], formattedEvent)
           const newEvent = {
             title: capitalize(res.status),
             start: new Date(res.start_time),

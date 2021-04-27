@@ -3,6 +3,8 @@ import { businessCalendarData } from '../dummyData/businessCalendar'
 import { DAYS } from '../helpers/Days'
 import Button from '../subcomponents/Submit'
 import Card from '../wrappers/Card'
+import ApiManager from '../helpers/ApiManager'
+import { dateToHTMLString } from '../helpers/functions'
 
 import {
   formatDateShort,
@@ -16,8 +18,15 @@ export default function ViewBusinessCalendar(props){
   const [dateRangeStart, setDateRangeStart] = useState(null)
   const [dateRangeEnd, setDateRangeEnd] = useState(null)
   const [loading, setLoading] = useState(true)
-
+  console.log(props.business)
   useEffect(() => {
+    const getSchedule = async (startDate, endDate) => {
+      setLoading(true)
+      const res = await ApiManager.getHoursSummary(props.business.locationIds[0], startDate, endDate)
+      console.log(res)
+      setEvents(res)
+      setLoading(false)
+    }
     const now = new Date()
     const weekStartDate = now.getDate() - now.getDay()
     const weekEndDate = weekStartDate + 6
@@ -25,8 +34,7 @@ export default function ViewBusinessCalendar(props){
     const weekEnd = new Date(now.setDate(weekEndDate))
     setDateRangeStart(weekStart)
     setDateRangeEnd(weekEnd)
-    setEvents(businessCalendarData)
-    setLoading(false)
+    getSchedule(dateToHTMLString(weekStart), dateToHTMLString(weekEnd))
   }, [])  
 
 

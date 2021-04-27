@@ -14,7 +14,8 @@ export default class Parser{
         phoneNumber: res.phone_number,
         emailAddress: res.email_address,
         name: res.name,
-        id: res.id
+        id: res.id,
+        locationIds: res.locations.map(l => l.id)
     }
   }
 

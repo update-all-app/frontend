@@ -42,7 +42,6 @@ export default function Home(props){
 
   const user = useContext(UserContext).state
   const { dispatch } = useContext(EventContext)
-
   const { id } = useParams()
   const business = !!user.data.businesses && user.data.businesses.find(b => Number.parseInt(b.id) === Number.parseInt(id))
 
@@ -57,14 +56,14 @@ export default function Home(props){
 
     async function getAndSaveEvents(){
       try{
-        const regularEvents = await ApiManager.getRegularEventsForBusiness(business.id)  
+        const regularEvents = await ApiManager.getRegularEventsForLocation(business.locationIds[0])  
         const formattedRegularEvents = regularEvents.map(re => ({
           start: re.start_time,
           end: re.end_time,
           day: re.day_of_week,
           id: re.id
         }))
-        const irregularEvents = await ApiManager.getIrregularEventsForBusiness(business.id)
+        const irregularEvents = await ApiManager.getIrregularEventsForLocation(business.locationIds[0])
         const formattedIrregularEents = irregularEvents.map(ie => ({
           id: ie.id,
           title: capitalize(ie.status),

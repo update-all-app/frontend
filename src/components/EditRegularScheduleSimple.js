@@ -46,7 +46,7 @@ import React, {
             start_time: event.start,
             end_time: event.end
           }
-          const res = await ApiManager.createRegularEventForBusiness(business.id, eventToSend)
+          const res = await ApiManager.createRegularEventForLocation(business.locationIds[0], eventToSend)
           dispatch({type: DELETE_REGULAR_EVENT, payload: dispatchedEvent})
           const newEvent = {
             id: res.id,

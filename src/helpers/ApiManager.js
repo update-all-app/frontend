@@ -99,6 +99,11 @@ export default class ApiManager {
     return await this.get(`${API_SUFFIX}/businesses`, token);
   }
 
+  static async getHoursSummary(locationId, startDate, endDate){
+    const token = await this.protectedRoute()
+    return await this.get(`${API_SUFFIX}/locations/${locationId}/hours_summary?start_date=${startDate}&end_date=${endDate}`, token)
+  }
+
   static async createBusiness(businessParams) {
     const token = await this.protectedRoute();
     return await this.post(`${API_SUFFIX}/businesses`, businessParams, token);
@@ -118,6 +123,14 @@ export default class ApiManager {
       token
     );
   }
+  static async createRegularEventForLocation(locationId, event){
+    const token = await this.protectedRoute();
+    return await this.post(
+      `${API_SUFFIX}/locations/${locationId}/regular_events`,
+      { regular_event: event },
+      token
+    )
+  }
 
   static async createRegularEventForBusiness(businessId, event){
     const token = await this.protectedRoute();
@@ -136,6 +149,15 @@ export default class ApiManager {
     )
   }
 
+
+  static async getRegularEventsForLocation(locationId){
+    const token = await this.protectedRoute();
+    return await this.get(
+      `${API_SUFFIX}/locations/${locationId}/regular_events`,
+      token
+    )
+  }
+
   static async getRegularEventsForBusiness(businessId){
     const token = await this.protectedRoute();
     return await this.get(
@@ -144,6 +166,15 @@ export default class ApiManager {
     )
   }
 
+
+  static async createIrregularEventForLocation(locationId, event){
+    const token = await this.protectedRoute();
+    return await this.post(
+      `${API_SUFFIX}/locations/${locationId}/irregular_events`,
+      { irregular_event: event },
+      token
+    )
+  }
 
   static async createIrregularEventForBusiness(businessId, event){
     const token = await this.protectedRoute();
@@ -182,6 +213,14 @@ export default class ApiManager {
     const token = await this.protectedRoute()
     return await this.get(
       `${API_SUFFIX}/businesses/${businessId}/irregular_events`,
+      token
+    )
+  }
+
+  static async getIrregularEventsForLocation(locationId){
+    const token = await this.protectedRoute()
+    return await this.get(
+      `${API_SUFFIX}/locations/${locationId}/irregular_events`,
       token
     )
   }
