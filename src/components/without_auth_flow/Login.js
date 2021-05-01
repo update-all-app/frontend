@@ -53,7 +53,18 @@ export default function Login(props){
             if(res.success){
                 const businesses = await ApiManager.getBusinesses()
                 const businessesForContext = businesses.map(b => Parser.parseBusinessForContext(b))
-                dispatch({type: POPULATE_USER, payload: { name: res.user.name, email: res.user.email, paymentStatusCurrent: res.user.payment_status_current, businesses: businessesForContext }})
+                const formattedServices = res.user.services.map(s => ({
+                    provider: s.provider,
+                    userID: s.provider_uid,
+                    label: s.label
+                  }))
+                dispatch({type: POPULATE_USER, payload: { 
+                    name: res.user.name, 
+                    email: res.user.email, 
+                    paymentStatusCurrent: res.user.payment_status_current, 
+                    businesses: businessesForContext,
+                    services: formattedServices 
+                }})
             }else{
                 LoginManager.clearLocalStorage()
                 dispatch({type: LOGOUT_USER })
@@ -71,7 +82,7 @@ export default function Login(props){
             <div className="white flex flex-col justify-center align-left ">
                 
             </div> 
-            <div className="border-l-2 border-primary shadow-lg p-10 content-center absolute top-1/4 left-3/10 bg-white w-2/5 max-h-3/4 overflow-scroll">
+            <div className="border-l-2 border-primary shadow-lg p-10 content-center absolute top-1/4 left-3/10 bg-white w-2/5 max-h-3/4 overflow-scroll hide-scroll">
                 <Form onSubmit={login}>
                     <Input 
                         placeholder="Email"

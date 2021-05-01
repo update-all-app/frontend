@@ -19,6 +19,10 @@ html, body{
   z-index: 10;
 }
 
+.max-h-large{
+  max-height: 10000px
+}
+
 #content-wrap {
   height: 100%;
   min-height: 100vh;
@@ -165,15 +169,26 @@ html, body{
   background-color: rgba(0, 0, 0, 0.4);
 }
 
+.sidebar-link{
+  border-left: 1px solid #ffffff;
+  transition: 0.2s;
+}
+
 .sidebar-link:hover{
-  border-left: 4px solid #E0E7FF;
-  transition: 0.5s;
-  background: #1F2937;
+  /* border-left: 5px solid #E0E7FF; */
+  border-left: 5px solid #ffffff;
+  transition: 0.2s;
+  /* background: #181c20; */
   color: white;
 }
 
+.sidebar-link:focus{
+  outline: 0 !important;
+}
+
 .active-sidebar-link{
-  border-left: 4px solid #E0E7FF;
+  /* border-left: 4px solid #E0E7FF; */
+  border-left: 5px solid #ffffff;
   transition: 0.5s;
   background: black;
   color: white;
@@ -187,12 +202,25 @@ html, body{
   margin: 20px;
 }
 
+
+
 .custom-input:focus{
   outline: none;
   /* border: none;
   border-left: 5px solid black; */
   /* border-bottom: 1px solid black; */
   /* transition: 0.3s; */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 .landing-navbar{

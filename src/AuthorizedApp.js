@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useReducer, useContext} from 'react'
+import React, {useReducer, useContext, useEffect } from 'react'
 
 import About from './components/without_auth_flow/About'
 import Pricing from './components/without_auth_flow/Pricing'
@@ -11,15 +11,20 @@ import SetupPayment from './components/SetupPayment'
 import CreateBusiness from './components/CreateBusiness'
 import ManageBusiness from './components/ManageBusiness'
 import SelectBusiness from './components/SelectBusiness'
+import AuthorizeServices from './components/AuthorizeServices'
 import NotFound from './components/NotFound'
 
 import EventReducer from './reducers/EventReducer'
 import EventContext from './context/EventContext'
 
+import { initFBSDK } from './apiClients/FBClient'
+
+import { LOADING, LOADING_COMPLETE } from './actionTypes'
+
 import { 
   BrowserRouter as Router,
   Switch,
-  Route,
+  Route, 
   Redirect
 } from 'react-router-dom';
 
@@ -30,6 +35,13 @@ export default function AuthorizedApp() {
   const events = useContext(EventContext)
   const [state, dispatch] = useReducer(EventReducer, events)
 
+  
+  useEffect(() => {
+    dispatch({type: LOADING })
+    initFBSDK().then(() => {
+      dispatch({type: LOADING_COMPLETE})
+    })
+  }, [])
 
   return (
     <Router>
@@ -58,10 +70,13 @@ export default function AuthorizedApp() {
         <Route exact path="/setup-payment">
           <SetupPayment />
         </Route>
+        <Route exact path="/authorize-services">
+          <AuthorizeServices />
+        </Route>
         <Route exact path="/businesses/new">
           <CreateBusiness />
         </Route>
-        <Route exact path="/businesses/:id">
+        <Route path="/businesses/:id">
           <EventContext.Provider value={{state, dispatch}}>
             <ManageBusiness />
           </EventContext.Provider>

@@ -113,7 +113,6 @@ export default class GoogleAutocompleteAddressManager extends Cachable{
     for (const component in this.updateComponents) {
       this.updateComponents[component]("")
     }
-
     // Get each component of the address from the place details,
     // and then fill-in the corresponding field on the form.
     try{

@@ -30,6 +30,7 @@ class InteractiveCalendar extends React.Component {
     dimensions: null,
     modalw: "w-11/12 max-w-2xl",
     modalh: "",
+    titleOptions: null,
     // modalPosition: null,
     onSave: () => {},
     onDelete: () => {},
@@ -230,7 +231,17 @@ class InteractiveCalendar extends React.Component {
     }
     const disabled = this.props.disabledEventValues.includes("title");
 
-    return (
+    return this.props.titleOptions ? (
+      <Select
+        label="Event Name"
+        value={this.state.eventToEdit.title}
+        options={this.props.titleOptions}
+        onChange={(val) => this.updateModalTitle(val)}
+        disabled={disabled}
+      />
+    )
+    :
+    (
       <Input
         label="Event Name"
         value={this.state.eventToEdit.title}

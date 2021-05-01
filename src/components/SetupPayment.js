@@ -5,7 +5,8 @@ import { useHistory } from 'react-router-dom'
 import WithHeaderAndFooter from '../wrappers/WithHeaderAndFooter'
 import {
   VALIDATE_PAYMENT,
-  LOADING
+  LOADING,
+  LOADING_COMPLETE
 } from '../actionTypes'
 import ApiManager from '../helpers/ApiManager'
 
@@ -28,6 +29,7 @@ export default function SetupPayment(props){
     }catch(err){
       console.log(err)
       setPaymentErrors(["There was a problem updating your payment"])
+      dispatch({type: LOADING_COMPLETE})
     }
     
   }

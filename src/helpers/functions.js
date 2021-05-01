@@ -114,6 +114,11 @@ function dateToHTMLString(date){
     return `${date.getFullYear()}-${pad(String(date.getMonth() + 1), 2)}-${pad(String(date.getDate()),2)}`
 }
 
+
+function formatDateShort(date){
+    return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+}
+
 function pad(val, padLen, padVal="0"){
     val = String(val)
     if(val.length < padLen){
@@ -128,6 +133,121 @@ function pad(val, padLen, padVal="0"){
     }
 }
 
+function time24To12(milTime){
+    const [hourStr, minStr] = milTime.split(":")
+    const hour = Number.parseInt(hourStr)
+    const min = Number.parseInt(minStr)
+    if(hour === 0){
+        return `12:${pad(min,2)} AM`
+    }else if(hour < 12){
+        return `${hour}:${pad(min,2)} AM`
+    }else if(hour ===12)
+        return `12:${pad(min,2)} PM` 
+    else{
+        return `${hour - 12}:${pad(min,2)} PM`
+    }
+}
+
+function time12To24(timeStr){
+    const [time, suffix] = timeStr.split(" ")
+    const [hrStr, minStr] = time.split(":")
+    const hour = Number.parseInt(hrStr)
+    const min = Number.parseInt(minStr)
+    if(suffix == "AM"){
+        if(hour === 12){
+            return `00:${pad(min,2)}`
+        }
+        return `${pad(hour,2)}:${pad(min,2)}`
+    }else{
+        return `${hour + 12}:${pad(min,2)}`
+    }
+}
+
+function dateRangesOverlap(d1start, d1end, d2start, d2end){
+    const maxStart = max([d1start, d2start], (a,b) => a > b)
+    const minEnd = min([d1end, d2end], (a,b) => a < b)
+    return minEnd > maxStart
+}
+
+function dateRangesHaveSameDay(d1start, d1end, d2start, d2end){
+    const overlapExists = dateRangesOverlap(d1start, d1end, d2start, d2end)
+    if(overlapExists){ return true }
+    return (
+        datesInSameDay(d1start, d2start) ||
+        datesInSameDay(d1start, d2end) ||
+        datesInSameDay(d2end, d1start) ||
+        datesInSameDay(d2end, d1end)
+    )
+
+}
+
+function datesInSameDay(d1, d2){
+    return (d1.getFullYear() === d2.getFullYear() && 
+        d1.getMonth() === d2.getMonth() &&
+        d1.getDate() === d2.getDate()
+    )
+}
+
+function min(coll, isLessThan){
+    let min = null
+    for(let el of coll){
+        if(min === null || isLessThan(el, min)){
+            min = el
+        }
+    }
+    return min
+}
+
+function formatDateTimeForBackend(date){
+    return `${dateToHTMLString(date)} ${dateTo24Time(date)}:00`
+}
+
+function formatDateToUTCForBackend(date){
+    const dateStr = `${date.getUTCFullYear()}-${pad(String(date.getUTCMonth() + 1), 2)}-${pad(String(date.getUTCDate()),2)}`
+    const timeStr = `${pad(date.getUTCHours(),2)}:${pad(date.getUTCMinutes(),2)}:00`
+    return `${dateStr} ${timeStr}`
+}
+
+function max(coll, isGreaterThan){
+    let max = null
+    for(let el of coll){
+        if(max === null || isGreaterThan(el, max)){
+            max = el
+        }
+    }
+    return max
+}
+
+function capitalize(str){
+    if (typeof str !== 'string') return ''
+    return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+
+function datePlusDays(date, days){
+    const dateCpy = new Date(date)
+    const dateDate = dateCpy.getDate()
+    const newDate = dateDate + days
+    return new Date(dateCpy.setDate(newDate))
+}
+
+
+function getWeekStart(fromDate=null){
+    if(fromDate === null){
+        fromDate = new Date()
+    }
+    const weekStartDate = fromDate.getDate() - fromDate.getDay()
+    return new Date(fromDate.setDate(weekStartDate))
+}
+
+function getWeekEnd(fromDate=null){
+    if(fromDate === null){
+        fromDate = new Date()
+    }
+    const weekEndDate = fromDate.getDate() - fromDate.getDay() + 6
+    return new Date(fromDate.setDate(weekEndDate))
+}
+
 export {
     strip,
     hash,
@@ -139,5 +259,19 @@ export {
     dateTo24Time,
     protectNullArgs,
     safeCallWithDefault,
-    dateToHTMLString
+    dateToHTMLString,
+    time24To12,
+    time12To24,
+    min,
+    max,
+    datesInSameDay,
+    dateRangesHaveSameDay,
+    dateRangesOverlap,
+    formatDateTimeForBackend,
+    formatDateToUTCForBackend,
+    capitalize,
+    formatDateShort,
+    datePlusDays,
+    getWeekStart,
+    getWeekEnd
 }
