@@ -5,6 +5,10 @@ import Button from '../subcomponents/Submit'
 import Card from '../wrappers/Card'
 import ApiManager from '../helpers/ApiManager'
 import { dateToHTMLString } from '../helpers/functions'
+import {
+  getWeekStart,
+  getWeekEnd
+} from '../helpers/functions'
 
 import {
   formatDateShort,
@@ -27,23 +31,17 @@ export default function ViewBusinessCalendar(props){
       setEvents(res)
       setLoading(false)
     }
-    const now = new Date()
-    const weekStartDate = now.getDate() - now.getDay()
-    const weekEndDate = weekStartDate + 6
-    const weekStart = new Date(now.setDate(weekStartDate))
-    const weekEnd = new Date(now.setDate(weekEndDate))
+    const weekStart = getWeekStart()
+    const weekEnd = getWeekEnd()
     setDateRangeStart(weekStart)
     setDateRangeEnd(weekEnd)
     getSchedule(dateToHTMLString(weekStart), dateToHTMLString(weekEnd))
-  }, [])  
+  }, [getWeekStart, getWeekEnd]) 
 
 
   const getThisWeek = () => {
-    const now = new Date()
-    const weekStartDate = now.getDate() - now.getDay()
-    const weekEndDate = weekStartDate + 6
-    const weekStart = new Date(now.setDate(weekStartDate))
-    const weekEnd = new Date(now.setDate(weekEndDate))
+    const weekStart = getWeekStart()
+    const weekEnd = getWeekEnd()
     setLoading(true)
     setDateRangeStart(weekStart)
     setDateRangeEnd(weekEnd)

@@ -141,7 +141,9 @@ function time24To12(milTime){
         return `12:${pad(min,2)} AM`
     }else if(hour < 12){
         return `${hour}:${pad(min,2)} AM`
-    }else{
+    }else if(hour ===12)
+        return `12:${pad(min,2)} PM` 
+    else{
         return `${hour - 12}:${pad(min,2)} PM`
     }
 }
@@ -229,6 +231,23 @@ function datePlusDays(date, days){
     return new Date(dateCpy.setDate(newDate))
 }
 
+
+function getWeekStart(fromDate=null){
+    if(fromDate === null){
+        fromDate = new Date()
+    }
+    const weekStartDate = fromDate.getDate() - fromDate.getDay()
+    return new Date(fromDate.setDate(weekStartDate))
+}
+
+function getWeekEnd(fromDate=null){
+    if(fromDate === null){
+        fromDate = new Date()
+    }
+    const weekEndDate = fromDate.getDate() - fromDate.getDay() + 6
+    return new Date(fromDate.setDate(weekEndDate))
+}
+
 export {
     strip,
     hash,
@@ -252,5 +271,7 @@ export {
     formatDateToUTCForBackend,
     capitalize,
     formatDateShort,
-    datePlusDays
+    datePlusDays,
+    getWeekStart,
+    getWeekEnd
 }
