@@ -48,14 +48,16 @@ export default function EditIrregularSchedule(props){
         dispatch({type: ADD_IRREGULAR_EVENT, payload: optimisticEvent})
         try{
           const res = await ApiManager.createIrregularEventForLocation(business.locationIds[0], formattedEvent)
-          const newEvent = {
-            title: capitalize(res.status),
-            start: new Date(res.start_time),
-            end: new Date(res.end_time),
-            id: res.id
-          }
           dispatch({type: DELETE_IRREGULAR_EVENT, payload: optimisticEvent})
-          dispatch({type: ADD_IRREGULAR_EVENT, payload: newEvent})
+          res.forEach((data) => {
+            const newEvent = {
+              title: capitalize(data.status),
+              start: new Date(data.start_time),
+              end: new Date(data.end_time),
+              id: data.id
+            }
+            dispatch({ type: ADD_IRREGULAR_EVENT, payload: newEvent })
+          })
         }catch(err){
           dispatch({type: DELETE_IRREGULAR_EVENT, payload: optimisticEvent})
         }
