@@ -69,13 +69,26 @@ export default function EditIrregularSchedule(props){
         dispatch({type: EDIT_IRREGULAR_EVENT, payload: optimisticEvent})
         try{
           const res = await ApiManager.updateIrregularEvent(optimisticEvent)
-          const newEvent = {
-            title: capitalize(res.status),
-            start: formatDateForFrontend(res.start_time),
-            end: formatDateForFrontend(res.end_time),
-            id: res.id
+          const originalEvent = res[0]
+          const updatedEvent = {
+            title: capitalize(originalEvent.status),
+            start: formatDateForFrontend(originalEvent.start_time),
+            end: formatDateForFrontend(originalEvent.end_time),
+            id: originalEvent.id
           };
-          dispatch({type: EDIT_IRREGULAR_EVENT, payload: newEvent})
+          dispatch({type: EDIT_IRREGULAR_EVENT, payload: updatedEvent})
+          if(res.length > 1){
+            for(let i = 1; i < res.length; i++){
+              const newEventData = res[i]
+              const newEvent = {
+                title: capitalize(newEventData.status),
+                start: formatDateForFrontend(newEventData.start_time),
+                end: formatDateForFrontend(newEventData.end_time),
+                id: newEventData.id
+              }
+              dispatch({type: ADD_IRREGULAR_EVENT, payload: newEvent})
+            }
+          }
         }catch(err){
           dispatch({type: EDIT_IRREGULAR_EVENT, payload: eventBeforeChange})
           setError('There was a problem updating your event. Please try again')
