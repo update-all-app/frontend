@@ -12,7 +12,7 @@ import {
   dateRangesHaveSameDay,
   dateRangesOverlap,
   datesInSameDay,
-  formatDateToUTCForBackend,
+  formatDateTimeForBackend,
   capitalize
 } from '../helpers/functions'
 
@@ -37,8 +37,8 @@ export default function EditIrregularSchedule(props){
       
       const formattedEvent = {
         status: event.title.toLowerCase(),
-        start_time: formatDateToUTCForBackend(event.start),
-        end_time: formatDateToUTCForBackend(event.end)
+        start_time: formatDateTimeForBackend(event.start),
+        end_time: formatDateTimeForBackend(event.end)
       }
 
       if(isNewEvent){
