@@ -13,6 +13,7 @@ import {
   dateRangesOverlap,
   datesInSameDay,
   formatDateTimeForBackend,
+  formatDateForFrontend,
   capitalize
 } from '../helpers/functions'
 
@@ -52,10 +53,10 @@ export default function EditIrregularSchedule(props){
           res.forEach((data) => {
             const newEvent = {
               title: capitalize(data.status),
-              start: new Date(data.start_time),
-              end: new Date(data.end_time),
+              start: formatDateForFrontend(data.start_time),
+              end: formatDateForFrontend(data.end_time),
               id: data.id
-            }
+            };
             dispatch({ type: ADD_IRREGULAR_EVENT, payload: newEvent })
           })
         }catch(err){
@@ -70,10 +71,10 @@ export default function EditIrregularSchedule(props){
           const res = await ApiManager.updateIrregularEvent(optimisticEvent)
           const newEvent = {
             title: capitalize(res.status),
-            start: new Date(res.start_time),
-            end: new Date(res.end_time),
+            start: formatDateForFrontend(res.start_time),
+            end: formatDateForFrontend(res.end_time),
             id: res.id
-          }
+          };
           dispatch({type: EDIT_IRREGULAR_EVENT, payload: newEvent})
         }catch(err){
           dispatch({type: EDIT_IRREGULAR_EVENT, payload: eventBeforeChange})
