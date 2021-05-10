@@ -26,7 +26,8 @@ import {
 
 import ApiManager from '../helpers/ApiManager'
 import {
-  capitalize
+  capitalize,
+  formatDateForFrontend
 } from '../helpers/functions'
 
 import {
@@ -67,8 +68,8 @@ export default function Home(props){
         const formattedIrregularEents = irregularEvents.map(ie => ({
           id: ie.id,
           title: capitalize(ie.status),
-          start: new Date(ie.start_time),
-          end: new Date(ie.end_time)
+          start: formatDateForFrontend(ie.start_time),
+          end: formatDateForFrontend(ie.end_time)
         }))
 
         dispatch({type: SET_REGULAR_EVENTS, payload: formattedRegularEvents})
