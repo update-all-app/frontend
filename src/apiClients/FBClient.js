@@ -4,10 +4,10 @@ export function initFBSDK(){
   return new Promise(resolve => {
     window.fbAsyncInit = function() {
       window.FB.init({
-        appId      : '205727007974727',
+        appId      : '2897145780604497',
         cookie     : true,
         xfbml      : true,
-        version    : 'v9.0'
+        version    : 'v10.0'
       });
         
       window.FB.AppEvents.logPageView(); 
