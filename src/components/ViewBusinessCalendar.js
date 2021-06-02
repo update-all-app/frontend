@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { businessCalendarData } from "../dummyData/businessCalendar";
 import { DAYS } from "../helpers/Days";
-import Button from "../subcomponents/Submit";
-import Card from "../wrappers/Card";
 import ApiManager from "../helpers/ApiManager";
 import { dateToHTMLString } from "../helpers/functions";
 import { getWeekStart, getWeekEnd } from "../helpers/functions";
+import Loader from '../subcomponents/Loader'
 
 import {
   formatDateShort,
@@ -162,9 +160,10 @@ export default function ViewBusinessCalendar(props) {
     eventsByDay = assignEventsToDay();
   }
 
-  return loading ? (
-    <h1>Loading...</h1>
-  ) : (
+    return loading ? (
+      <Loader /> 
+    ) 
+    : (
     <div className='m-8'>
       <div className='border-b-2 p-2'>
         <button
@@ -236,5 +235,5 @@ export default function ViewBusinessCalendar(props) {
       </div>
       <div>{renderDays()}</div>
     </div>
-  );
+  )
 }
