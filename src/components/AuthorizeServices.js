@@ -34,15 +34,18 @@ export default function AuthorizeServices(props){
         accessToken,
         userID
       );
+
       const {
         provider,
         provider_uid,
-        label
+        label, 
+        page_data
       } = res
       const service = {
         provider,
         userID: provider_uid,
-        label
+        label,
+        pageData: page_data
       }
       dispatch({
         type: ADD_AUTHORIZED_SERVICE,
@@ -50,6 +53,7 @@ export default function AuthorizeServices(props){
       });
     } catch (err) {
       // alert that fb login failed
+      alert("Something went wrong!")
     }
     setLoadingFb(false);
   };
@@ -86,7 +90,7 @@ export default function AuthorizeServices(props){
   const renderServicesFor = service => {
     return servicesFor(service).map(s => (
       <div className="rounded bg-gray-200 text-xs p-1 m-2">
-        <p>{`Auth: ${s.label}`}</p>
+        <p>{`${s.label}`}</p>
       </div>
     ))
   }
@@ -112,7 +116,6 @@ export default function AuthorizeServices(props){
   return(
     <WithHeaderAndFooter>
       <div className="m-12">
-        {/* <h1 className="text-center w-full text-2xl">Authorize</h1> */}
         <Card clickable={false}>
           <div className="flex flex-row align-center justify-center mb-4">
             <h1>Facebook</h1>
