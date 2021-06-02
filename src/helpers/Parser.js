@@ -4,6 +4,9 @@ export default class Parser{
 
 
   static parseBusinessForContext(res){
+    // Assume only one location for a business
+    // When we support multiple locations per business this will
+    // need a major refactor
     return {
         addressLine1: res.locations[0].address_line_1,
         addressLine2: res.locations[0].address_line_2,
@@ -15,7 +18,21 @@ export default class Parser{
         emailAddress: res.email_address,
         name: res.name,
         id: res.id,
-        locationIds: res.locations.map(l => l.id)
+        locationIds: res.locations.map(l => l.id),
+        connectedPages: res.locations.flatMap(l => { 
+          return l.location_services.map(ls => {
+            return this.parseLocationService(ls)
+          })
+        }).filter(page => !!page)
+    }
+  }
+
+  static parseLocationService(locationService){
+    return {
+      id: locationService.id,
+      pageId: locationService.page_id,
+      locationId: locationService.location_id,
+      providerOauthTokenId: locationService.provider_oauth_token_id
     }
   }
 
