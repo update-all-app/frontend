@@ -181,7 +181,7 @@ export default function ManageEndpoints({ business }) {
       }else{
         return (
           <Accordion headerText={service.name} key={hash(service.value)}>
-            <p>You have not authorized {service.name}. <button className="focus:outline-none text-blue-600" onClick={() => history.push('/authorize-services')}>Do it here</button></p>
+            <p className="p-4">You have not authorized {service.name}. <button className="focus:outline-none text-blue-600" onClick={() => history.push('/authorize-services')}>Do it here</button></p>
           </Accordion>
         )
       }
