@@ -58,6 +58,11 @@ export default function LoggedInNavbar(props){
         history.push('/businesses/new')
     }
 
+    const goToMyBusinesses = () => {
+        setDisplayDropdown(false)
+        history.push('/')
+    }
+
     return(
         <>
         <div className="landing-navbar bg-terdark">
@@ -99,6 +104,7 @@ export default function LoggedInNavbar(props){
                             hidden={!displayDropdown}
                             links={
                                 {
+                                    "My businesses": goToMyBusinesses,
                                     "Create New Business": goToNewBusiness,
                                     "Account Settings": () => {},
                                     "Manage Payment": () => {},
