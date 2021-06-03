@@ -58,6 +58,8 @@ export default function LoadingButton(props) {
         return 'px-4 py-2'
       case 'sm':
         return 'px-2 py-1'
+      case 'xs':
+        return 'px-1 py-1 text-xs'
       default: 
         return 'px-4 py-2'
     }

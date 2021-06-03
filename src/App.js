@@ -30,8 +30,10 @@ export default function App() {
           );
           const formattedServices = user.services.map(s => ({
             provider: s.provider,
-            userID: s.provider_uid,
-            label: s.label
+            providerOauthTokenId: s.id,
+            providerUID: s.provider_uid,
+            label: s.label,
+            pageData: s.page_data
           }))
           dispatch({
             type: POPULATE_USER,

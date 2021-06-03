@@ -8,7 +8,8 @@ import {
     POPULATE_BUSINESSES,
     VALIDATE_PAYMENT,
     ADD_BUSINESS_SERVICE,
-    ADD_AUTHORIZED_SERVICE
+    ADD_AUTHORIZED_SERVICE,
+    ADD_CONNECTED_PAGE
 } from '../actionTypes'
 
 export default function UserReducer(state, action){
@@ -56,7 +57,7 @@ export default function UserReducer(state, action){
                 return {
                     data: {...state.data, businesses: state.data.businesses.map(b => {
                         return b.id === foundBusiness.id ? foundBusiness : b
-                    })},
+                    }).sort((b1,b2) => b1.id - b2.id)},
                     loading: false
                 }
             }
@@ -78,6 +79,19 @@ export default function UserReducer(state, action){
                 data: {
                     ...state.data,
                     services
+                }
+            }
+        case ADD_CONNECTED_PAGE:
+            const pageData = {...action.payload}
+            const business = {...state.data.businesses.find(b => b.locationIds.includes(action.payload.locationId))}
+            const connectedPages = [...business.connectedPages, pageData]
+            business.connectedPages = connectedPages
+            const businessesAfterConnectedPage = [...state.data.businesses.filter(b => b.id !== business.id), business].sort((b1,b2) => b1.id - b2.id)
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    businesses: businessesAfterConnectedPage
                 }
             }
         default:

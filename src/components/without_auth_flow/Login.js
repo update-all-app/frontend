@@ -55,7 +55,9 @@ export default function Login(props){
                 const businessesForContext = businesses.map(b => Parser.parseBusinessForContext(b))
                 const formattedServices = res.user.services.map(s => ({
                     provider: s.provider,
-                    userID: s.provider_uid,
+                    providerOauthTokenId: s.id,
+                    providerUID: s.provider_uid,
+                    pageData: s.page_data,
                     label: s.label
                   }))
                 dispatch({type: POPULATE_USER, payload: { 
