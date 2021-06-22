@@ -52,7 +52,7 @@ export default function ManageEndpoints({ business }) {
        payload: {
          id: res.id,
          locationId,
-         providerOauthTokenID: res.provider_oauth_token_id,
+         providerOauthTokenId: res.provider_oauth_token_id,
          pageId: res.page_id
        }
      }) 

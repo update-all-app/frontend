@@ -38,6 +38,7 @@ export default function AuthorizeServices(props){
       const {
         provider,
         provider_uid,
+        id,
         label, 
         page_data
       } = res
@@ -45,6 +46,7 @@ export default function AuthorizeServices(props){
         provider,
         userID: provider_uid,
         label,
+        providerOauthTokenId: id,
         pageData: page_data
       }
       dispatch({
