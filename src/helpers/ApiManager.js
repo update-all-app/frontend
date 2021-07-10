@@ -246,6 +246,14 @@ export default class ApiManager {
     )
   }
 
+  static async removeLocationService({id}){
+    const token = await this.protectedRoute()
+    return await this.delete(
+      `${API_SUFFIX}/location_services/${id}`,
+      token
+    )
+  }
+
   static async get(path, token = null) {
     return await this.request("GET", path, null, token);
   }
