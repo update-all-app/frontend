@@ -9,7 +9,8 @@ import {
     VALIDATE_PAYMENT,
     ADD_BUSINESS_SERVICE,
     ADD_AUTHORIZED_SERVICE,
-    ADD_CONNECTED_PAGE
+    ADD_CONNECTED_PAGE,
+    REMOVE_CONNECTED_PAGE
 } from '../actionTypes'
 
 export default function UserReducer(state, action){
@@ -94,6 +95,21 @@ export default function UserReducer(state, action){
                     businesses: businessesAfterConnectedPage
                 }
             }
+        case REMOVE_CONNECTED_PAGE:
+            const locationServiceId = action.payload.locationServiceId
+            const businessId = action.payload.businessId
+            const businessToRemoveFrom = {...state.data.businesses.find(b => b.id === businessId)}
+            const connectedPagesAfterRemoval = businessToRemoveFrom.connectedPages.filter(locationService => locationService.id !== locationServiceId)
+            businessToRemoveFrom.connectedPages = connectedPagesAfterRemoval
+            const businessesAfterRemoval = [...state.data.businesses.filter(b => b.id !== businessToRemoveFrom.id), businessToRemoveFrom].sort((b1,b2) => b1.id - b2.id)
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    businesses: businessesAfterRemoval
+                }
+            }
+
         default:
             return state
     }

@@ -6,7 +6,10 @@ import Card from '../wrappers/Card'
 import { useHistory } from 'react-router-dom'
 import UserContext from "../context/UserContext";
 import { SUPPORTED_SERVICES } from '../constants'
-import { ADD_CONNECTED_PAGE } from "../actionTypes";
+import { 
+  ADD_CONNECTED_PAGE,
+  REMOVE_CONNECTED_PAGE,
+} from "../actionTypes";
 import { hash } from '../helpers/functions'
 
 export default function ManageEndpoints({ business }) {
@@ -62,6 +65,34 @@ export default function ManageEndpoints({ business }) {
     }
   }
 
+  async function disconnectPage({locationServiceId}){
+    try{
+      const res = await ApiManager.removeLocationService({
+        id: locationServiceId
+      })
+      dispatch({
+        type: REMOVE_CONNECTED_PAGE,
+        payload: {
+          locationServiceId,
+          businessId: business.id
+        }
+      })
+    }catch(err){
+      // Currently bc the server returns nothing, 
+      // this is handled in the catch. Update the server respone
+      // to prevent this
+      dispatch({
+        type: REMOVE_CONNECTED_PAGE,
+        payload: {
+          locationServiceId,
+          businessId: business.id
+        }
+      })
+      console.log(err)
+      console.log("TODO: Add server response as to not need logic here")
+    }
+  }
+
   async function handleConnect({
     serviceName,
     pageId,
@@ -85,10 +116,25 @@ export default function ManageEndpoints({ business }) {
   }
 
   async function handleDisconnect({
-    serviceName, 
-    pageId
+    locationServiceId,
+    serviceName,
+    pageId,
   }){
-    alert('disconnecting...')
+    const buttonId = `${serviceName}-${pageId}`
+    setLoadingButtons(loadingButtons => {
+      const nextState = {...loadingButtons}
+      nextState[buttonId] = true
+      return nextState
+    })
+    await disconnectPage({
+      locationServiceId
+    })
+    setLoadingButtons(loadingButtons => {
+      const nextState = {...loadingButtons}
+      nextState[buttonId] = false
+      return nextState
+    })
+
   }
 
   function isPageConnectedToAnotherBusiness(providerOauthTokenId, pageId){
@@ -104,6 +150,12 @@ export default function ManageEndpoints({ business }) {
     return !!business.connectedPages.find(page => {
       return page.providerOauthTokenId === providerOauthTokenId && page.pageId === pageId
     })
+  }
+
+  function getLocationServiceId(providerOauthTokenId, pageId){
+    return business.connectedPages.find(page => {
+      return page.providerOauthTokenId === providerOauthTokenId && page.pageId === pageId
+    }).id
   }
 
   const renderOnlineIcon = () => (
@@ -135,15 +187,16 @@ export default function ManageEndpoints({ business }) {
                   serviceName: service.value, 
                   pageId: pageData.id, 
                   providerOauthTokenId: pageData.providerOauthTokenId
-                })
+              })
+
               let disabled = false
 
               if(pageIsConnected){
                 value = "Disconnect"
                 onClick = () => handleDisconnect({
+                  locationServiceId: getLocationServiceId(pageData.providerOauthTokenId, pageData.id),
                   serviceName: service.value,
-                  pageId: pageData.id, 
-                  providerOauthTokenId: pageData.providerOauthTokenId
+                  pageId: pageData.id,
                 }) 
               }else if(pageIsConnectedToDifferentBusiness){
                 value = "Connected to another business"
