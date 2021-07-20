@@ -1,15 +1,18 @@
 import React, {useState} from 'react'
 import LoadingButton from '../subcomponents/LoadingButton'
-
+import ApiManager from '../helpers/ApiManager'
 export default function UpdateIt(props){
 
   const [loading, setLoading] = useState(false)
 
-  const updateIt = () => {
+  const updateIt = async () => {
     setLoading(loading => !loading)
-    window.setTimeout(() => {
-      setLoading(false)
-    }, 3000)
+    try{
+      await ApiManager.updateHoursForLocation(props.business.locationIds[0])
+    }catch(err){
+      console.log(err)
+      alert("something went wrong")
+    }
   }
 
   return(

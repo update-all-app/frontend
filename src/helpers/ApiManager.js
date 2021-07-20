@@ -225,6 +225,16 @@ export default class ApiManager {
     )
   }
 
+
+  static async updateHoursForLocation(locationId){
+    const token = await this.protectedRoute();
+    return await this.post(
+      `${API_SUFFIX}/locations/${locationId}/hours_updates`,
+      {},
+      token
+    )
+  }
+
   static async connectPageToLocation({
     providerOauthTokenId,
     locationId,
