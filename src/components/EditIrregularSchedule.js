@@ -59,6 +59,8 @@ export default function EditIrregularSchedule(props){
             };
             dispatch({ type: ADD_IRREGULAR_EVENT, payload: newEvent })
           })
+          setInfoMessage('Your event was created successfully')
+          setTimeout(() => setInfoMessage(null), 2000)
         }catch(err){
           dispatch({type: DELETE_IRREGULAR_EVENT, payload: optimisticEvent})
         }
@@ -89,6 +91,8 @@ export default function EditIrregularSchedule(props){
               dispatch({type: ADD_IRREGULAR_EVENT, payload: newEvent})
             }
           }
+          setInfoMessage('Your event was updated successfully')
+          setTimeout(() => setInfoMessage(null), 2000)
         }catch(err){
           dispatch({type: EDIT_IRREGULAR_EVENT, payload: eventBeforeChange})
           setError('There was a problem updating your event. Please try again')
@@ -104,6 +108,8 @@ export default function EditIrregularSchedule(props){
     dispatch({type: DELETE_IRREGULAR_EVENT, payload: event})
     try{
       await ApiManager.deleteIrregularEvent(event.id)
+      setInfoMessage('Your event was deleted successfully')
+      setTimeout(() => setInfoMessage(null), 2000)
     }catch(err){
       dispatch({type: ADD_REGULAR_EVENT, payload: event})
       setError('There was a problem deleting your event. Please try again')

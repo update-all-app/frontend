@@ -86,6 +86,7 @@ export default function CreateBusiness(props) {
       }
     } catch (err) {
       dispatch({ type: LOADING_COMPLETE });
+      console.log(err)
       setSubmitErrors(["An error occurred while making this business"]);
     }
   };

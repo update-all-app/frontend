@@ -9,6 +9,7 @@ import React, {
   import OpenHoursForm from '../subcomponents/OpenHoursForm'
   import EventContext from '../context/EventContext'
   import ErrorBanner from '../subcomponents/ErrorBanner'
+  import SuccessBanner from '../subcomponents/InformationBanner'
   import ApiManager from '../helpers/ApiManager'
   import { ADD_REGULAR_EVENT, DELETE_REGULAR_EVENT, EDIT_REGULAR_EVENT } from '../actionTypes'
   import { v4 as uuidv4} from 'uuid';
@@ -21,6 +22,7 @@ import React, {
 
     const [displayFormForDays, setDisplayFormForDays] = useState([false, false, false, false, false, false, false])
     const [errorMessage, setErrorMessage] = useState(null)
+    const [displaySuccessBanner, setDisplaySuccessBanner] = useState(false)
 
     const setDisplayFormForDaysToVal = (day, val) => {
         setDisplayFormForDays(prevState => {
@@ -55,6 +57,8 @@ import React, {
             day: res.day_of_week
           }
           dispatch({type: ADD_REGULAR_EVENT, payload: newEvent})
+          setDisplaySuccessBanner(true)
+          setTimeout(() => setDisplaySuccessBanner(false), 2000)
         }catch(err){
           dispatch({type: DELETE_REGULAR_EVENT, payload: dispatchedEvent})
           setErrorMessage("There was a problem saving your event. Please try again.")
@@ -75,6 +79,8 @@ import React, {
       dispatch({type: DELETE_REGULAR_EVENT, payload: event})
       try{
         const res = ApiManager.deleteRegularEvent(event.id)
+        setDisplaySuccessBanner(true)
+        setTimeout(() => setDisplaySuccessBanner(false), 2000)
       }catch(err){
         dispatch({type: ADD_REGULAR_EVENT, payload: event})
         setErrorMessage("There was a problem deleting your event. Please try again.")
@@ -191,10 +197,23 @@ import React, {
         return null
       }
     }
+
+    const renderSuccessBanner = () => {
+      if(displaySuccessBanner){
+        return (
+          <SuccessBanner
+            message="Your update has saved successfully"
+            onExit={() => setDisplaySuccessBanner(false)}
+          />
+        )
+      }
+    }
+
     console.log(events)
     return (
       <>
         {renderErrorBanner()}
+        {renderSuccessBanner()}
         <div className="flex m-4 ml-24 flex-col">
             <div className="mt-4">
               <h1><span className="my-3 float-left w-32 text-2xl">Sunday</span>

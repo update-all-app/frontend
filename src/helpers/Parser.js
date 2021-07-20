@@ -20,9 +20,9 @@ export default class Parser{
         id: res.id,
         locationIds: res.locations.map(l => l.id),
         connectedPages: res.locations.flatMap(l => { 
-          return l.location_services.map(ls => {
+          return l.location_services?.map(ls => {
             return this.parseLocationService(ls)
-          })
+          }) 
         }).filter(page => !!page)
     }
   }
