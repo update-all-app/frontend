@@ -1,4 +1,4 @@
-const BACKEND_URL = process.env.REACT_APP_API_URL;
+const BACKEND_URL = process.env.REACT_APP_API_URL || "https://update-it-all.dakotaleemartinez.com";
 const API_SUFFIX = "/api/v1";
 const BACKEND_API_URL = `${BACKEND_URL}${API_SUFFIX}`;
 const FACEBOOK = {name: 'Facebook', value: 'facebook'}
