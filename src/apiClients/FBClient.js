@@ -41,6 +41,6 @@ export function fbLogin(){
         console.log("Login failed")
         err({msg: "Login failed"})
       }
-    }, {scope: 'pages_manage_metadata,public_profile,pages_show_list'})
+    }, {scope: 'pages_manage_metadata,public_profile,pages_show_list, instagram_basic'})
   })
 }
