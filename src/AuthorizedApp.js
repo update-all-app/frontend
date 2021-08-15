@@ -9,6 +9,7 @@ import Careers from './components/Careers'
 import Privacy from './components/Privacy'
 import SetupPayment from './components/SetupPayment'
 import CreateBusiness from './components/CreateBusiness'
+import CreateBusinessSimple from './components/CreateBusinessSimple';
 import ManageBusiness from './components/ManageBusiness'
 import SelectBusiness from './components/SelectBusiness'
 import AuthorizeServices from './components/AuthorizeServices'
@@ -74,7 +75,7 @@ export default function AuthorizedApp() {
           <AuthorizeServices />
         </Route>
         <Route exact path="/businesses/new">
-          <CreateBusiness />
+          <CreateBusinessSimple />
         </Route>
         <Route path="/businesses/:id">
           <EventContext.Provider value={{state, dispatch}}>
