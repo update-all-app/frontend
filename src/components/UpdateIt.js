@@ -1,10 +1,21 @@
-import React, {useState} from 'react'
+import React, { useState, useContext } from 'react'
+import UserContext from '../context/UserContext'
 import LoadingButton from '../subcomponents/LoadingButton'
 import ApiManager from '../helpers/ApiManager'
 import InformationBanner from '../subcomponents/InformationBanner'
 import ErrorBanner from '../subcomponents/ErrorBanner'
+import { SUPPORTED_SERVICES } from '../constants'
+import getSocialMediaIcon from '../helpers/SocialMediaIcons'
 
 export default function UpdateIt(props){
+
+  const { business } = props
+  const user = useContext(UserContext).state
+  const connectedServices = user.data.services
+  const serviceLookupByProviderOauthTokenId = {}
+  for(let service of connectedServices){
+    serviceLookupByProviderOauthTokenId[service.providerOauthTokenId] = service.provider 
+  }
 
   const [loading, setLoading] = useState(false)
   const [showSuccessBanner, setShowSuccessBanner] = useState(false)
@@ -46,13 +57,37 @@ export default function UpdateIt(props){
     }
   }
 
+  const renderServicesStatus = () => {
+    const connectedPages = business.connectedPages.map(page => {
+      return serviceLookupByProviderOauthTokenId[page.providerOauthTokenId]
+    })
+    return SUPPORTED_SERVICES.map(service => {
+      if(connectedPages.includes(service.value)){
+        return (
+          <div className="flex-row">
+            {getSocialMediaIcon(service.value)}<p>........................Up to date</p>
+          </div>
+        )
+      }else{
+        return(
+          <div className="flex-row">
+            {getSocialMediaIcon(service.value)}<p>........................Out of sync</p>
+          </div>
+        )
+      }
+    });
+  }
+
   return(
     <div className="p-4">
       {renderBanners()}
-      <h1>Update main page</h1>
-      <div className="mt-10">
+      <h1 className="text-3xl m-10">Update Status</h1>
+      <div>
+        { renderServicesStatus() }
+      </div>
+      <div className="m-10">
         <LoadingButton
-          value="Update It"
+          value="Update It All"
           loadingValue="Updating"
           loading={loading}
           onClick={updateIt}
