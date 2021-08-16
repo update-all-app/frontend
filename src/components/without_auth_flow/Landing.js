@@ -31,7 +31,7 @@ export default function Landing(props){
                     className="bg-transparent hover:bg-secdark text-tertiary font-semibold py-2 px-4 border border-tertiary hover:text-terdark rounded auth-button focus:outline-none"
                     onClick={loginClick}
                     >
-                        Login
+                        Log In
                     </button>
                 </div>
                 
