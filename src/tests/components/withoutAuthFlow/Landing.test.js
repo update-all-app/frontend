@@ -8,16 +8,29 @@ beforeEach(() => {
 
 
 describe('Landing', () => {
-    it('displays the Login button', () => {
-        expect(screen.getByRole('button', {
-            name: /log in/i
-        })).toBeInTheDocument();
+    describe('the login button', () => {
+        it('displays the Login button', () => {
+            expect(screen.getByRole('button', {
+                name: /log in/i
+            })).toBeInTheDocument();
+        });
+
+        it('redirects to the correct page after button is pressed', () => {
+
+        })
     });
 
-    it('displays the Sign Up button', () => {
-        expect(screen.getByRole('button', {
-            name: /sign up/i
-        })).toBeInTheDocument();
+    describe('the sign up button', () => {
+        it('displays the Sign Up button', () => {
+            expect(screen.getByRole('button', {
+                name: /sign up/i
+            })).toBeInTheDocument();
+        });
+
+        it('redirects to the correct page after button is pressed', () => {
+
+        })
     });
 
+    
 });
