@@ -5,7 +5,7 @@ import WithHeaderAndFooter from '../wrappers/WithHeaderAndFooter'
 import { hash } from '../helpers/functions'
 
 import { Redirect } from 'react-router-dom'
-import BusinessCard from '../subcomponents/BusinessCard'
+import BusinessCard from '../subcomponents/SimpleBusinessCard'
 
 
 export default function SelectBusiness(props){
