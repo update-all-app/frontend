@@ -9,7 +9,7 @@ import ErrorText from "../subcomponents/ErrorText";
 
 import UserContext from "../context/UserContext";
 
-import ApiManager from "../helpers/ApiManager";
+import BusinessApiManager from "../apiClients/BusinessApiManager";
 import Parser from "../helpers/Parser";
 
 import {
@@ -76,7 +76,7 @@ export default function CreateBusiness(props) {
 
     try {
       dispatch({ type: LOADING });
-      const res = await ApiManager.createBusiness(businessParams);
+      const res = await BusinessApiManager.createBusiness(businessParams);
       const business = Parser.parseBusinessForContext(res);
       dispatch({ type: ADD_BUSINESS, payload: business });
       if (isFirstBusiness) {

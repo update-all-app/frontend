@@ -8,8 +8,9 @@ import UserContext from "./context/UserContext";
 import UserReducer from "./reducers/UserReducer";
 import { POPULATE_USER, LOADING, LOGOUT_USER } from "./actionTypes";
 
-import LoginManager from "./helpers/LoginManager";
-import ApiManager from "./helpers/ApiManager";
+import LoginManager from "./apiClients/LoginManager";
+import UserApiManager from "./apiClients/UserApiManager";
+import BusinessApiManager from "./apiClients/BusinessApiManager";
 import Parser from "./helpers/Parser";
 
 import AppDecider from "./wrappers/AppDecider";
@@ -21,10 +22,10 @@ export default function App() {
   useEffect(() => {
     const checkUserStatus = async () => {
       try {
-        const user = await ApiManager.getUser();
+        const user = await UserApiManager.getUser();
         console.log(user)
         if (user) {
-          const businesses = await ApiManager.getBusinesses();
+          const businesses = await BusinessApiManager.getBusinesses();
           const businessesForContext = businesses.map((b) =>
             Parser.parseBusinessForContext(b)
           );

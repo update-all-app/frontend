@@ -10,7 +10,7 @@ import React, {
   import EventContext from '../context/EventContext'
   import ErrorBanner from '../subcomponents/ErrorBanner'
   import SuccessBanner from '../subcomponents/InformationBanner'
-  import ApiManager from '../helpers/ApiManager'
+  import BusinessApiManager from '../apiClients/BusinessApiManager'
   import { ADD_REGULAR_EVENT, DELETE_REGULAR_EVENT, EDIT_REGULAR_EVENT } from '../actionTypes'
   import { v4 as uuidv4} from 'uuid';
 
@@ -48,7 +48,7 @@ import React, {
             start_time: event.start,
             end_time: event.end
           }
-          const res = await ApiManager.createRegularEventForLocation(business.locationIds[0], eventToSend)
+          const res = await BusinessApiManager.createRegularEventForLocation(business.locationIds[0], eventToSend)
           dispatch({type: DELETE_REGULAR_EVENT, payload: dispatchedEvent})
           const newEvent = {
             id: res.id,
@@ -78,7 +78,7 @@ import React, {
     const onDelete = event => {
       dispatch({type: DELETE_REGULAR_EVENT, payload: event})
       try{
-        const res = ApiManager.deleteRegularEvent(event.id)
+        const res = BusinessApiManager.deleteRegularEvent(event.id)
         setDisplaySuccessBanner(true)
         setTimeout(() => setDisplaySuccessBanner(false), 2000)
       }catch(err){

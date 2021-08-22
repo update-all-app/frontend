@@ -6,7 +6,7 @@ import Card from '../wrappers/Card'
 import UserContext from '../context/UserContext'
 import LoadingButton from '../subcomponents/LoadingButton'
 import { fbLogin } from '../apiClients/FBClient'
-import ApiManager from '../helpers/ApiManager'
+import FacebookApiManager from '../apiClients/FacebookApiManager'
 
 import { ADD_AUTHORIZED_SERVICE } from '../actionTypes'
 
@@ -30,7 +30,7 @@ export default function AuthorizeServices(props){
     try {
       const { accessToken, userID } = await fbLogin();
       console.log(`AccessToken: ${accessToken}`);
-      const res = await ApiManager.getAccessTokenForFacebook(
+      const res = await FacebookApiManager.getAccessTokenForFacebook(
         accessToken,
         userID
       );

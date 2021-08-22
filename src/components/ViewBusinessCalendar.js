@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { DAYS } from "../helpers/Days";
-import ApiManager from "../helpers/ApiManager";
+import BusinessApiManager from "../apiClients/BusinessApiManager";
 import { dateToHTMLString } from "../helpers/functions";
 import { getWeekStart, getWeekEnd } from "../helpers/functions";
 import Loader from '../subcomponents/Loader'
@@ -20,7 +20,7 @@ export default function ViewBusinessCalendar(props) {
 
   const getScheduleMemo = useCallback(
     async (startDate, endDate) => {
-      return await ApiManager.getHoursSummary(
+      return await BusinessApiManager.getHoursSummary(
         props.business.locationIds[0],
         startDate,
         endDate

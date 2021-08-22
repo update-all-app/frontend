@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import UserContext from '../context/UserContext'
 import LoadingButton from '../subcomponents/LoadingButton'
-import ApiManager from '../helpers/ApiManager'
+import BusinessApiManager from '../apiClients/BusinessApiManager'
 import InformationBanner from '../subcomponents/InformationBanner'
 import ErrorBanner from '../subcomponents/ErrorBanner'
 import { SUPPORTED_SERVICES } from '../constants'
@@ -24,7 +24,7 @@ export default function UpdateIt(props){
   const updateIt = async () => {
     setLoading(true)
     try{
-      await ApiManager.updateHoursForLocation(props.business.locationIds[0])
+      await BusinessApiManager.updateHoursForLocation(props.business.locationIds[0])
       setShowSuccessBanner(true)
       setTimeout(() => {
         setShowSuccessBanner(false)

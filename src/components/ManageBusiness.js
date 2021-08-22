@@ -3,7 +3,6 @@ import UserContext from '../context/UserContext'
 import EventContext from '../context/EventContext'
 import WithHeaderAndFooter from '../wrappers/WithHeaderAndFooter'
 import Sidebar from '../subcomponents/Sidebar'
-import Calendar from '../subcomponents/Calendar'
 import EditRegularScheduleSimple from './EditRegularScheduleSimple'
 import EditIrregularSchedule from './EditIrregularSchedule'
 import UpdateIt from './UpdateIt'
@@ -24,7 +23,7 @@ import {
   Route
 } from 'react-router-dom'
 
-import ApiManager from '../helpers/ApiManager'
+import BusinessApiManager from '../apiClients/BusinessApiManager'
 import {
   capitalize,
   formatDateForFrontend
@@ -57,14 +56,14 @@ export default function Home(props){
 
     async function getAndSaveEvents(){
       try{
-        const regularEvents = await ApiManager.getRegularEventsForLocation(business.locationIds[0])  
+        const regularEvents = await BusinessApiManager.getRegularEventsForLocation(business.locationIds[0])  
         const formattedRegularEvents = regularEvents.map(re => ({
           start: re.start_time,
           end: re.end_time,
           day: re.day_of_week,
           id: re.id
         }))
-        const irregularEvents = await ApiManager.getIrregularEventsForLocation(business.locationIds[0])
+        const irregularEvents = await BusinessApiManager.getIrregularEventsForLocation(business.locationIds[0])
         const formattedIrregularEents = irregularEvents.map(ie => ({
           id: ie.id,
           title: capitalize(ie.status),
