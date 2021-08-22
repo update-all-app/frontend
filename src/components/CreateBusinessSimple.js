@@ -7,7 +7,7 @@ import ErrorText from '../subcomponents/ErrorText';
 
 import { useHistory } from 'react-router-dom';
 
-import ApiManager from '../helpers/ApiManager';
+import BusinessApiManager from '../apiClients/BusinessApiManager';
 import UserContext from '../context/UserContext';
 import Parser from '../helpers/Parser';
 import { hash } from '../helpers/functions';
@@ -45,7 +45,7 @@ export default function CreateBusinessSimple(props){
 
         try{
             dispatch({ type: LOADING});
-            const res = await ApiManager.createBusiness(businessParams);
+            const res = await BusinessApiManager.createBusiness(businessParams);
             const business = Parser.parseBusinessForContext(res);
             dispatch({ type: ADD_BUSINESS, payload: business });
             if(isFirstBusiness){

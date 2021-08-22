@@ -8,7 +8,7 @@ import {
   LOADING,
   LOADING_COMPLETE
 } from '../actionTypes'
-import ApiManager from '../helpers/ApiManager'
+import UserApiManager from '../apiClients/UserApiManager'
 
 export default function SetupPayment(props){
 
@@ -23,7 +23,7 @@ export default function SetupPayment(props){
     // add to context payment status
     try{
       dispatch({type: LOADING})
-      const res = await ApiManager.completePayment(state.data)
+      const res = await UserApiManager.completePayment(state.data)
       dispatch({type: VALIDATE_PAYMENT})
       history.push('/')
     }catch(err){

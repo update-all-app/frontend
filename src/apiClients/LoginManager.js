@@ -1,6 +1,7 @@
 import ApiManager from './ApiManager'
-import TokenTimeManager from './TokenTimeManager'
-import { strip } from './functions'
+import AuthenticationApiManager from './AuthenticationApiManager'
+import TokenTimeManager from '../helpers/TokenTimeManager'
+import { strip } from '../helpers/functions'
 
 export default class LoginManager{
 
@@ -53,7 +54,7 @@ export default class LoginManager{
 
     static async login(email, password){
         try{
-            const res = await ApiManager.login(strip(email), password)
+            const res = await AuthenticationApiManager.login(strip(email), password)
             this.writeTokenToStorage(res)
             return { success: true, user: res.user }
         }catch(err){
@@ -71,7 +72,7 @@ export default class LoginManager{
 
     static async signup(firstname, lastname, email, password, passwordConfirmation){
         try{
-            const res = await ApiManager.signup(strip(firstname), strip(lastname), strip(email), password, passwordConfirmation)
+            const res = await AuthenticationApiManager.signup(strip(firstname), strip(lastname), strip(email), password, passwordConfirmation)
             this.writeTokenToStorage(res)
             return { success: true, user: res.user }
         }catch(err){

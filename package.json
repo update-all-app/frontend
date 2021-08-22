@@ -28,7 +28,7 @@
     "start": "HTTPS=true SSL_CRT_FILE=./.cert/cert.pem SSL_KEY_FILE=./.cert/key.pem REACT_APP_API_URL=https://update-it-all.dakotaleemartinez.com craco start",
     "dev": "HTTPS=true SSL_CRT_FILE=./.cert/cert.pem SSL_KEY_FILE=./.cert/key.pem REACT_APP_API_URL=http://localhost:3001 craco start",
     "build": "craco build",
-    "test": "craco test",
+    "test": "craco test --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

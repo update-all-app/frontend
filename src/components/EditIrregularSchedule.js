@@ -17,8 +17,7 @@ import {
   capitalize
 } from '../helpers/functions'
 
-import ApiManager from '../helpers/ApiManager'
-
+import BusinessApiManager from '../apiClients/BusinessApiManager'
 import { v4 as uuidv4} from 'uuid';
 
 export default function EditIrregularSchedule(props){
@@ -48,7 +47,7 @@ export default function EditIrregularSchedule(props){
 
         dispatch({type: ADD_IRREGULAR_EVENT, payload: optimisticEvent})
         try{
-          const res = await ApiManager.createIrregularEventForLocation(business.locationIds[0], formattedEvent)
+          const res = await BusinessApiManager.createIrregularEventForLocation(business.locationIds[0], formattedEvent)
           dispatch({type: DELETE_IRREGULAR_EVENT, payload: optimisticEvent})
           res.forEach((data) => {
             const newEvent = {
@@ -70,7 +69,7 @@ export default function EditIrregularSchedule(props){
         const eventBeforeChange = events.find(e => e.id === event.id)
         dispatch({type: EDIT_IRREGULAR_EVENT, payload: optimisticEvent})
         try{
-          const res = await ApiManager.updateIrregularEvent(optimisticEvent)
+          const res = await BusinessApiManager.updateIrregularEvent(optimisticEvent)
           const originalEvent = res[0]
           const updatedEvent = {
             title: capitalize(originalEvent.status),
@@ -107,7 +106,7 @@ export default function EditIrregularSchedule(props){
   const onDelete = async event => {
     dispatch({type: DELETE_IRREGULAR_EVENT, payload: event})
     try{
-      await ApiManager.deleteIrregularEvent(event.id)
+      await BusinessApiManager.deleteIrregularEvent(event.id)
       setInfoMessage('Your event was deleted successfully')
       setTimeout(() => setInfoMessage(null), 2000)
     }catch(err){

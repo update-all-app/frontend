@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import LoadingButton from "../subcomponents/LoadingButton";
-import ApiManager from "../helpers/ApiManager";
+import ServicesApiManager from "../apiClients/ServicesApiManager";
 import Accordion from '../subcomponents/Accordion'
 import Card from '../wrappers/Card'
 import { useHistory } from 'react-router-dom'
@@ -45,7 +45,7 @@ export default function ManageEndpoints({ business }) {
   async function connectPage({providerOauthTokenId, pageId}){
     try{
       const locationId = business.locationIds[0]
-      const res = await ApiManager.connectPageToLocation({
+      const res = await ServicesApiManager.connectPageToLocation({
         providerOauthTokenId,
         locationId,
         pageId
@@ -67,7 +67,7 @@ export default function ManageEndpoints({ business }) {
 
   async function disconnectPage({locationServiceId}){
     try{
-      const res = await ApiManager.removeLocationService({
+      const res = await ServicesApiManager.removeLocationService({
         id: locationServiceId
       })
       dispatch({

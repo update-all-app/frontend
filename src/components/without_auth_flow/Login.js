@@ -5,8 +5,8 @@ import Submit from '../../subcomponents/Submit'
 import Form from '../../subcomponents/Form'
 import WithFooter from '../../wrappers/WithFooter'
 
-import LoginManager from '../../helpers/LoginManager'
-import ApiManager from '../../helpers/ApiManager'
+import LoginManager from '../../apiClients/LoginManager'
+import BusinessApiManager from '../../apiClients/BusinessApiManager'
 import Parser from '../../helpers/Parser'
 import { POPULATE_USER, LOADING, LOGOUT_USER } from '../../actionTypes'
 import UserContext from '../../context/UserContext'
@@ -51,7 +51,7 @@ export default function Login(props){
             dispatch({type: LOADING})
             const res = await LoginManager.login(email, password)
             if(res.success){
-                const businesses = await ApiManager.getBusinesses()
+                const businesses = await BusinessApiManager.getBusinesses()
                 const businessesForContext = businesses.map(b => Parser.parseBusinessForContext(b))
                 const formattedServices = res.user.services.map(s => ({
                     provider: s.provider,
