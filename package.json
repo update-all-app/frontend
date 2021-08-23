@@ -28,7 +28,7 @@
     "start": "HTTPS=true SSL_CRT_FILE=./.cert/cert.pem SSL_KEY_FILE=./.cert/key.pem REACT_APP_API_URL=https://update-it-all.dakotaleemartinez.com craco start",
     "dev": "HTTPS=true SSL_CRT_FILE=./.cert/cert.pem SSL_KEY_FILE=./.cert/key.pem REACT_APP_API_URL=http://localhost:3001 craco start",
     "build": "craco build",
-    "test": "craco test --watchAll=false",
+    "test": "REACT_APP_API_URL=http://localhost:4001 craco test --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -48,5 +48,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@react-mock/localstorage": "^0.1.2",
+    "msw": "^0.35.0"
   }
 }

@@ -155,18 +155,21 @@ export default function Signup(props){
                             onChange={ firstName => setFirstName(firstName) }
                             value={ firstName }
                             errors={ firstNameErrors }
+                            id="signup-first-name"
                         />
                         <Input 
                             placeholder="Last Name"
                             onChange={ lastName => setLastName(lastName) }
                             value={ lastName }
                             errors={ lastNameErrors}
+                            id="signup-last-name"
                         />
                         <Input 
                             placeholder="Email"
                             onChange={ updateEmail }
                             value={ email }
                             errors={ emailErrors }
+                            id="signup-email"
                         />
                         <Input
                             placeholder="Password"
@@ -174,6 +177,7 @@ export default function Signup(props){
                             onChange={ pass => updatePassword(pass) }
                             value={ password }
                             errors={ passwordErrors }
+                            id="signup-password"
                         />
                         <Input 
                             placeholder="Password Confirmation"
@@ -181,6 +185,7 @@ export default function Signup(props){
                             onChange={ pass => updatePasswordConfirmation(pass) }
                             value={ passwordConfirmation }
                             errors={ passwordConfirmationErrors }
+                            id="signup-password-confirmation"
                         />
                         <Submit 
                             value="Sign Up"
