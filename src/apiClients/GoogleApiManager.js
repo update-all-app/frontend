@@ -5,7 +5,7 @@ export default class GoogleApiManager extends ApiManager{
 
     static async createGoogleConnection(code){
         const token = this.protectedRoute();
-        const url = '/auth/google_oauth2/callback';
+        const url = `${API_SUFFIX}/provider_oauth_tokens`;
         return await this.post(
             url,
             {
