@@ -10,6 +10,7 @@ import FacebookApiManager from '../apiClients/FacebookApiManager'
 import { authorizeGoogle } from '../apiClients/GoogleClient'
 
 import { ADD_AUTHORIZED_SERVICE } from '../actionTypes'
+import GoogleApiManager from '../apiClients/GoogleApiManager'
 
 export default function AuthorizeServices(props){
 
@@ -79,7 +80,10 @@ export default function AuthorizeServices(props){
     try{
       const res = await authorizeGoogle()
       console.log(res);
-      debugger;
+      if(!res.code){ throw code }
+      const res = await GoogleApiManager.createGoogleConnection(res.code)
+      console.log(res);
+      debugger
     }catch(err){
       console.log("ERROR");
       console.log(err);
