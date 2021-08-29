@@ -19,6 +19,7 @@ import EventReducer from './reducers/EventReducer'
 import EventContext from './context/EventContext'
 
 import { initFBSDK } from './apiClients/FBClient'
+import { initGoogleSDK } from './apiClients/GoogleClient';
 
 import { LOADING, LOADING_COMPLETE } from './actionTypes'
 
@@ -39,7 +40,7 @@ export default function AuthorizedApp() {
   
   useEffect(() => {
     dispatch({type: LOADING })
-    initFBSDK().then(() => {
+    Promise.all([initFBSDK(), initGoogleSDK()]).then(() => {
       dispatch({type: LOADING_COMPLETE})
     })
   }, [])

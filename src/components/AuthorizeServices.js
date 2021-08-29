@@ -7,6 +7,7 @@ import UserContext from '../context/UserContext'
 import LoadingButton from '../subcomponents/LoadingButton'
 import { fbLogin } from '../apiClients/FBClient'
 import FacebookApiManager from '../apiClients/FacebookApiManager'
+import { authorizeGoogle } from '../apiClients/GoogleClient'
 
 import { ADD_AUTHORIZED_SERVICE } from '../actionTypes'
 
@@ -29,7 +30,6 @@ export default function AuthorizeServices(props){
     setLoadingFb(true);
     try {
       const { accessToken, userID } = await fbLogin();
-      console.log(`AccessToken: ${accessToken}`);
       const res = await FacebookApiManager.getAccessTokenForFacebook(
         accessToken,
         userID
@@ -76,9 +76,14 @@ export default function AuthorizeServices(props){
 
   const syncGoogle = async () => {
     setLoadingGgl(true)
-    window.setTimeout(() => {
-      setLoadingGgl(false)
-    }, 3000)
+    try{
+      const res = await authorizeGoogle()
+      console.log(res);
+      debugger;
+    }catch(err){
+      console.log("ERROR");
+      console.log(err);
+    }
   }
 
   const hasService = service => {

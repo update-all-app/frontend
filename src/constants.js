@@ -13,6 +13,8 @@ const SUPPORTED_SERVICES = [
     GOOGLE_MAPS,
     APPLE_MAPS
 ]
+const FACEBOOK_CLIENT_ID = '2897145780604497'
+const GOOGLE_CLIENT_ID = '83032555728-go02qbg8i5h64dv7u6f66rf3dn3g5ou5.apps.googleusercontent.com'
 
 export { 
     BACKEND_URL,
@@ -23,5 +25,7 @@ export {
     TWITTER,
     GOOGLE_MAPS,
     APPLE_MAPS,
-    SUPPORTED_SERVICES
+    SUPPORTED_SERVICES,
+    FACEBOOK_CLIENT_ID,
+    GOOGLE_CLIENT_ID,
 };

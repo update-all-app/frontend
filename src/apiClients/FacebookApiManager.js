@@ -9,9 +9,9 @@ export default class FacebookApiManager extends ApiManager{
         `${API_SUFFIX}/provider_oauth_tokens`,
         {
             provider_oauth_token: {
-            exchange_token: accessToken,
-            provider: 'facebook',
-            provider_uid: userID
+                exchange_token: accessToken,
+                provider: 'facebook',
+                provider_uid: userID
             }
         },
         token

@@ -14,6 +14,7 @@ import BusinessApiManager from "./apiClients/BusinessApiManager";
 import Parser from "./helpers/Parser";
 
 import AppDecider from "./wrappers/AppDecider";
+import { initGoogleSDK } from "./apiClients/GoogleClient";
 
 export default function App() {
   const user = useContext(UserContext);
@@ -63,7 +64,7 @@ export default function App() {
   // BELOW: Testing to see if this is faster than using wrapper
   // const renderApp = () => {
   //   return !!user.data.name ? <AuthorizedApp /> : <UnauthorizedApp />
-  // }
+  // },
 
   return (
     // <React.StrictMode>
