@@ -80,7 +80,7 @@ export default function AuthorizeServices(props){
     try{
       const res = await authorizeGoogle()
       console.log(res);
-      if(!res.code){ throw code }
+      if(!res.code){ throw "code not found" }
       const googleRes = await GoogleApiManager.createGoogleConnection(res.code)
       console.log(googleRes);
       debugger
