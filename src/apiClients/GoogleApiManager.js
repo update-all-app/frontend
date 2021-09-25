@@ -10,7 +10,8 @@ export default class GoogleApiManager extends ApiManager{
             url,
             {
                 provider_oauth_token: {
-                    code
+                    code,
+                    provider: "google"
                 }
             },
             token
