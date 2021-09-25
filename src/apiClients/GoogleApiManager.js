@@ -4,7 +4,7 @@ import { API_SUFFIX } from '../constants';
 export default class GoogleApiManager extends ApiManager{
 
     static async createGoogleConnection(code){
-        const token = this.protectedRoute();
+        const token = await this.protectedRoute();
         const url = `${API_SUFFIX}/provider_oauth_tokens`;
         return await this.post(
             url,
