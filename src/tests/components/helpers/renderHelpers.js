@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import UserContext from '../../../../context/UserContext'
+import UserContext from '../../../context/UserContext'
 import { LocalStorageMock } from '@react-mock/localstorage';
 
 export function withRouter(children){

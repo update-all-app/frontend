@@ -58,7 +58,7 @@ export default function Signup(props){
 
     const checkFirstName = () => {
         const valid = firstName.length > 0
-        const errors = valid ? [] : ["This field must be populated"]
+        const errors = valid ? [] : ["You must enter a first name"]
         return {
             valid,
             errors
@@ -68,7 +68,7 @@ export default function Signup(props){
 
     const checkLastName = () => {
         const valid = lastName.length > 0
-        const errors = valid ? [] : ["This field must be populated"]
+        const errors = valid ? [] : ["You must enter a last name"]
         return {
             valid,
             errors
@@ -130,13 +130,23 @@ export default function Signup(props){
                 dispatch({type: POPULATE_USER, payload: { name: res.user.name, email: res.user.email, services: [], businesses: [], paymentStatusCurrent: false }})
                 history.push('/setup-payment')
             }else{
-                LoginManager.clearLocalStorage()
-                dispatch({type: LOGOUT_USER })
-                setFormErrors(["There was a problem signing you up"])
+                handleUnsuccessfulSignup(res)
             }
         }else if(!validEmail.valid){
             setEmailErrorOccurred(true)
         }
+    }
+
+    const handleUnsuccessfulSignup = (res) => {
+        let formErrors;
+        if(res.message){
+            formErrors = res.message;
+        }else{
+            formErrors = 'There was a problem connecting to our servers'
+        }
+        LoginManager.clearLocalStorage();
+        dispatch({ type: LOGOUT_USER });
+        setFormErrors([formErrors]);
     }
 
 
