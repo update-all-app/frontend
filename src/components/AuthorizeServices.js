@@ -82,7 +82,7 @@ export default function AuthorizeServices(props){
       console.log(res);
       if(!res.code){ throw "code not found" }
       const googleRes = await GoogleApiManager.createGoogleConnection(res.code)
-      console.log(googleRes);
+      setLoadingGgl(false)
     }catch(err){
       console.log("ERROR");
       console.log(err);
