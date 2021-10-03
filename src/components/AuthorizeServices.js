@@ -81,11 +81,27 @@ export default function AuthorizeServices(props){
       const res = await authorizeGoogle()
       console.log(res);
       if(!res.code){ throw "code not found" }
-      const googleRes = await GoogleApiManager.createGoogleConnection(res.code)
+      const backendRes = await GoogleApiManager.createGoogleConnection(res.code)
+      const {
+        provider,
+        provider_uid,
+        id,
+        label, 
+        page_data
+      } = backendRes
+      const service = {
+        provider,
+        userID: provider_uid,
+        label,
+        providerOauthTokenId: id,
+        pageData: page_data
+      }
+      dispatch({type: ADD_AUTHORIZED_SERVICE, payload: service})
       setLoadingGgl(false)
     }catch(err){
       console.log("ERROR");
       console.log(err);
+      setLoadingGgl(false)
     }
   }
 
