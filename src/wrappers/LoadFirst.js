@@ -1,17 +1,13 @@
-import React, {
-  useContext
-} from 'react'
+import React, { useContext } from 'react';
 
-import UserContext from '../context/UserContext'
+import UserContext from '../context/UserContext';
 
-export default function LoadFirst(props){
+export default function LoadFirst(props) {
+  const user = useContext(UserContext).state;
 
-  const user = useContext(UserContext).state
-
-  if(user.loading){
-    return <></>
-  }else{
-    return <>{props.children}</>
+  if (user.loading) {
+    return <></>;
+  } else {
+    return <>{props.children}</>;
   }
-
 }

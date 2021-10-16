@@ -1,44 +1,42 @@
-
-
-export default class Parser{
-
-
-  static parseBusinessForContext(res){
+export default class Parser {
+  static parseBusinessForContext(res) {
     // Assume only one location for a business
     // When we support multiple locations per business this will
     // need a major refactor
     return {
-        addressLine1: res.locations[0].address_line_1,
-        addressLine2: res.locations[0].address_line_2,
-        city: res.locations[0].city,
-        state: res.locations[0].state,
-        zipcode: res.locations[0].zipcode,
-        country: res.locations[0].country,
-        phoneNumber: res.phone_number,
-        emailAddress: res.email_address,
-        name: res.name,
-        id: res.id,
-        locationIds: res.locations.map(l => l.id),
-        connectedPages: res.locations.flatMap(l => { 
-          return l.location_services?.map(ls => {
-            return this.parseLocationService(ls)
-          }) 
-        }).filter(page => !!page)
-    }
+      addressLine1: res.locations[0].address_line_1,
+      addressLine2: res.locations[0].address_line_2,
+      city: res.locations[0].city,
+      state: res.locations[0].state,
+      zipcode: res.locations[0].zipcode,
+      country: res.locations[0].country,
+      phoneNumber: res.phone_number,
+      emailAddress: res.email_address,
+      name: res.name,
+      id: res.id,
+      locationIds: res.locations.map((l) => l.id),
+      connectedPages: res.locations
+        .flatMap((l) => {
+          return l.location_services?.map((ls) => {
+            return this.parseLocationService(ls);
+          });
+        })
+        .filter((page) => !!page)
+    };
   }
 
-  static parseLocationService(locationService){
+  static parseLocationService(locationService) {
     return {
       id: locationService.id,
       pageId: locationService.page_id,
       locationId: locationService.location_id,
       providerOauthTokenId: locationService.provider_oauth_token_id
-    }
+    };
   }
 
-  static parseBusinessForRequest(params){
+  static parseBusinessForRequest(params) {
     const {
-      businessName, 
+      businessName,
       businessEmail,
       businessTelephone,
       streetAddress,
@@ -47,7 +45,7 @@ export default class Parser{
       state,
       zipCode,
       country
-    } = params
+    } = params;
     return {
       business: {
         name: businessName,
@@ -65,7 +63,6 @@ export default class Parser{
           }
         ]
       }
-    }
+    };
   }
-
 }

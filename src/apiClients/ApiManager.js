@@ -1,15 +1,15 @@
-import { BACKEND_URL, API_SUFFIX } from "../constants";
-import LoginManager from "./LoginManager";
-import AuthenticationError from "../errors/AuthenticationError";
+import { BACKEND_URL, API_SUFFIX } from '../constants';
+import LoginManager from './LoginManager';
+import AuthenticationError from '../errors/AuthenticationError';
 
 export default class ApiManager {
   static getHeaders(token) {
     const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json"
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
     };
     if (!!token) {
-      headers["Authorization"] = `Bearer ${token}`;
+      headers['Authorization'] = `Bearer ${token}`;
     }
 
     return headers;
@@ -46,23 +46,23 @@ export default class ApiManager {
   }
 
   static async get(path, token = null) {
-    return await this.request("GET", path, null, token);
+    return await this.request('GET', path, null, token);
   }
 
   static async post(path, body, token = null) {
-    return await this.request("POST", path, body, token);
+    return await this.request('POST', path, body, token);
   }
 
   static async put(path, body, token = null) {
-    return await this.request("PUT", path, body, token);
+    return await this.request('PUT', path, body, token);
   }
 
   static async patch(path, body, token = null) {
-    return await this.request("PATCH", path, body, token);
+    return await this.request('PATCH', path, body, token);
   }
 
   static async delete(path, token = null) {
-    return await this.request("DELETE", path, null, token);
+    return await this.request('DELETE', path, null, token);
   }
 
   static async request(method, path, body = null, token = null) {

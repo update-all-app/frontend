@@ -1,27 +1,27 @@
-import React from "react";
-import { hash } from "../helpers/functions";
-import ErrorText from "./ErrorText";
-import Label from "./Label";
+import React from 'react';
+import { hash } from '../helpers/functions';
+import ErrorText from './ErrorText';
+import Label from './Label';
 export default function Input(props) {
   const {
     placeholder,
     value,
     onChange,
-    name = "select",
+    name = 'select',
     errors = [],
     id = null,
     onFocus = () => {},
     disabled = false,
     required = true,
-    mb = "mb-12",
-    display = "block",
-    w = "w-full",
+    mb = 'mb-12',
+    display = 'block',
+    w = 'w-full',
     label = null,
-    options = ["Default"],
+    options = ['Default']
   } = props;
 
   const propOrEmptyString = (someProp) => {
-    return !!someProp ? someProp : "";
+    return !!someProp ? someProp : '';
   };
 
   const propOrFirstOption = (someProp) => {

@@ -1,13 +1,11 @@
-import React from 'react'
+import React from 'react';
 
+export default function Avatar(props) {
+  const { initials } = props;
 
-export default function Avatar(props){
-
-  const { initials } = props
-
-  return(
-    <div className="bg-secdark text-primary w-10 h-10 mr-8 rounded-full inline-flex items-center align-middle justify-center font-bold text-xl"> 
+  return (
+    <div className='bg-secdark text-primary w-10 h-10 mr-8 rounded-full inline-flex items-center align-middle justify-center font-bold text-xl'>
       {initials}
     </div>
-  )
+  );
 }

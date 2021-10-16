@@ -1,5 +1,5 @@
 function strip(str) {
-  return str.replace(/^\s+|\s+$/g, "");
+  return str.replace(/^\s+|\s+$/g, '');
 }
 
 function hash(str) {
@@ -24,16 +24,16 @@ function validatePhoneNumber(num) {
 }
 
 function unformatPhoneNumber(num) {
-  return num.replace(/\D/g, "");
+  return num.replace(/\D/g, '');
 }
 
 function formatPhoneNumber(num) {
   const numStr = String(num);
   let formatted =
     numStr.substring(0, 3) +
-    "-" +
+    '-' +
     numStr.substring(3, 6) +
-    "-" +
+    '-' +
     numStr.substring(6, 10);
   if (numStr.length <= 3) {
     formatted = formatted.substring(0, formatted.length - 2);
@@ -59,7 +59,7 @@ function validatePassword(pass) {
   function validateLength() {
     const valid = pass.length > 8;
     if (!valid) {
-      errors.push("Must have at least 8 characters");
+      errors.push('Must have at least 8 characters');
     }
     return valid;
   }
@@ -68,7 +68,7 @@ function validatePassword(pass) {
     const re = /[0-9]/g;
     const valid = regexMatchCount(pass.matchAll(re), 1);
     if (!valid) {
-      errors.push("Must have at least one number");
+      errors.push('Must have at least one number');
     }
     return valid;
   }
@@ -77,7 +77,7 @@ function validatePassword(pass) {
     const re = /[!@#$%^&]/g;
     const valid = regexMatchCount(pass.matchAll(re), 1);
     if (!valid) {
-      errors.push("Contains one of the charcters !,@,#,$,%,^,&");
+      errors.push('Contains one of the charcters !,@,#,$,%,^,&');
     }
     return valid;
   }
@@ -124,7 +124,7 @@ function formatDateShort(date) {
   return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 }
 
-function pad(val, padLen, padVal = "0") {
+function pad(val, padLen, padVal = '0') {
   val = String(val);
   if (val.length < padLen) {
     const padAmount = padLen - val.length;
@@ -139,7 +139,7 @@ function pad(val, padLen, padVal = "0") {
 }
 
 function time24To12(milTime) {
-  const [hourStr, minStr] = milTime.split(":");
+  const [hourStr, minStr] = milTime.split(':');
   const hour = Number.parseInt(hourStr);
   const min = Number.parseInt(minStr);
   if (hour === 0) {
@@ -153,11 +153,11 @@ function time24To12(milTime) {
 }
 
 function time12To24(timeStr) {
-  const [time, suffix] = timeStr.split(" ");
-  const [hrStr, minStr] = time.split(":");
+  const [time, suffix] = timeStr.split(' ');
+  const [hrStr, minStr] = time.split(':');
   const hour = Number.parseInt(hrStr);
   const min = Number.parseInt(minStr);
-  if (suffix == "AM") {
+  if (suffix == 'AM') {
     if (hour === 12) {
       return `00:${pad(min, 2)}`;
     }
@@ -221,9 +221,9 @@ function formatDateToUTCForBackend(date) {
 }
 
 function formatDateForFrontend(dateString) {
-  const [date, time] = dateString.split("T");
-  const [year, month, day] = date.split("-");
-  const [hour, min] = time.split(":");
+  const [date, time] = dateString.split('T');
+  const [year, month, day] = date.split('-');
+  const [hour, min] = time.split(':');
   return new Date(year, month - 1, day, hour, min);
 }
 
@@ -238,7 +238,7 @@ function max(coll, isGreaterThan) {
 }
 
 function capitalize(str) {
-  if (typeof str !== "string") return "";
+  if (typeof str !== 'string') return '';
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 

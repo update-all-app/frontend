@@ -1,15 +1,15 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { DAYS } from "../helpers/Days";
-import BusinessApiManager from "../apiClients/BusinessApiManager";
-import { dateToHTMLString } from "../helpers/functions";
-import { getWeekStart, getWeekEnd } from "../helpers/functions";
-import Loader from '../subcomponents/Loader'
+import React, { useEffect, useState, useCallback } from 'react';
+import { DAYS } from '../helpers/Days';
+import BusinessApiManager from '../apiClients/BusinessApiManager';
+import { dateToHTMLString } from '../helpers/functions';
+import { getWeekStart, getWeekEnd } from '../helpers/functions';
+import Loader from '../subcomponents/Loader';
 
 import {
   formatDateShort,
   time24To12,
   datePlusDays
-} from "../helpers/functions";
+} from '../helpers/functions';
 
 export default function ViewBusinessCalendar(props) {
   const [events, setEvents] = useState([]);
@@ -108,7 +108,7 @@ export default function ViewBusinessCalendar(props) {
   const renderDateRange = () => {
     return (
       <>
-        <span className='font-bold'>{formatDateShort(dateRangeStart)}</span> to{" "}
+        <span className='font-bold'>{formatDateShort(dateRangeStart)}</span> to{' '}
         <span className='font-bold'>{formatDateShort(dateRangeEnd)}</span>
       </>
     );
@@ -136,8 +136,8 @@ export default function ViewBusinessCalendar(props) {
     return (
       <div className='m-8'>
         <h1 className='rounded text-xl tertiary mb-2 p-4 bg-secdark'>
-          {DAYS.GET(dayNumber).displayValue}, {displayDate} -{" "}
-          {isClosed ? "Closed" : "Open"}
+          {DAYS.GET(dayNumber).displayValue}, {displayDate} -{' '}
+          {isClosed ? 'Closed' : 'Open'}
         </h1>
         {displayEvents(dayEvents)}
       </div>
@@ -160,10 +160,9 @@ export default function ViewBusinessCalendar(props) {
     eventsByDay = assignEventsToDay();
   }
 
-    return loading ? (
-      <Loader /> 
-    ) 
-    : (
+  return loading ? (
+    <Loader />
+  ) : (
     <div className='m-8'>
       <div className='border-b-2 p-2'>
         <button
@@ -214,7 +213,7 @@ export default function ViewBusinessCalendar(props) {
           </svg>
         </button>
         <h1 className='pl-4 pt-4 align-bottom leading-3 inline-block text-3xl mb-0 mt-4 secdark p-2'>
-          {dateRangeStart.toLocaleString("default", { month: "long" })},{" "}
+          {dateRangeStart.toLocaleString('default', { month: 'long' })},{' '}
           {dateRangeStart.getFullYear()}
         </h1>
         <span className='text-xs ml-8 align-bottom'>{renderDateRange()}</span>
@@ -235,5 +234,5 @@ export default function ViewBusinessCalendar(props) {
       </div>
       <div>{renderDays()}</div>
     </div>
-  )
+  );
 }

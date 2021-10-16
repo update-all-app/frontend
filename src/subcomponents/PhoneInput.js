@@ -1,26 +1,26 @@
-import React from "react";
-import { hash } from "../helpers/functions";
-import ErrorText from "./ErrorText";
-import Label from "./Label";
+import React from 'react';
+import { hash } from '../helpers/functions';
+import ErrorText from './ErrorText';
+import Label from './Label';
 export default function PhoneInput(props) {
   const {
     placeholder,
     value,
     onChange,
-    pattern = "[0-9]{3}-[0-9]{3}-[0-9]{4}",
+    pattern = '[0-9]{3}-[0-9]{3}-[0-9]{4}',
     errors = [],
     id = null,
     onFocus = () => {},
     disabled = false,
     required = true,
-    mb = "mb-12",
-    display = "block",
-    w = "w-full",
-    label = null,
+    mb = 'mb-12',
+    display = 'block',
+    w = 'w-full',
+    label = null
   } = props;
 
   const propOrEmptyString = (someProp) => {
-    return !!someProp ? someProp : "";
+    return !!someProp ? someProp : '';
   };
 
   const renderErrors = () => {
@@ -43,7 +43,7 @@ export default function PhoneInput(props) {
       <input
         id={id}
         className={`${w} custom-input h-10 px-3 transition duration-300 text-base text-gray-700 placeholder-gray-400 border-b-2 focus:border-primary focus:border-b-2 focus:outline-none`}
-        type={"tel"}
+        type={'tel'}
         placeholder={propOrEmptyString(placeholder)}
         value={propOrEmptyString(value)}
         onChange={(e) => onChange(e.target.value)}

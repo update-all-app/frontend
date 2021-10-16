@@ -1,37 +1,33 @@
-import React from 'react'
-import useAuth from '../hooks/useAuth'
+import React from 'react';
+import useAuth from '../hooks/useAuth';
 
+export default function AppDecider(props) {
+  const [loggedIn, loading] = useAuth();
 
-
-export default function AppDecider(props){
-
-    const [loggedIn, loading] = useAuth()
-
-    const renderModal = () => {
-        if(loading){
-            return(
-                <>
-                    <div className="overlay"></div>
-                    <div className="loader">Loading...</div>
-                </>
-            )
-        }
-    }
-    
-    if(!loggedIn){
-      return(
+  const renderModal = () => {
+    if (loading) {
+      return (
         <>
-          {renderModal()}
-          {props.children[0]}
+          <div className='overlay'></div>
+          <div className='loader'>Loading...</div>
         </>
-      )
-    }else{
-      return(
-          <>
-              {renderModal()}
-              {props.children[1]}
-          </>
-      )
+      );
     }
+  };
 
+  if (!loggedIn) {
+    return (
+      <>
+        {renderModal()}
+        {props.children[0]}
+      </>
+    );
+  } else {
+    return (
+      <>
+        {renderModal()}
+        {props.children[1]}
+      </>
+    );
+  }
 }
