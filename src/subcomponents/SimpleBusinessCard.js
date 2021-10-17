@@ -7,7 +7,7 @@ export default function SimpleBusinessCard(props) {
   const { id, name } = business;
 
   const goToBusiness = () => {
-    history.push(`/businesses/${id}/update`);
+    history.push(`/businesses/${id}`);
   };
 
   return (

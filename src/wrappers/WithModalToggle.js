@@ -42,7 +42,7 @@ export default function WithModalToggle(props) {
   return (
     <>
       <div
-        className={`relative h-screen transition-opacity duration-300 p-4 withModalToggle`}
+        className={`relative h-screen transition-opacity duration-300 withModalToggle`}
       >
         {props.children}
         <div className={`overlay-dark ${hiddenClass}`}></div>

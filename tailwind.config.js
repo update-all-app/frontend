@@ -9,11 +9,12 @@ module.exports = {
         'max-height': 'max-height'
       },
       colors: {
-        primary: '#111827', //'#1F2937',
-        secondary: '#EEF2FF', //'#065F46'
+        primary: '#111827',
+        secondary: '#ffffff', //'#065F46'
         tertiary: '#4338CA',
         terdark: '#3730A3',
-        secdark: '#E0E7FF'
+        secdark: '#E0E7FF',
+        yellow: '#dddb52'
       },
       maxHeight: {
         '1/2': '50%',
@@ -26,7 +27,15 @@ module.exports = {
         22: '5.5em',
         100: '25rem',
         160: '40rem',
-        120: '30rem'
+        120: '30rem',
+        header: '65px',
+        'top-sidebar': '200px',
+        footer: '55px',
+        main: "calc(100vh - theme('height.header'))",
+        content:
+          "calc(100vh - theme('height.header') - theme('height.footer'))",
+        'content-narrow':
+          "calc(100vh - theme('height.header') - theme('height.top-sidebar') - theme('height.footer'))"
       },
       width: {
         160: '40rem',
@@ -52,7 +61,7 @@ module.exports = {
   },
   variants: {
     border: ['responsive', 'hover', 'focus', 'group-hover'],
-    extend: {},
+    extend: { margin: ['first', 'last'] },
     opacity: ({ after }) => after(['disabled'])
   },
   plugins: []

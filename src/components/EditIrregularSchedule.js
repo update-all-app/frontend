@@ -21,6 +21,7 @@ import {
 
 import BusinessApiManager from '../apiClients/BusinessApiManager';
 import { v4 as uuidv4 } from 'uuid';
+import { Title } from '../subcomponents/Title';
 
 export default function EditIrregularSchedule(props) {
   const { business } = props;

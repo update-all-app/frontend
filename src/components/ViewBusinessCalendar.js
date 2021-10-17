@@ -10,6 +10,7 @@ import {
   time24To12,
   datePlusDays
 } from '../helpers/functions';
+import { Title } from '../subcomponents/Title';
 
 export default function ViewBusinessCalendar(props) {
   const [events, setEvents] = useState([]);
@@ -134,13 +135,13 @@ export default function ViewBusinessCalendar(props) {
     const displayDate = currentDate.getDate();
 
     return (
-      <div className='m-8'>
+      <>
         <h1 className='rounded text-xl tertiary mb-2 p-4 bg-secdark'>
           {DAYS.GET(dayNumber).displayValue}, {displayDate} -{' '}
           {isClosed ? 'Closed' : 'Open'}
         </h1>
         {displayEvents(dayEvents)}
-      </div>
+      </>
     );
   };
 
@@ -163,7 +164,7 @@ export default function ViewBusinessCalendar(props) {
   return loading ? (
     <Loader />
   ) : (
-    <div className='m-8'>
+    <>
       <div className='border-b-2 p-2'>
         <button
           className='focus:outline-none mr-4 bg-transparent hover:bg-gray-100 text-gray-800 font-thin py-1 px-3 border border-gray-500 rounded'
@@ -233,6 +234,6 @@ export default function ViewBusinessCalendar(props) {
         </div>
       </div>
       <div>{renderDays()}</div>
-    </div>
+    </>
   );
 }

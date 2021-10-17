@@ -20,7 +20,7 @@ export default function BusinessCard(props) {
   } = business;
 
   const goToBusiness = () => {
-    history.push(`/businesses/${id}/update`);
+    history.push(`/businesses/${id}`);
   };
 
   return (

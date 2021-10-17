@@ -8,6 +8,7 @@ import UserContext from '../context/UserContext';
 import { SUPPORTED_SERVICES } from '../constants';
 import { ADD_CONNECTED_PAGE, REMOVE_CONNECTED_PAGE } from '../actionTypes';
 import { hash } from '../helpers/functions';
+import { Title } from '../subcomponents/Title';
 
 export default function ManageEndpoints({ business }) {
   const { state, dispatch } = useContext(UserContext);
@@ -298,8 +299,10 @@ export default function ManageEndpoints({ business }) {
   };
 
   return (
-    <div className='p-4'>
+    <>
+      <Title text='Connections' />
+
       {SUPPORTED_SERVICES.map((s) => renderLinkedServices(s))}
-    </div>
+    </>
   );
 }

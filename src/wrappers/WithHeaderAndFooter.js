@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 export default function WithHeaderAndFooter(props) {
   return (
     <div className='page overflow-scroll hide-scroll'>
-      <div id='content-wrap'>
+      <div>
         <Navbar />
         {props.children}
       </div>

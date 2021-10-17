@@ -24,14 +24,14 @@ export default function OpenHoursForm(props) {
   return (
     <Form onSubmit={createAndSubmitEvent}>
       <div className='w-3/4'>
-        <Label for='open-start' value='Open at' />
+        <Label htmlFor='open-start' value='Open at' />
         <Input
           id='open-start'
           type='time'
           onChange={setOpenStart}
           value={openStart}
         />
-        <Label for='open-end' value='Closes at' />
+        <Label htmlFor='open-end' value='Closes at' />
         <Input
           id='open-end'
           type='time'

@@ -6,6 +6,7 @@ import InformationBanner from '../subcomponents/InformationBanner';
 import ErrorBanner from '../subcomponents/ErrorBanner';
 import { SUPPORTED_SERVICES } from '../constants';
 import getSocialMediaIcon from '../helpers/SocialMediaIcons';
+import { Title } from '../subcomponents/Title';
 
 export default function UpdateIt(props) {
   const { business } = props;
@@ -63,30 +64,31 @@ export default function UpdateIt(props) {
       return serviceLookupByProviderOauthTokenId[page.providerOauthTokenId];
     });
     return SUPPORTED_SERVICES.map((service) => {
-      if (connectedPages.includes(service.value)) {
-        return (
-          <div className='flex-row'>
-            {getSocialMediaIcon(service.value)}
+      const isConnected = connectedPages.includes(service.value);
+
+      return (
+        <div
+          className='flex flex px-4 py-2 bg-gray-200 rounded-md mb-2'
+          key={service.value}
+        >
+          {getSocialMediaIcon(service.value)}
+          {isConnected ? (
             <p>........................Up to date</p>
-          </div>
-        );
-      } else {
-        return (
-          <div className='flex-row'>
-            {getSocialMediaIcon(service.value)}
+          ) : (
             <p>........................Out of sync</p>
-          </div>
-        );
-      }
+          )}
+        </div>
+      );
     });
   };
 
   return (
-    <div className='p-4'>
+    <>
       {renderBanners()}
-      <h1 className='text-3xl m-10'>Update Status</h1>
+      <Title text='Home - Sync Status' />
+
       <div>{renderServicesStatus()}</div>
-      <div className='m-10'>
+      <div className='mt-10'>
         <LoadingButton
           value='Update It All'
           loadingValue='Updating'
@@ -94,6 +96,6 @@ export default function UpdateIt(props) {
           onClick={updateIt}
         />
       </div>
-    </div>
+    </>
   );
 }

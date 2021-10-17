@@ -30,6 +30,6 @@ export default function SelectBusiness(props) {
       </WithHeaderAndFooter>
     );
   } else {
-    return <Redirect to={`/businesses/${user.data.businesses[0].id}/update`} />;
+    return <Redirect to={`/businesses/${user.data.businesses[0].id}`} />;
   }
 }

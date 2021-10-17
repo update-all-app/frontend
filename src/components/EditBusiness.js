@@ -2,6 +2,7 @@ import React from 'react';
 import Input from '../subcomponents/Input';
 import Submit from '../subcomponents/Submit';
 import Form from '../subcomponents/Form';
+import { Title } from '../subcomponents/Title';
 
 export default function EditBusiness(props) {
   const { business } = props;
@@ -20,8 +21,10 @@ export default function EditBusiness(props) {
   } = business;
 
   return (
-    <div className='p-4 m-auto w-3/4'>
-      <Form onSubmit={() => {}}>
+    <>
+      <Title text='Business Settings' />
+
+      <Form onSubmit={() => {}} className='p-4 m-auto w-3/4'>
         <Input label='Business Name' value={name} />
         <div className='flex flex-row justify-between'>
           <Input label='Business Email' value={emailAddress} w='w-11/12' />
@@ -41,6 +44,6 @@ export default function EditBusiness(props) {
 
         <Submit value='Save' />
       </Form>
-    </div>
+    </>
   );
 }

@@ -251,7 +251,7 @@ export default function EditRegularScheduleSimple(props) {
     <>
       {renderErrorBanner()}
       {renderSuccessBanner()}
-      <div className='flex m-4 ml-24 flex-col'>
+      <div className='flex flex-col'>
         <div className='mt-4'>
           <h1>
             <span className='my-3 float-left w-32 text-2xl'>Sunday</span>

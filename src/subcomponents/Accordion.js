@@ -17,7 +17,7 @@ export default function Accordion(props) {
           className='absolute opacity-0 z-0'
           id={checkboxId}
         />
-        <label for={checkboxId} className='tab-label'>
+        <label htmlFor={checkboxId} className='tab-label'>
           <span>{props.headerText}</span>
         </label>
         {renderChildren()}
