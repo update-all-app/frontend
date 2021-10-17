@@ -1,9 +1,7 @@
 import React, { useState, useContext } from 'react';
-import LandingNavbar from './LandingNavbar';
 import Input from '../../subcomponents/Input';
 import Submit from '../../subcomponents/Submit';
 import Form from '../../subcomponents/Form';
-import WithFooter from '../../wrappers/WithFooter';
 
 import LoginManager from '../../apiClients/LoginManager';
 import BusinessApiManager from '../../apiClients/BusinessApiManager';
@@ -11,6 +9,8 @@ import Parser from '../../helpers/Parser';
 import { POPULATE_USER, LOADING, LOGOUT_USER } from '../../actionTypes';
 import UserContext from '../../context/UserContext';
 import { Link } from 'react-router-dom';
+import { Title } from '../../subcomponents/Title';
+import { Card } from '../../subcomponents/Card';
 
 export default function Login(props) {
   const [email, setEmail] = useState('');
@@ -77,12 +77,10 @@ export default function Login(props) {
   };
 
   return (
-    <WithFooter>
-      <div className='h-45vh w-full bg-secondary'>
-        <LandingNavbar />
-      </div>
-      <div className='white flex flex-col justify-center align-left '></div>
-      <div className='border-l-2 border-primary shadow-lg p-10 content-center absolute top-1/4 left-3/10 bg-white w-2/5 max-h-3/4 overflow-scroll hide-scroll'>
+    <>
+      <Title text='Login' />
+
+      <Card>
         <Form onSubmit={login}>
           <Input
             placeholder='Email'
@@ -105,7 +103,7 @@ export default function Login(props) {
         <div className='mt-6 '>
           <Link to='/signup'>Don't have an account? Sign Up.</Link>
         </div>
-      </div>
-    </WithFooter>
+      </Card>
+    </>
   );
 }

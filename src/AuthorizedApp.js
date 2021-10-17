@@ -13,7 +13,6 @@ import CreateBusinessSimple from './components/CreateBusinessSimple';
 import ManageBusiness from './components/ManageBusiness';
 import SelectBusiness from './components/SelectBusiness';
 import AuthorizeServices from './components/AuthorizeServices';
-import NotFound from './components/NotFound';
 
 import EventReducer from './reducers/EventReducer';
 import EventContext from './context/EventContext';
@@ -29,6 +28,7 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
+import WithHeaderAndFooter from './wrappers/WithHeaderAndFooter';
 
 export default function AuthorizedApp() {
   const events = useContext(EventContext);
@@ -48,39 +48,52 @@ export default function AuthorizedApp() {
           <About />
         </Route>
         <Route exact path='/contact'>
-          <ContactUs />
+          <WithHeaderAndFooter fullWidth>
+            <ContactUs />
+          </WithHeaderAndFooter>
         </Route>
         <Route exact path='/customer-stories'>
-          <CustomerStories />
+          <WithHeaderAndFooter fullWidth>
+            <CustomerStories />
+          </WithHeaderAndFooter>
         </Route>
         <Route exact path='/careers'>
-          <Careers />
+          <WithHeaderAndFooter fullWidth>
+            <Careers />
+          </WithHeaderAndFooter>
         </Route>
         <Route exact path='/privacy'>
-          <Privacy />
+          <WithHeaderAndFooter fullWidth>
+            <Privacy />
+          </WithHeaderAndFooter>
         </Route>
         <Route exact path='/pricing'>
-          <Pricing />
+          <WithHeaderAndFooter fullWidth>
+            <Pricing />
+          </WithHeaderAndFooter>
         </Route>
         <Route exact path='/'>
           <SelectBusiness />
         </Route>
         <Route exact path='/setup-payment'>
-          <SetupPayment />
+          <WithHeaderAndFooter fullWidth>
+            <SetupPayment />
+          </WithHeaderAndFooter>
         </Route>
         <Route exact path='/authorize-services'>
-          <AuthorizeServices />
+          <WithHeaderAndFooter fullWidth>
+            <AuthorizeServices />
+          </WithHeaderAndFooter>
         </Route>
         <Route exact path='/businesses/new'>
-          <CreateBusinessSimple />
+          <WithHeaderAndFooter fullWidth>
+            <CreateBusinessSimple />
+          </WithHeaderAndFooter>
         </Route>
         <Route path='/businesses/:id'>
           <EventContext.Provider value={{ state, dispatch }}>
             <ManageBusiness />
           </EventContext.Provider>
-        </Route>
-        <Route exact path='/not-found'>
-          <NotFound />
         </Route>
         <Route path='/'>
           <Redirect to='/' />

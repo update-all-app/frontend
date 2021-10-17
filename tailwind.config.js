@@ -35,7 +35,8 @@ module.exports = {
         content:
           "calc(100vh - theme('height.header') - theme('height.footer'))",
         'content-narrow':
-          "calc(100vh - theme('height.header') - theme('height.top-sidebar') - theme('height.footer'))"
+          "calc(100vh - theme('height.header') - theme('height.top-sidebar') - theme('height.footer'))",
+        'fit-content': 'fit-content'
       },
       width: {
         160: '40rem',

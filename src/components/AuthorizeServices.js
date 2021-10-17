@@ -1,8 +1,5 @@
 import React, { useContext, useState } from 'react';
 
-import WithHeaderAndFooter from '../wrappers/WithHeaderAndFooter';
-import Card from '../wrappers/Card';
-
 import UserContext from '../context/UserContext';
 import LoadingButton from '../subcomponents/LoadingButton';
 import { fbLogin } from '../apiClients/FBClient';
@@ -11,6 +8,9 @@ import { authorizeGoogle } from '../apiClients/GoogleClient';
 
 import { ADD_AUTHORIZED_SERVICE } from '../actionTypes';
 import GoogleApiManager from '../apiClients/GoogleApiManager';
+import { Card } from '../subcomponents/Card';
+import { Cards } from '../subcomponents/Cards';
+import { Title } from '../subcomponents/Title';
 
 export default function AuthorizeServices(props) {
   const [loadingFb, setLoadingFb] = useState(false);
@@ -149,9 +149,11 @@ export default function AuthorizeServices(props) {
   };
 
   return (
-    <WithHeaderAndFooter>
-      <div className='m-12'>
-        <Card clickable={false}>
+    <>
+      <Title text='Authorize Services' />
+
+      <Cards>
+        <Card>
           <div className='flex flex-row align-center justify-center mb-4'>
             <h1>Facebook</h1>
             {renderIcon('facebook')}
@@ -166,7 +168,7 @@ export default function AuthorizeServices(props) {
             />
           </div>
         </Card>
-        <Card clickable={false}>
+        <Card>
           <div className='flex flex-column align-center justify-center mb-4'>
             <h1>Instagram</h1>
             {renderIcon('instagram')}
@@ -181,7 +183,7 @@ export default function AuthorizeServices(props) {
             />
           </div>
         </Card>
-        <Card clickable={false}>
+        <Card>
           <div className='flex flex-column align-center justify-center mb-4'>
             <h1>Twitter</h1>
             {renderIcon('twitter')}
@@ -196,7 +198,7 @@ export default function AuthorizeServices(props) {
             />
           </div>
         </Card>
-        <Card clickable={false}>
+        <Card>
           <div className='flex flex-column align-center justify-center mb-4'>
             <h1>Google</h1>
             {renderIcon('google')}
@@ -211,7 +213,7 @@ export default function AuthorizeServices(props) {
             />
           </div>
         </Card>
-      </div>
-    </WithHeaderAndFooter>
+      </Cards>
+    </>
   );
 }

@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { Tabs } from '../subcomponents/Tabs';
 import EditIrregularSchedule from './EditIrregularSchedule';
 import EditRegularScheduleSimple from './EditRegularScheduleSimple';
 import ViewBusinessCalendar from './ViewBusinessCalendar';

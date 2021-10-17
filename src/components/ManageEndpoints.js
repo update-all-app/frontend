@@ -2,13 +2,13 @@ import React, { useState, useContext } from 'react';
 import LoadingButton from '../subcomponents/LoadingButton';
 import ServicesApiManager from '../apiClients/ServicesApiManager';
 import Accordion from '../subcomponents/Accordion';
-import Card from '../wrappers/Card';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 import { SUPPORTED_SERVICES } from '../constants';
 import { ADD_CONNECTED_PAGE, REMOVE_CONNECTED_PAGE } from '../actionTypes';
 import { hash } from '../helpers/functions';
 import { Title } from '../subcomponents/Title';
+import { Card } from '../subcomponents/Card';
 
 export default function ManageEndpoints({ business }) {
   const { state, dispatch } = useContext(UserContext);

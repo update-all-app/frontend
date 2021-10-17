@@ -1,10 +1,12 @@
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import UserContext from '../context/UserContext';
 import Submit from '../subcomponents/Submit';
-import { useHistory } from 'react-router-dom';
 import WithHeaderAndFooter from '../wrappers/WithHeaderAndFooter';
 import { VALIDATE_PAYMENT, LOADING, LOADING_COMPLETE } from '../actionTypes';
 import UserApiManager from '../apiClients/UserApiManager';
+import { Title } from '../subcomponents/Title';
 
 export default function SetupPayment(props) {
   const { state, dispatch } = useContext(UserContext);
@@ -33,18 +35,17 @@ export default function SetupPayment(props) {
   };
 
   return (
-    <WithHeaderAndFooter>
-      <div className='flex flex-col justify-center items-center min-h-screen h-full w-full'>
-        <h1 className='text-4xl pb-10'>STRIPE PAYMENT PLACEHOLDER PAGE</h1>
-        <Submit
-          value='Confirm Payment Info'
-          onClick={submitPayment}
-          errors={paymentErrors}
-        />
-        <div className='mt-5'>
-          <Submit value='Skip for now' onClick={skipPayment} />
-        </div>
+    <>
+      <Title text='Set Up Payment' />
+
+      <Submit
+        value='Confirm Payment Info'
+        onClick={submitPayment}
+        errors={paymentErrors}
+      />
+      <div className='mt-5'>
+        <Submit value='Skip for now' onClick={skipPayment} />
       </div>
-    </WithHeaderAndFooter>
+    </>
   );
 }

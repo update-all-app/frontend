@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import WithHeaderAndFooter from '../wrappers/WithHeaderAndFooter';
 import Input from '../subcomponents/Input';
 import TextArea from '../subcomponents/TextArea';
 import Submit from '../subcomponents/Submit';
 import { validateEmail } from '../helpers/functions';
+import { Title } from '../subcomponents/Title';
 
 export default function ContactUs(props) {
   const [email, setEmail] = useState('');
@@ -58,32 +58,31 @@ export default function ContactUs(props) {
   };
 
   return (
-    <WithHeaderAndFooter>
-      <div className='flex justify-center items-center w-full flex-col overflow-scroll'>
-        <h1 className='text-center text-2xl font-bold m-10'>Contact Us</h1>
-        <h1>Ask a question. Report a bug. Say hi.</h1>
-        <div className='p-4 w-96'>
-          <Input
-            placeholder={'Email'}
-            value={email}
-            onChange={updateEmail}
-            errors={emailErrors}
-          />
-        </div>
-        <div>
-          <TextArea
-            value={question}
-            onChange={updateQuestion}
-            errors={questionErrors}
-          />
-        </div>
-        <div className='m-10 border-2 w-160 p-4'>
-          <p>Add file drop here</p>
-        </div>
-        <div className='mb-10 w-160 flex flex-col items-start'>
-          <Submit value={'Send'} onClick={sendQuestion} errors={formErrors} />
-        </div>
+    <>
+      <Title text='Contact Us' />
+
+      <p>Ask a question. Report a bug. Say hi.</p>
+      <div className='py-4 w-96'>
+        <Input
+          placeholder={'Email'}
+          value={email}
+          onChange={updateEmail}
+          errors={emailErrors}
+        />
       </div>
-    </WithHeaderAndFooter>
+      <div>
+        <TextArea
+          value={question}
+          onChange={updateQuestion}
+          errors={questionErrors}
+        />
+      </div>
+      <div className='my-10 border-2 w-160 p-4'>
+        <p>Add file drop here</p>
+      </div>
+      <div className='mb-10 w-160 flex flex-col items-start'>
+        <Submit value={'Send'} onClick={sendQuestion} errors={formErrors} />
+      </div>
+    </>
   );
 }

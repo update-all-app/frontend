@@ -30,32 +30,30 @@ const SidebarLink = ({ children, link }) => {
 
 export default function Sidebar() {
   return (
-    <>
-      <div className='flex flex-col w-full md:w-52 text-white bg-primary flex-shrink-0 overflow-scroll md:h-content'>
-        <div className='px-6'>
-          <ul className='mt-6'>
-            <SidebarLink link=''>
-              <HomeIcon className='-mr-1 h-5 w-5' aria-hidden='true' />
-              <span className='text-sm  ml-2'>Home</span>
-            </SidebarLink>
+    <div className='flex flex-col w-full md:w-52 text-white bg-primary flex-shrink-0 overflow-scroll md:h-content'>
+      <div className='px-6'>
+        <ul className='mt-6'>
+          <SidebarLink link=''>
+            <HomeIcon className='-mr-1 h-5 w-5' aria-hidden='true' />
+            <span className='text-sm  ml-2'>Home</span>
+          </SidebarLink>
 
-            <SidebarLink link='/business-hours'>
-              <CalendarIcon className='-mr-1 h-5 w-5' aria-hidden='true' />
-              <span className='text-sm  ml-2'>Business Hours</span>
-            </SidebarLink>
+          <SidebarLink link='/business-hours'>
+            <CalendarIcon className='-mr-1 h-5 w-5' aria-hidden='true' />
+            <span className='text-sm  ml-2'>Business Hours</span>
+          </SidebarLink>
 
-            <SidebarLink link='/connections'>
-              <WifiIcon className='-mr-1 h-5 w-5' aria-hidden='true' />
-              <span className='text-sm  ml-2'>Connections</span>
-            </SidebarLink>
+          <SidebarLink link='/connections'>
+            <WifiIcon className='-mr-1 h-5 w-5' aria-hidden='true' />
+            <span className='text-sm  ml-2'>Connections</span>
+          </SidebarLink>
 
-            <SidebarLink link='/edit'>
-              <CogIcon className='-mr-1 h-5 w-5' aria-hidden='true' />
-              <span className='text-sm  ml-2'>Business Settings</span>
-            </SidebarLink>
-          </ul>
-        </div>
+          <SidebarLink link='/edit'>
+            <CogIcon className='-mr-1 h-5 w-5' aria-hidden='true' />
+            <span className='text-sm  ml-2'>Business Settings</span>
+          </SidebarLink>
+        </ul>
       </div>
-    </>
+    </div>
   );
 }

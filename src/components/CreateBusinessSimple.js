@@ -13,6 +13,7 @@ import Parser from '../helpers/Parser';
 import { hash } from '../helpers/functions';
 
 import { LOADING, ADD_BUSINESS, LOADING_COMPLETE } from '../actionTypes';
+import { Title } from '../subcomponents/Title';
 
 export default function CreateBusinessSimple(props) {
   const { dispatch } = useContext(UserContext);
@@ -100,31 +101,28 @@ export default function CreateBusinessSimple(props) {
   };
 
   return (
-    <WithHeaderAndFooter>
-      <WithModal h='h-3/4' overflowScroll=''>
-        <h1 className='mt-10 text-xl font-black text-center'>
-          To get started, just tell us the name of your business
-        </h1>
-        <div classNmae='m-auto w-full flex justify-between'>
-          <div className='mt-10'>
-            <Input
-              value={businessName}
-              onChange={setBusinessName}
-              label='Your Business Name'
-              placeholder={`${firstName()}'s Amazing Business`}
-              errors={nameErrors}
-            />
-          </div>
-          <div className='m-auto w-full flex justify-end'>
-            <Submit
-              value='Create Business'
-              mt='mt-8'
-              onClick={handleSubmit}
-              errors={submitErrors}
-            />
-          </div>
+    <>
+      <Title text='New Business' />
+
+      <div classNmae='m-auto w-full flex justify-between'>
+        <div className='mt-10'>
+          <Input
+            value={businessName}
+            onChange={setBusinessName}
+            label='Your Business Name'
+            placeholder={`${firstName()}'s Amazing Business`}
+            errors={nameErrors}
+          />
         </div>
-      </WithModal>
-    </WithHeaderAndFooter>
+        <div className='m-auto w-full flex justify-end'>
+          <Submit
+            value='Create Business'
+            mt='mt-8'
+            onClick={handleSubmit}
+            errors={submitErrors}
+          />
+        </div>
+      </div>
+    </>
   );
 }

@@ -9,14 +9,20 @@ body {
   font-family: 'Nunito', sans-serif;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .logo {
-  height: 27vh;
-  animation-duration: 20s;
-  animation-iteration-count: infinite;
   margin: auto;
-  margin-bottom: 0px;
-  transform-origin: bottom;
-  z-index: 10;
+  animation: bounceIn 0.6s;
+  transform: rotate(0deg) scale(1) translateZ(0);
+  transition: all 0.4s cubic-bezier(0.8, 1.8, 0.75, 0.75);
+  cursor: pointer;
+}
+
+.logo:hover {
+  transform: rotate(10deg) scale(1.1);
 }
 
 .max-h-large {
