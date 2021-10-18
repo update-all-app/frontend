@@ -1,19 +1,20 @@
-import "./App.css";
-import React, { useEffect, useReducer, useContext } from "react";
+import './App.css';
+import React, { useEffect, useReducer, useContext } from 'react';
 
-import AuthorizedApp from "./AuthorizedApp";
-import UnauthorizedApp from "./UnauthorizedApp";
+import AuthorizedApp from './AuthorizedApp';
+import UnauthorizedApp from './UnauthorizedApp';
 
-import UserContext from "./context/UserContext";
-import UserReducer from "./reducers/UserReducer";
-import { POPULATE_USER, LOADING, LOGOUT_USER } from "./actionTypes";
+import UserContext from './context/UserContext';
+import UserReducer from './reducers/UserReducer';
+import { POPULATE_USER, LOADING, LOGOUT_USER } from './actionTypes';
 
-import LoginManager from "./apiClients/LoginManager";
-import UserApiManager from "./apiClients/UserApiManager";
-import BusinessApiManager from "./apiClients/BusinessApiManager";
-import Parser from "./helpers/Parser";
+import LoginManager from './apiClients/LoginManager';
+import UserApiManager from './apiClients/UserApiManager';
+import BusinessApiManager from './apiClients/BusinessApiManager';
+import Parser from './helpers/Parser';
 
-import AppDecider from "./wrappers/AppDecider";
+import AppDecider from './wrappers/AppDecider';
+import { initGoogleSDK } from './apiClients/GoogleClient';
 
 export default function App() {
   const user = useContext(UserContext);
@@ -23,19 +24,19 @@ export default function App() {
     const checkUserStatus = async () => {
       try {
         const user = await UserApiManager.getUser();
-        console.log(user)
+        console.log(user);
         if (user) {
           const businesses = await BusinessApiManager.getBusinesses();
           const businessesForContext = businesses.map((b) =>
             Parser.parseBusinessForContext(b)
           );
-          const formattedServices = user.services.map(s => ({
+          const formattedServices = user.services.map((s) => ({
             provider: s.provider,
             providerOauthTokenId: s.id,
             providerUID: s.provider_uid,
             label: s.label,
             pageData: s.page_data
-          }))
+          }));
           dispatch({
             type: POPULATE_USER,
             payload: {
@@ -63,7 +64,7 @@ export default function App() {
   // BELOW: Testing to see if this is faster than using wrapper
   // const renderApp = () => {
   //   return !!user.data.name ? <AuthorizedApp /> : <UnauthorizedApp />
-  // }
+  // },
 
   return (
     // <React.StrictMode>

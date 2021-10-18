@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-const UserContext = React.createContext({ data: {}, loading: true })
-UserContext.displayName = "UserContext";
+const UserContext = React.createContext({ data: {}, loading: true });
+UserContext.displayName = 'UserContext';
 
 export default UserContext;

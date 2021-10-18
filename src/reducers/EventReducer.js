@@ -1,4 +1,3 @@
-
 import {
   ADD_REGULAR_EVENT,
   EDIT_REGULAR_EVENT,
@@ -11,67 +10,66 @@ import {
   CLEAR_EVENTS
 } from '../actionTypes';
 
-
-export default function UserReducer(state, action){
-  switch(action.type){
-      case ADD_REGULAR_EVENT:
-        const newRegEvent = action.payload
-        return {
-          ...state,
-          regularEvents: [...state.regularEvents, newRegEvent]
-        }
-      case EDIT_REGULAR_EVENT:
-        return {
-          ...state,
-          regularEvents: state.regularEvents.map(e => {
-            return e.id === action.payload.id ? {...action.payload} : e
-          })
-        }
-      case ADD_IRREGULAR_EVENT:
-        const newIrregEvent = action.payload
-        newIrregEvent.start = new Date(newIrregEvent.start)
-        newIrregEvent.end = new Date(newIrregEvent.end)
-        return {
-          ...state,
-          irregularEvents: [...state.irregularEvents, newIrregEvent]
-        }
-      case EDIT_IRREGULAR_EVENT:
-        return {
-          ...state,
-          irregularEvents: state.irregularEvents.map(e => {
-            return e.id === action.payload.id ? {...action.payload} : e
-          })
-        }
-      case DELETE_REGULAR_EVENT:
-        return {
-          ...state,
-          regularEvents: state.regularEvents.filter(e => {
-            return e.id !== action.payload.id
-          })
-        }
-      case DELETE_IRREGULAR_EVENT:
-        return {
-          ...state,
-          irregularEvents: state.irregularEvents.filter(e => {
-            return e.id !== action.payload.id
-          })
-        }
-      case SET_REGULAR_EVENTS:
-        return {
-          ...state,
-          regularEvents: [...action.payload]
-        }
-      case SET_IRREGULAR_EVENTS:
-        return {
-          ...state,
-          irregularEvents: [...action.payload]
-        }
-      case CLEAR_EVENTS:
-        return {
-          regularEvents: [],
-          irregularEvents: []
-        }
-      default:
-          return state
+export default function UserReducer(state, action) {
+  switch (action.type) {
+    case ADD_REGULAR_EVENT:
+      const newRegEvent = action.payload;
+      return {
+        ...state,
+        regularEvents: [...state.regularEvents, newRegEvent]
+      };
+    case EDIT_REGULAR_EVENT:
+      return {
+        ...state,
+        regularEvents: state.regularEvents.map((e) => {
+          return e.id === action.payload.id ? { ...action.payload } : e;
+        })
+      };
+    case ADD_IRREGULAR_EVENT:
+      const newIrregEvent = action.payload;
+      newIrregEvent.start = new Date(newIrregEvent.start);
+      newIrregEvent.end = new Date(newIrregEvent.end);
+      return {
+        ...state,
+        irregularEvents: [...state.irregularEvents, newIrregEvent]
+      };
+    case EDIT_IRREGULAR_EVENT:
+      return {
+        ...state,
+        irregularEvents: state.irregularEvents.map((e) => {
+          return e.id === action.payload.id ? { ...action.payload } : e;
+        })
+      };
+    case DELETE_REGULAR_EVENT:
+      return {
+        ...state,
+        regularEvents: state.regularEvents.filter((e) => {
+          return e.id !== action.payload.id;
+        })
+      };
+    case DELETE_IRREGULAR_EVENT:
+      return {
+        ...state,
+        irregularEvents: state.irregularEvents.filter((e) => {
+          return e.id !== action.payload.id;
+        })
+      };
+    case SET_REGULAR_EVENTS:
+      return {
+        ...state,
+        regularEvents: [...action.payload]
+      };
+    case SET_IRREGULAR_EVENTS:
+      return {
+        ...state,
+        irregularEvents: [...action.payload]
+      };
+    case CLEAR_EVENTS:
+      return {
+        regularEvents: [],
+        irregularEvents: []
+      };
+    default:
+      return state;
   }
 }
