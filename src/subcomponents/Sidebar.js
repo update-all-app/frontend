@@ -1,62 +1,59 @@
-import React from 'react'
-import {hash} from '../helpers/functions'
+import React from 'react';
+import {
+  HomeIcon,
+  CalendarIcon,
+  WifiIcon,
+  CogIcon
+} from '@heroicons/react/outline';
+import { useLocation, useHistory, useRouteMatch } from 'react-router-dom';
 
-export default function Sidebar(props){
+const classNames = (...classes) => classes.filter(Boolean).join(' ');
 
-  const { links, callbacks, activeLink, header } = props
+const SidebarLink = ({ children, link }) => {
+  const history = useHistory();
+  const { url } = useRouteMatch();
+  const location = useLocation();
+  const isActive = location.pathname.split(url).slice(-1)[0] === link;
 
-  const renderHeader = () => {
-    if(!!header){
-      return(
-        <div className="text-lg p-6 flex border-b-4 border-black justify-center items-center text-gray-500">
-          <h1>{header}</h1>
-        </div>
-      )
-    }
-  }
+  return (
+    <li
+      className={classNames(
+        isActive ? 'text-yellow' : '',
+        'flex w-full justify-between hover:text-gray-500 cursor-pointer items-center mb-6'
+      )}
+      onClick={() => history.push(`${url}${link}`)}
+    >
+      <div className='flex items-center'>{children}</div>
+    </li>
+  );
+};
 
-  const renderLinks = () => {
-    return links.map((link, i) => {
-      let mtClass = ""
-      if(i === 0){
-        mtClass = !!header ? 'mt-10' : 'mt-20'
-      }
-      let icon = (props.children && props.children.length > i) ? props.children[i] : null
+export default function Sidebar() {
+  return (
+    <div className='flex flex-col w-full md:w-52 text-white bg-primary flex-shrink-0 overflow-scroll md:h-content'>
+      <div className='px-6'>
+        <ul className='mt-6'>
+          <SidebarLink link=''>
+            <HomeIcon className='-mr-1 h-5 w-5' aria-hidden='true' />
+            <span className='text-sm  ml-2'>Home</span>
+          </SidebarLink>
 
-      let callback = (callbacks && callbacks.length > i) ? callbacks[i] : () => {}
+          <SidebarLink link='/business-hours'>
+            <CalendarIcon className='-mr-1 h-5 w-5' aria-hidden='true' />
+            <span className='text-sm  ml-2'>Business Hours</span>
+          </SidebarLink>
 
-      if(i === 0 && !icon && props.children){
-        icon = props.children
-      }
+          <SidebarLink link='/connections'>
+            <WifiIcon className='-mr-1 h-5 w-5' aria-hidden='true' />
+            <span className='text-sm  ml-2'>Connections</span>
+          </SidebarLink>
 
-      let activatedClass = ''
-
-      if(i === activeLink){
-        activatedClass = 'active-sidebar-link'
-      }
-
-      return(
-        <li key={hash(link)} className="mr-3 flex-1 mb-5 block h-full">
-          <button onClick={callback} className={`ml-2 ${mtClass} block ${activatedClass} py-2 pl-4 w-full text-left text-gray-500 no-underline border-l border-secdark sidebar-link cursor-pointer focus:outline-none`}>
-          {icon}<span className="pb-1 inline text-xs hidden md:inline lg:text-base">{link}</span>
-          </button>
-        </li>
-      )
-    })
-  }
-
-  return(
-
-    <>
-      <div className="w-1/5 min-w-1/5 min-h-screen h-full custom-shadow bg-primary relative bottom:0 left:0 h-full top:0 float-left">
-        {renderHeader()}
-        <div className="mx-auto inline">
-          <ul className="list-reset bg-primary flex flex-col text-left">
-            {renderLinks()}
-          </ul>
-        </div>
+          <SidebarLink link='/edit'>
+            <CogIcon className='-mr-1 h-5 w-5' aria-hidden='true' />
+            <span className='text-sm  ml-2'>Business Settings</span>
+          </SidebarLink>
+        </ul>
       </div>
-    </>
-    
-  )
+    </div>
+  );
 }

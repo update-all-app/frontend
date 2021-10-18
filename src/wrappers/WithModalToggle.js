@@ -1,37 +1,37 @@
-import React from "react";
+import React from 'react';
 
 export default function WithModalToggle(props) {
   const {
-    w = "w-11/12 max-w-2xl",
-    h = "",
-    leftCenterWidth = "left-center-160",
-    position = "top-12",
+    w = 'w-11/12 max-w-2xl',
+    h = '',
+    leftCenterWidth = 'left-center-160',
+    position = 'top-12',
     modal = null,
     on = false,
     onExit,
-    hasExit = false,
+    hasExit = false
   } = props;
 
-  const hiddenClass = on ? "" : "hidden";
+  const hiddenClass = on ? '' : 'hidden';
 
   const renderExit = () => {
     if (hasExit) {
       return (
         <div
-          className="absolute top-0 right-0 h-10 w-10 text-tertiary hover:text-terdark transition-500 cursor-pointer"
+          className='absolute top-0 right-0 h-10 w-10 text-tertiary hover:text-terdark transition-500 cursor-pointer'
           onClick={onExit}
         >
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
           >
             <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              strokeLinecap='round'
+              strokeLinejoin='round'
               strokeWidth={2}
-              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+              d='M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z'
             />
           </svg>
         </div>
@@ -41,7 +41,9 @@ export default function WithModalToggle(props) {
 
   return (
     <>
-      <div className={`relative h-screen transition-opacity duration-300 p-4 withModalToggle`}>
+      <div
+        className={`relative h-screen transition-opacity duration-300 withModalToggle`}
+      >
         {props.children}
         <div className={`overlay-dark ${hiddenClass}`}></div>
         {/* <div className="w-full h-full flex justify-center items-center"> */}

@@ -1,42 +1,38 @@
-import './App.css';
-import React from 'react'
-
-import Landing from './components/without_auth_flow/Landing'
-import Login from './components/without_auth_flow/Login'
-import About from './components/without_auth_flow/About'
-import Pricing from './components/without_auth_flow/Pricing'
-import Signup from './components/without_auth_flow/Signup'
-import ContactUs from './components/ContactUs'
-import CustomerStories from './components/CustomerStories'
-import Careers from './components/Careers'
-import Privacy from './components/Privacy'
-import NotFound from './components/NotFound'
-
-
-import { 
+import React from 'react';
+import {
   BrowserRouter as Router,
   Switch,
-  Route, 
+  Route,
   Redirect
 } from 'react-router-dom';
 
+import './App.css';
+import Landing from './components/without_auth_flow/Landing';
+import Login from './components/without_auth_flow/Login';
+import About from './components/without_auth_flow/About';
+import Pricing from './components/without_auth_flow/Pricing';
+import Signup from './components/without_auth_flow/Signup';
+import ContactUs from './components/ContactUs';
+import CustomerStories from './components/CustomerStories';
+import Careers from './components/Careers';
+import Privacy from './components/Privacy';
+import WithHeaderAndFooter from './wrappers/WithHeaderAndFooter';
 
 export default function UnauthorizedApp() {
-
-
   return (
-      <Router>
+    <Router>
+      <WithHeaderAndFooter fullWidth>
         <Switch>
-          <Route exact path="/">
+          <Route exact path='/'>
             <Landing />
           </Route>
-          <Route exact path="/login">
+          <Route exact path='/login'>
             <Login />
           </Route>
-          <Route exact path="/signup">
+          <Route exact path='/signup'>
             <Signup />
           </Route>
-          <Route exact path="/about">
+          <Route exact path='/about'>
             <About />
           </Route>
           <Route exact path='/contact'>
@@ -51,14 +47,14 @@ export default function UnauthorizedApp() {
           <Route exact path='/privacy'>
             <Privacy />
           </Route>
-          <Route exact path="/pricing">
+          <Route exact path='/pricing'>
             <Pricing />
           </Route>
-          <Route path="/">
-            <Redirect to="/"/>
+          <Route path='/'>
+            <Redirect to='/' />
           </Route>
         </Switch>
-      </Router>
-  )
+      </WithHeaderAndFooter>
+    </Router>
+  );
 }
-

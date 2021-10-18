@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 
-export default function Loader(){
-    return (
-        <>
-            <div className="overlay"></div>
-            <div className="loader">Loading...</div>
-        </>
-    )
+export default function Loader() {
+  return (
+    <>
+      <div className='overlay'></div>
+      <div className='loader'>Loading...</div>
+    </>
+  );
 }

@@ -1,20 +1,20 @@
-import React from "react";
-import Submit from "./Submit";
-import Input from "./Input";
-import TextArea from "./TextArea";
-import Select from "./Select";
+import React from 'react';
+import Submit from './Submit';
+import Input from './Input';
+import TextArea from './TextArea';
+import Select from './Select';
 import {
   dateTo24Time,
   safeCallWithDefault,
-  dateToHTMLString,
-} from "../helpers/functions";
-import { Calendar, Views, momentLocalizer } from "react-big-calendar";
-import WithModalToggle from "../wrappers/WithModalToggle";
-import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
-import moment from "moment";
+  dateToHTMLString
+} from '../helpers/functions';
+import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
+import WithModalToggle from '../wrappers/WithModalToggle';
+import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
+import moment from 'moment';
 
-import "react-big-calendar/lib/css/react-big-calendar.css";
-import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 
 const localizer = momentLocalizer(moment);
 
@@ -23,13 +23,13 @@ const DragAndDropCalendar = withDragAndDrop(Calendar);
 class InteractiveCalendar extends React.Component {
   static defaultProps = {
     views: Object.keys(Views).map((k) => Views[k]),
-    defaultView: "week",
-    allowedEventValues: ["title", "start", "end", "desc"],
+    defaultView: 'week',
+    allowedEventValues: ['title', 'start', 'end', 'desc'],
     defaultEventValues: {},
     disabledEventValues: [],
     dimensions: null,
-    modalw: "w-11/12 max-w-2xl",
-    modalh: "",
+    modalw: 'w-11/12 max-w-2xl',
+    modalh: '',
     titleOptions: null,
     // modalPosition: null,
     onSave: () => {},
@@ -37,8 +37,8 @@ class InteractiveCalendar extends React.Component {
     events: [],
     step: 30,
     toolbar: true,
-    dayLayoutAlgorithm: "overlap",
-    repeatOptions: [],
+    dayLayoutAlgorithm: 'overlap',
+    repeatOptions: []
   };
 
   constructor(props) {
@@ -48,15 +48,15 @@ class InteractiveCalendar extends React.Component {
       displayEditEvent: false,
       eventToEdit: {
         id: null,
-        title: "",
+        title: '',
         start: null,
         end: null,
-        desc: "",
+        desc: ''
       },
-      newEventTitle: "",
-      newEventStart: "",
-      newEventEnd: "",
-      isNewEvent: false,
+      newEventTitle: '',
+      newEventStart: '',
+      newEventEnd: '',
+      isNewEvent: false
     };
 
     this.moveEvent = this.moveEvent.bind(this);
@@ -67,10 +67,10 @@ class InteractiveCalendar extends React.Component {
   placeholderEvent() {
     return {
       id: null,
-      title: "",
+      title: '',
       start: null,
       end: null,
-      desc: "",
+      desc: ''
     };
   }
 
@@ -96,7 +96,7 @@ class InteractiveCalendar extends React.Component {
       title: draggedEvent.title,
       start,
       end,
-      allDay: allDay,
+      allDay: allDay
     };
 
     this.setState({ draggedEvent: null });
@@ -112,7 +112,7 @@ class InteractiveCalendar extends React.Component {
   handleSelectSlot = ({ start, end }) => {
     let defaultTitle;
     if (this.props.defaultEventValues.title === undefined) {
-      defaultTitle = "";
+      defaultTitle = '';
     } else {
       defaultTitle = this.props.defaultEventValues.title;
     }
@@ -121,10 +121,10 @@ class InteractiveCalendar extends React.Component {
       eventToEdit: {
         start,
         end,
-        title: defaultTitle,
+        title: defaultTitle
       },
       displayEditEvent: true,
-      isNewEvent: true,
+      isNewEvent: true
     });
   };
 
@@ -132,14 +132,14 @@ class InteractiveCalendar extends React.Component {
     this.setState({
       displayEditEvent: true,
       eventToEdit: { ...e },
-      isNewEvent: false,
+      isNewEvent: false
     });
   };
 
   exitAndSaveEvent = () => {
     this.props.onSave(this.state.eventToEdit);
     this.setState({
-      eventToEdit: this.placeholderEvent(),
+      eventToEdit: this.placeholderEvent()
     });
     this.exitModal();
   };
@@ -148,26 +148,26 @@ class InteractiveCalendar extends React.Component {
     this.setState({
       eventToEdit: {
         ...this.state.eventToEdit,
-        title: val,
-      },
+        title: val
+      }
     });
   };
 
   updateModalStartTime = (val) => {
-    const [hour, min] = val.split(":");
+    const [hour, min] = val.split(':');
     const startDate = new Date(this.state.eventToEdit.start);
     startDate.setHours(Number.parseInt(hour));
     startDate.setMinutes(Number.parseInt(min));
     this.setState({
       eventToEdit: {
         ...this.state.eventToEdit,
-        start: startDate,
-      },
+        start: startDate
+      }
     });
   };
 
   updateModalStartDate = (val) => {
-    const [year, month, day] = val.split("-");
+    const [year, month, day] = val.split('-');
     const startDate = new Date(this.state.eventToEdit.start);
     startDate.setYear(year);
     startDate.setMonth(month - 1);
@@ -175,26 +175,26 @@ class InteractiveCalendar extends React.Component {
     this.setState({
       eventToEdit: {
         ...this.state.eventToEdit,
-        start: startDate,
-      },
+        start: startDate
+      }
     });
   };
 
   updateModalEndTime = (val) => {
-    const [hour, min] = val.split(":");
+    const [hour, min] = val.split(':');
     const endDate = new Date(this.state.eventToEdit.end);
     endDate.setHours(Number.parseInt(hour));
     endDate.setMinutes(Number.parseInt(min));
     this.setState({
       eventToEdit: {
         ...this.state.eventToEdit,
-        end: endDate,
-      },
+        end: endDate
+      }
     });
   };
 
   updateModalEndDate = (val) => {
-    const [year, month, day] = val.split("-");
+    const [year, month, day] = val.split('-');
     const endDate = new Date(this.state.eventToEdit.end);
     endDate.setYear(year);
     endDate.setMonth(month - 1);
@@ -202,8 +202,8 @@ class InteractiveCalendar extends React.Component {
     this.setState({
       eventToEdit: {
         ...this.state.eventToEdit,
-        end: endDate,
-      },
+        end: endDate
+      }
     });
   };
 
@@ -211,8 +211,8 @@ class InteractiveCalendar extends React.Component {
     this.setState({
       eventToEdit: {
         ...this.state.eventToEdit,
-        desc: val,
-      },
+        desc: val
+      }
     });
   };
 
@@ -220,30 +220,28 @@ class InteractiveCalendar extends React.Component {
     this.setState({
       eventToEdit: {
         ...this.state.eventToEdit,
-        repeat: val,
-      },
+        repeat: val
+      }
     });
   };
 
   renderEventTitle = () => {
-    if (!this.props.allowedEventValues.includes("title")) {
+    if (!this.props.allowedEventValues.includes('title')) {
       return null;
     }
-    const disabled = this.props.disabledEventValues.includes("title");
+    const disabled = this.props.disabledEventValues.includes('title');
 
     return this.props.titleOptions ? (
       <Select
-        label="Event Name"
+        label='Event Name'
         value={this.state.eventToEdit.title}
         options={this.props.titleOptions}
         onChange={(val) => this.updateModalTitle(val)}
         disabled={disabled}
       />
-    )
-    :
-    (
+    ) : (
       <Input
-        label="Event Name"
+        label='Event Name'
         value={this.state.eventToEdit.title}
         onChange={(val) => this.updateModalTitle(val)}
         disabled={disabled}
@@ -252,35 +250,35 @@ class InteractiveCalendar extends React.Component {
   };
 
   renderStartTimes() {
-    if (!this.props.allowedEventValues.includes("start")) {
+    if (!this.props.allowedEventValues.includes('start')) {
       return null;
     }
-    const disabled = this.props.disabledEventValues.includes("start");
+    const disabled = this.props.disabledEventValues.includes('start');
 
     return (
-      <div className="flex flex-row space-between">
+      <div className='flex flex-row space-between'>
         <Input
-          label="Start Date"
-          type="date"
+          label='Start Date'
+          type='date'
           value={safeCallWithDefault(
-            "",
+            '',
             dateToHTMLString,
             this.state.eventToEdit.start
           )}
           onChange={this.updateModalStartDate}
-          w="w-11/12"
+          w='w-11/12'
           disabled={disabled}
         />
         <Input
-          label="Start Time"
-          type="time"
+          label='Start Time'
+          type='time'
           value={safeCallWithDefault(
-            "",
+            '',
             dateTo24Time,
             this.state.eventToEdit.start
           )}
           onChange={this.updateModalStartTime}
-          w="w-11/12"
+          w='w-11/12'
           disabled={disabled}
         />
       </div>
@@ -288,34 +286,34 @@ class InteractiveCalendar extends React.Component {
   }
 
   renderEndTimes() {
-    if (!this.props.allowedEventValues.includes("end")) {
+    if (!this.props.allowedEventValues.includes('end')) {
       return null;
     }
-    const disabled = this.props.disabledEventValues.includes("end");
+    const disabled = this.props.disabledEventValues.includes('end');
     return (
-      <div className="flex flex-row space-between">
+      <div className='flex flex-row space-between'>
         <Input
-          label="End Date"
-          type="date"
+          label='End Date'
+          type='date'
           value={safeCallWithDefault(
-            "",
+            '',
             dateToHTMLString,
             this.state.eventToEdit.end
           )}
           onChange={this.updateModalEndDate}
-          w="w-11/12"
+          w='w-11/12'
           disabled={disabled}
         />
         <Input
-          label="End Time"
-          type="time"
+          label='End Time'
+          type='time'
           value={safeCallWithDefault(
-            "",
+            '',
             dateTo24Time,
             this.state.eventToEdit.end
           )}
           onChange={this.updateModalEndTime}
-          w="w-11/12"
+          w='w-11/12'
           disabled={disabled}
         />
       </div>
@@ -323,17 +321,17 @@ class InteractiveCalendar extends React.Component {
   }
 
   renderDescription() {
-    if (!this.props.allowedEventValues.includes("desc")) {
+    if (!this.props.allowedEventValues.includes('desc')) {
       return null;
     }
-    const disabled = this.props.disabledEventValues.includes("desc");
+    const disabled = this.props.disabledEventValues.includes('desc');
     return (
       <TextArea
-        label="Description"
+        label='Description'
         value={this.state.eventToEdit.desc}
         onChange={(val) => this.updateModalDesc(val)}
-        w="w-full"
-        h="h-56"
+        w='w-full'
+        h='h-56'
         disabled={disabled}
       />
     );
@@ -342,10 +340,10 @@ class InteractiveCalendar extends React.Component {
   renderRepeatOptions() {
     if (this.props.repeatOptions.length > 0) {
       return (
-        <div className="w-1/2">
+        <div className='w-1/2'>
           <Select
-            label={"Repeat Options"}
-            name="repeatOptions"
+            label={'Repeat Options'}
+            name='repeatOptions'
             value={this.state.eventToEdit.repeat}
             options={this.props.repeatOptions}
             onChange={(val) => this.updateModalRepeat(val)}
@@ -358,10 +356,10 @@ class InteractiveCalendar extends React.Component {
   renderDeleteEvent() {
     if (!this.state.isNewEvent) {
       return (
-        <div className="my-10 flex justify-left flex-row">
+        <div className='my-10 flex justify-left flex-row'>
           <Submit
-            value="Delete Event"
-            type="danger"
+            value='Delete Event'
+            type='danger'
             onClick={() => this.deleteEvent()}
           />
         </div>
@@ -379,7 +377,7 @@ class InteractiveCalendar extends React.Component {
   renderModal() {
     return (
       <div>
-        <div className="flex flex-col">
+        <div className='flex flex-col'>
           <div>
             {this.renderEventTitle()}
             {this.renderStartTimes()}
@@ -388,10 +386,10 @@ class InteractiveCalendar extends React.Component {
             {this.renderRepeatOptions()}
           </div>
         </div>
-        <div className="flex flex-row justify-between mt-10">
-          <Submit value="Cancel" onClick={() => this.exitModal()} />
-          <div className="float-right">
-            <Submit value="Save" onClick={() => this.exitAndSaveEvent()} />
+        <div className='flex flex-row justify-between mt-10'>
+          <Submit value='Cancel' onClick={() => this.exitModal()} />
+          <div className='float-right'>
+            <Submit value='Save' onClick={() => this.exitAndSaveEvent()} />
           </div>
         </div>
         {this.renderDeleteEvent()}
@@ -402,13 +400,13 @@ class InteractiveCalendar extends React.Component {
   exitModal() {
     this.setState({
       eventToEdit: this.placeholderEvent(),
-      displayEditEvent: false,
+      displayEditEvent: false
     });
   }
 
   render() {
     return (
-      <div className="h-full">
+      <div className='h-full'>
         <WithModalToggle
           w={this.props.modalw}
           h={this.props.modalh}
@@ -429,7 +427,7 @@ class InteractiveCalendar extends React.Component {
             localizer={localizer}
             defaultView={this.props.defaultView}
             defaultDate={new Date(Date.now())}
-            style={{ height: "100%", maxHeight: '100vh', overflow: 'scroll'}}
+            style={{ height: '100%', maxHeight: '100vh', overflow: 'scroll' }}
             onSelectEvent={this.editEvent}
             onSelectSlot={this.handleSelectSlot}
             popup={true}

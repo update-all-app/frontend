@@ -1,13 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-
-export default function Avatar(props){
-
-  const { initials } = props
-
-  return(
-    <div className="bg-secdark text-primary w-10 h-10 mr-8 rounded-full inline-flex items-center align-middle justify-center font-bold text-xl"> 
+export default function Avatar({ initials }) {
+  return (
+    <span
+      className='bg-secondary text-terdark w-8 h-8 rounded-full flex items-center justify-center font-bold text-l'
+      alt='Open user menu'
+    >
       {initials}
-    </div>
-  )
+    </span>
+  );
 }

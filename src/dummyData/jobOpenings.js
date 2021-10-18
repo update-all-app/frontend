@@ -3,24 +3,24 @@
 const jobOpenings = [
   {
     id: 1,
-    title: "Senior Accountant"
+    title: 'Senior Accountant'
   },
   {
     id: 2,
-    title: "Junior Accountant"
+    title: 'Junior Accountant'
   },
   {
     id: 3,
-    title: "Software Engineer"
+    title: 'Software Engineer'
   },
   {
     id: 4,
-    title: "Junior Developer"
+    title: 'Junior Developer'
   },
   {
     id: 5,
-    title: "Fullstack Architect"
-  },
-]
+    title: 'Fullstack Architect'
+  }
+];
 
-export default jobOpenings
+export default jobOpenings;

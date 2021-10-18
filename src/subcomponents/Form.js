@@ -1,15 +1,10 @@
-import React from 'react'
+import React from 'react';
 
-export default function Form(props){
+export default function Form(props) {
+  const submit = (e) => {
+    e.preventDefault();
+    props.onSubmit();
+  };
 
-  const submit = e => {
-    e.preventDefault()
-    props.onSubmit()
-  }
-
-  return(
-    <form onSubmit={submit}>
-      {props.children}
-    </form>
-  )
+  return <form onSubmit={submit}>{props.children}</form>;
 }
